@@ -4,10 +4,33 @@ public class PlayerMove : MonoBehaviour
 {
     // MonoBehaviour : 여러 이벤트 함수를 자동으로 호출
     // Component : 게임 오브젝트에 추가할 수 있는 여러 기능
+    public float Speed = 3f;
+    public float BoarderSize = 2.5f;
+    public float UnderCenter = -0.5f;
 
     private void Update()
     {
-        // 위로 초당 3미터 움직여라
-        transform.Translate(Vector2.up * 3f * Time.deltaTime);
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Speed = Speed <= 0 ? Speed : Speed - 1;
+        }
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            Speed++;
+        }
+        float h = Input.GetAxisRaw("Horizontal"); // 수평(좌우)
+        float v = Input.GetAxisRaw("Vertical"); // 수직(좌우)
+
+        Vector2 direction = new Vector2(h, v).normalized;
+        if (transform.position.y >= UnderCenter && v > 0)
+        {
+            direction.y = 0;
+        }
+        transform.Translate(direction * Speed * Time.deltaTime);
+
+        if (Mathf.Abs(transform.position.x) > BoarderSize)
+        {
+            transform.position = new Vector3(transform.position.x * -1, transform.position.y, transform.position.z);
+        }
     }
 }
