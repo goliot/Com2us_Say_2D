@@ -102,3 +102,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 4
   Frequency: 10
+  IsLeftBullet: 0
+  Weight: 3

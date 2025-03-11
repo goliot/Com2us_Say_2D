@@ -1,5 +1,11 @@
 using UnityEngine;
 
+public enum FireMode
+{
+    Auto,
+    Manual,
+}
+
 public class PlayerFire : MonoBehaviour
 {
     [Header ("# Objects")]
@@ -8,12 +14,11 @@ public class PlayerFire : MonoBehaviour
     public GameObject[] MuzzlePositions; // 총구
     public GameObject[] SubMuzzlePositions;
 
-    [Header ("# Stats")]
+    [Header ("# Timer")]
     public float FireCoolTime;
     private float _timeCounter = 0f;
 
-    [Header("# Auto Flag")]
-    public bool IsAuto = false;
+    public FireMode FireMode = FireMode.Manual;
 
     private void Update()
     {
@@ -29,16 +34,23 @@ public class PlayerFire : MonoBehaviour
             return;
         }
 
-        if ((Input.GetButtonDown("Fire1") && !IsAuto) || IsAuto)
+        if (Input.GetButtonDown("Fire1") || FireMode == FireMode.Auto)
         {
+            int counter = 0;
             // 총알을 인스턴스화해 씬에 올리고, 위치를 총구의 위치로 지정
             foreach(GameObject muzzle in MuzzlePositions)
             {
-                Instantiate(BulletPrefab, muzzle.transform.position, Quaternion.identity);
+                GameObject bullet = Instantiate(BulletPrefab, muzzle.transform.position, Quaternion.identity);
+                bullet.GetComponent<Bullet>().IsLeftBullet = counter % 2 == 0;
+                counter++;
             }
+
+            counter = 0;
             foreach(GameObject muzzle in SubMuzzlePositions)
             {
-                Instantiate(SubBulletPrefab, muzzle.transform.position, Quaternion.identity);
+                GameObject bullet = Instantiate(SubBulletPrefab, muzzle.transform.position, Quaternion.identity);
+                bullet.GetComponent<SubBullet>().IsLeftBullet = counter % 2 == 0;
+                counter++;
             }
             _timeCounter = 0f;
         }
@@ -48,11 +60,11 @@ public class PlayerFire : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
-            IsAuto = true;
+            FireMode = FireMode.Auto;
         }
         if(Input.GetKeyDown(KeyCode.Alpha2))
         {
-            IsAuto = false;
+            FireMode = FireMode.Manual;
         }    
     }
 }
