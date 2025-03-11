@@ -1,11 +1,5 @@
 using UnityEngine;
 
-public enum FireMode
-{
-    Auto,
-    Manual,
-}
-
 public class PlayerFire : MonoBehaviour
 {
     [Header ("# Objects")]
@@ -45,12 +39,9 @@ public class PlayerFire : MonoBehaviour
                 counter++;
             }
 
-            counter = 0;
             foreach(GameObject muzzle in SubMuzzlePositions)
             {
                 GameObject bullet = Instantiate(SubBulletPrefab, muzzle.transform.position, Quaternion.identity);
-                bullet.GetComponent<SubBullet>().IsLeftBullet = counter % 2 == 0;
-                counter++;
             }
             _timeCounter = 0f;
         }

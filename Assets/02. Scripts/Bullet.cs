@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    [Header ("# Bullet Type")]
+    public BulletType BulletType = BulletType.MainBullet;
+
+    [Header ("# Movement")]
     public float Speed;
     protected Vector3 _direction = new Vector3();
 
@@ -13,17 +17,16 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
-        SnakeMovement();
-        //MoveUpper();
+        //Movement();
+        StraightMovement();
     }
 
-    private void MoveUpper()
+    private void StraightMovement()
     {
-        _direction = Vector3.up;
-        transform.Translate(_direction * Speed * Time.deltaTime);
+        transform.Translate(Vector3.up * Speed * Time.deltaTime);
     }
 
-    protected virtual void SnakeMovement()
+    public virtual void Movement()
     {
         _lerpTime += Time.deltaTime;
         if(_lerpTime > 2 * Mathf.PI)
@@ -31,7 +34,8 @@ public class Bullet : MonoBehaviour
             _lerpTime = 0f;
         }
 
-        float h = IsLeftBullet ? Mathf.Cos(Frequency * _lerpTime) : -Mathf.Cos(Frequency * _lerpTime);
+        //float h = IsLeftBullet ? Mathf.Cos(Frequency * _lerpTime) : -Mathf.Cos(Frequency * _lerpTime);
+        float h = Mathf.Cos(Frequency * _lerpTime);
         _direction = new Vector3(h, 1, 0).normalized;
         transform.Translate(_direction * Speed * Time.deltaTime);
     }
