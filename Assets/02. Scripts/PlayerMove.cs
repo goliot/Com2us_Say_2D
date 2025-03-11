@@ -2,12 +2,15 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    // MonoBehaviour : ¿©·¯ ÀÌº¥Æ® ÇÔ¼ö¸¦ ÀÚµ¿À¸·Î È£Ãâ
-    // Component : °ÔÀÓ ¿ÀºêÁ§Æ®¿¡ Ãß°¡ÇÒ ¼ö ÀÖ´Â ¿©·¯ ±â´É
+    // MonoBehaviour : ì—¬ëŸ¬ ì´ë²¤íŠ¸ í•¨ìˆ˜ë¥¼ ìžë™ìœ¼ë¡œ í˜¸ì¶œ
+    // Component : ê²Œìž„ ì˜¤ë¸Œì íŠ¸ì— ì¶”ê°€í•  ìˆ˜ ìžˆëŠ” ì—¬ëŸ¬ ê¸°ëŠ¥
     public float Speed = 3f;
-    public float BoarderSize = 2.5f;
-    public float UnderCenter = -0.5f;
+    public float MaxY = -0.5f;
+    public float MinY = -4.5f;
+    public float MaxSpeed = 10f;
+    public float MinSpeed = 1f;
 
+    private Vector2 _direction = new Vector2();
     private SpriteRenderer _sr;
 
     private void Awake()
@@ -17,25 +20,39 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
+        SpeedUp();
+        AxisInput();
+        Move();
+        CheckCameraBound();
+    }
+
+    private void Move()
+    {
+        if (transform.position.y >= MaxY && _direction.y > 0 || transform.position.y <= MinY && _direction.y < 0)
+        {
+            _direction.y = 0;
+        }
+        transform.Translate(_direction * Speed * Time.deltaTime);
+    }
+
+    private void AxisInput()
+    {
+        float h = Input.GetAxisRaw("Horizontal"); // ìˆ˜í‰(ì¢Œìš°)
+        float v = Input.GetAxisRaw("Vertical"); // ìˆ˜ì§(ì¢Œìš°)
+
+        _direction = new Vector2(h, v).normalized;
+    }
+
+    private void SpeedUp()
+    {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            Speed = Speed <= 0 ? Speed : Speed - 1;
+            Speed = Mathf.Max(MinSpeed, Speed - 1);
         }
-        if(Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            Speed++;
+            Speed = Mathf.Min(MaxSpeed, Speed + 1);
         }
-        float h = Input.GetAxisRaw("Horizontal"); // ¼öÆò(ÁÂ¿ì)
-        float v = Input.GetAxisRaw("Vertical"); // ¼öÁ÷(ÁÂ¿ì)
-
-        Vector2 direction = new Vector2(h, v).normalized;
-        if (transform.position.y >= UnderCenter && v > 0)
-        {
-            direction.y = 0;
-        }
-        transform.Translate(direction * Speed * Time.deltaTime);
-
-        CheckCameraBound();
     }
 
     private void CheckCameraBound()
