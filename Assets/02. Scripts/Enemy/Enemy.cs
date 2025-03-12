@@ -4,8 +4,7 @@ public class Enemy : MonoBehaviour
 {
     [Header ("# Movement")]
     public float Speed = 5f;
-    private Vector3 _direction = new Vector3();
-    public float CurveIntensity = 2f;
+    protected Vector3 _direction = new Vector3();
 
     [Header("# Info")]
     public EnemyType EnemyType;
@@ -15,7 +14,12 @@ public class Enemy : MonoBehaviour
 
     [Header("# Skill")]
     public GameObject SubEnemy;
-    public Transform TargetPlayer;
+    protected Transform TargetPlayer;
+
+    private void Awake()
+    {
+        TargetPlayer = GameObject.FindGameObjectWithTag("Player").transform;
+    }
 
     private void Update()
     {
@@ -54,8 +58,7 @@ public class Enemy : MonoBehaviour
         for(int i=0; i<3; i++)
         {
             Enemy sub = Instantiate(SubEnemy, new Vector3(transform.position.x + (i - 1f) * 0.5f, transform.position.y, transform.position.z), Quaternion.identity).GetComponent<Enemy>();
-            sub.TargetPlayer = GameObject.FindGameObjectWithTag("Player").transform;
-            sub.EnemyType = EnemyType.Sub;
+            sub.EnemyType = EnemyType.Bezier;
         }
     }
 

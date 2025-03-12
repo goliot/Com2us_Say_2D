@@ -9,7 +9,12 @@ public class PlayerStats : MonoBehaviour
         Hp -= damage;
         if(Hp <= 0)
         {
-            Destroy(gameObject);
+            Die();
         }
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
     }
 }
