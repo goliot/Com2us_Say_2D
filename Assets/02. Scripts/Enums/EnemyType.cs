@@ -1,7 +1,8 @@
 public enum EnemyType
 {
-    Common,
+    Basic,
     Split,
     Bezier,
     Target,
+    Follow,
 }

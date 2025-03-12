@@ -5,6 +5,14 @@ public class Enemy : MonoBehaviour
     [Header ("# Movement")]
     public float Speed = 5f;
     protected Vector3 _direction = new Vector3();
+    public Vector3 Direction
+    {
+        get => _direction;
+        set
+        {
+            _direction = value;
+        }
+    }
 
     [Header("# Info")]
     public EnemyType EnemyType;
@@ -46,11 +54,7 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Movement()
     {
-        if (EnemyType == EnemyType.Common || EnemyType == EnemyType.Split)
-        {
-            _direction = Vector3.down;
-            transform.Translate(_direction * Speed * Time.deltaTime);
-        }
+        transform.Translate(_direction * Speed * Time.deltaTime);
     }
 
     private void Split()

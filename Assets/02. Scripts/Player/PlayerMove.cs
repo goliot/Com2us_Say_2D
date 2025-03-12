@@ -5,7 +5,7 @@ public class PlayerMove : MonoBehaviour
     // MonoBehaviour : 여러 이벤트 함수를 자동으로 호출
     // Component : 게임 오브젝트에 추가할 수 있는 여러 기능
     public float Speed = 3f;
-    public float MaxY = -0.5f;
+    public float MaxY = 0f;
     public float MinY = -4.5f;
     public float MaxSpeed = 10f;
     public float MinSpeed = 1f;
@@ -16,6 +16,7 @@ public class PlayerMove : MonoBehaviour
     private void Awake()
     {
         _sr = GetComponent<SpriteRenderer>();
+        MinY = Camera.main.transform.position.y - Camera.main.orthographicSize;
     }
 
     private void Update()

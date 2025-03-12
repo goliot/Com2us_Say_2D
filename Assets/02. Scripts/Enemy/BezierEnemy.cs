@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SubEnemy : Enemy
+public class BezierEnemy : Enemy
 {
     Vector2[] point = new Vector2[4];
 

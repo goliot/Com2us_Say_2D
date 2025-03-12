@@ -14,12 +14,15 @@ public class Spawner : MonoBehaviour
     private float _timer = 0f;
     private float _nextSpawnCooltime;
 
+    private float _leftBorder;
+    private float _rightBorder;
+
     private void Awake()
     {
         float rateSum = SpawnRates.Sum();
         for(int i=0; i<SpawnRates.Length; i++)
         {
-            SpawnRates[i] = (SpawnRates[i] / rateSum) * 100;
+            SpawnRates[i] = SpawnRates[i] / rateSum;
             if (i > 0)
             {
                 SpawnRates[i] += SpawnRates[i - 1];
@@ -27,6 +30,9 @@ public class Spawner : MonoBehaviour
         }
 
         _nextSpawnCooltime = Random.Range(MinSpawnCooltime, MaxSpawnCooltime);
+
+        _leftBorder = Camera.main.transform.position.x - Camera.main.orthographicSize * Camera.main.aspect;
+        _rightBorder = Camera.main.transform.position.x + Camera.main.orthographicSize * Camera.main.aspect;
     }
 
     // Update is called once per frame
@@ -36,24 +42,40 @@ public class Spawner : MonoBehaviour
 
         if (_timer > _nextSpawnCooltime)
         {
-            Spawn(SpawnPoints[Random.Range(0, SpawnPoints.Length)]);
+            Enemy enemy = Spawn(Random.Range(0, SpawnPoints.Length)).GetComponent<Enemy>();
+            if (enemy.EnemyType == EnemyType.Basic || enemy.EnemyType == EnemyType.Split)
+            {
+                if (enemy.transform.position.x < _leftBorder)
+                {
+                    enemy.Direction = Vector3.right;
+                }
+                else if (enemy.transform.position.x > _rightBorder)
+                {
+                    enemy.Direction = Vector3.left;
+                }
+                else
+                {
+                    enemy.Direction = Vector3.down;
+                }
+            }
+
             _nextSpawnCooltime = Random.Range(MinSpawnCooltime, MaxSpawnCooltime);
             _timer = 0f;
         }
     }
 
-    private void Spawn(Transform spawnPoint)
+    private GameObject Spawn(int spawnPointIndex)
     {
-        float randNum = Random.Range(0f, 100f);
+        float randNum = Random.value;
 
         for(int i=0; i<SpawnRates.Length; i++)
         {
             if(randNum < SpawnRates[i])
             {
-                Instantiate(Enemys[i], spawnPoint.position, Quaternion.identity);
-                return;
+                return Instantiate(Enemys[i], SpawnPoints[spawnPointIndex].position, Quaternion.identity);
+                
             }
         }
-        Instantiate(Enemys[SpawnRates.Length - 1], spawnPoint.position, Quaternion.identity);
+        return Instantiate(Enemys[SpawnRates.Length - 1], SpawnPoints[spawnPointIndex].position, Quaternion.identity);
     }
 }
