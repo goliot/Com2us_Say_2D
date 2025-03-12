@@ -4,9 +4,9 @@ public class PlayerStats : MonoBehaviour
 {
     public float Hp = 3;
 
-    public void TakeDamage()
+    public void TakeDamage(float damage)
     {
-        Hp--;
+        Hp -= damage;
         if(Hp <= 0)
         {
             Destroy(gameObject);

@@ -8,7 +8,7 @@ public class SubEnemy : Enemy
     [SerializeField] public float posA = 0.55f;
     [SerializeField] public float posB = 0.45f;
 
-    void Start()
+    private void Start()
     {
         point[0] = transform.position; // P0
         point[1] = PointSetting(transform.position); // P1
@@ -16,7 +16,7 @@ public class SubEnemy : Enemy
         point[3] = TargetPlayer.position; // P3
     }
 
-    void Update()
+    private void Update()
     {
         if (_t > 1)
         {

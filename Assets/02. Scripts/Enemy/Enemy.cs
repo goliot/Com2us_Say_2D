@@ -9,7 +9,8 @@ public class Enemy : MonoBehaviour
 
     [Header("# Info")]
     public EnemyType EnemyType;
-    public int Hp = 2;
+    public float Hp = 100f;
+    public float Damage;
     private bool IsDead = false;
 
     [Header("# Skill")]
@@ -23,27 +24,18 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Bullet"))
-        {
-            BulletType type = collision.GetComponent<Bullet>().BulletType;
-            if (type == BulletType.MainBullet)
-            {
-                Die();
-            }
-            else if(type == BulletType.SubBullet)
-            {
-                Hp--;
-                if(Hp <= 0)
-                {
-                    Die();
-                }
-            }
-
-            Destroy(collision.gameObject);
-        }
         if(collision.CompareTag("Player"))
         {
-            collision.GetComponent<PlayerStats>().TakeDamage();
+            collision.GetComponent<PlayerStats>().TakeDamage(Damage);
+            Die();
+        }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        Hp -= damage;
+        if(Hp <= 0)
+        {
             Die();
         }
     }
@@ -55,26 +47,16 @@ public class Enemy : MonoBehaviour
             _direction = Vector3.down;
             transform.Translate(_direction * Speed * Time.deltaTime);
         }
-        else if (EnemyType == EnemyType.Sub)
-        {
-            // TODO : 베지어 곡선으로 추적
-            BezierChase();
-        }
     }
 
     private void Split()
     {
         for(int i=0; i<3; i++)
         {
-            GameObject sub = Instantiate(SubEnemy, new Vector3(transform.position.x + (i - 1f) * 0.5f, transform.position.y, transform.position.z), Quaternion.identity);
-            sub.GetComponent<Enemy>().TargetPlayer = GameObject.FindGameObjectWithTag("Player").transform;
-            sub.GetComponent<Enemy>().EnemyType = EnemyType.Sub;
+            Enemy sub = Instantiate(SubEnemy, new Vector3(transform.position.x + (i - 1f) * 0.5f, transform.position.y, transform.position.z), Quaternion.identity).GetComponent<Enemy>();
+            sub.TargetPlayer = GameObject.FindGameObjectWithTag("Player").transform;
+            sub.EnemyType = EnemyType.Sub;
         }
-    }
-
-    private void BezierChase()
-    {
-
     }
 
     private void Die()

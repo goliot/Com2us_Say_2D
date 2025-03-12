@@ -105,6 +105,7 @@ MonoBehaviour:
   Speed: 4
   Frequency: 10
   IsLeftBullet: 0
+  Damage: 40
 --- !u!60 &7406719943970238331
 PolygonCollider2D:
   m_ObjectHideFlags: 0

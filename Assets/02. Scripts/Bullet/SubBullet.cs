@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class SubBullet : Bullet
 {
-    private void Start()
+    private void OnEnable()
     {
         BulletType = BulletType.SubBullet;
+        Damage = 40f;
     }
 
     /*public override void Movement()

@@ -15,10 +15,23 @@ public class Bullet : MonoBehaviour
     public float Frequency = 10f;
     public bool IsLeftBullet = false;
 
+    [Header("# Stats")]
+    public float Damage = 100;
+
     private void Update()
     {
         //Movement();
         StraightMovement();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Enemy"))
+        {
+            collision.GetComponent<Enemy>().TakeDamage(Damage);
+
+            Destroy(gameObject);
+        }
     }
 
     private void StraightMovement()

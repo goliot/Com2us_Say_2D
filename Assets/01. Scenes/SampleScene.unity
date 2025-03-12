@@ -508,10 +508,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1312142242}
   - component: {fileID: 1312142241}
+  - component: {fileID: 1312142246}
   - component: {fileID: 1312142243}
   - component: {fileID: 1312142244}
   - component: {fileID: 1312142245}
-  - component: {fileID: 1312142246}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -810,6 +810,10 @@ PrefabInstance:
     - target: {fileID: 7579682560884316346, guid: 3570e8ea9522dde4d81b9c233e778752, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7579682560884316346, guid: 3570e8ea9522dde4d81b9c233e778752, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9210545076644924269, guid: 3570e8ea9522dde4d81b9c233e778752, type: 3}
       propertyPath: m_LocalPosition.x

@@ -185,7 +185,8 @@ MonoBehaviour:
   Speed: 1
   CurveIntensity: 2
   EnemyType: 2
-  Hp: 1
+  Hp: 50
+  Damage: 20
   SubEnemy: {fileID: 0}
   TargetPlayer: {fileID: 0}
   _t: 0
