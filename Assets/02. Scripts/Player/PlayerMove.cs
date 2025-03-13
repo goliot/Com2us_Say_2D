@@ -4,16 +4,28 @@ public class PlayerMove : MonoBehaviour
 {
     // MonoBehaviour : 여러 이벤트 함수를 자동으로 호출
     // Component : 게임 오브젝트에 추가할 수 있는 여러 기능
+    [Header ("# Movement")]
     public float Speed = 3f;
     public float MaxY = 0f;
     public float MinY = -4.5f;
     public float MaxSpeed = 10f;
     public float MinSpeed = 1f;
-
     private Vector2 _direction = new Vector2();
+
+    [Header("# Components")]
     private SpriteRenderer _sr;
+
+    [Header("# AutoMove")]
     [SerializeField] private GameObject _closestEnemy = null;
     [SerializeField] private Vector3 AutoDefaultPosition;
+    private IFindStrategy[] _enemyStrategies = new IFindStrategy[]
+    {
+        new FindClosestEnemy(),
+        new FindFarthestEnemy(),
+    //new FindHighestEnemy()
+    };
+    private int _currentStrategyIndex = 0;
+    private IFindStrategy EnemyFindStrategy = new FindClosestEnemy();
 
     private void Awake()
     {
@@ -26,7 +38,7 @@ public class PlayerMove : MonoBehaviour
         SpeedUp();
         if (PlayerMode.PlayMode == PlayMode.Auto)
         {
-            FindClosestEnemy();
+            FindEnemy();
             SetAutoMoveDirection();
         }
         else
@@ -35,22 +47,21 @@ public class PlayerMove : MonoBehaviour
         }
         Move();
         CheckCameraBound();
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha9))
+            {
+                _currentStrategyIndex = (_currentStrategyIndex + 1) % _enemyStrategies.Length;
+                SetEnemyFindStrategy(_enemyStrategies[_currentStrategyIndex]);
+            }
+        }
     }
 
-    private void FindClosestEnemy()
+    private void FindEnemy()
     {
-        float minDistance = float.MaxValue;
-        float currentDistance;
-        GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy");
-
-        foreach(GameObject enemy in enemys)
+        if (EnemyFindStrategy != null)
         {
-            currentDistance = Vector3.Distance(enemy.transform.position, transform.position);
-            if (minDistance > currentDistance)
-            {
-                _closestEnemy = enemy;
-                minDistance = currentDistance;
-            }
+            _closestEnemy = EnemyFindStrategy.FindEnemy(transform);
         }
     }
 
@@ -124,5 +135,11 @@ public class PlayerMove : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x * -1, transform.position.y, transform.position.z);
         }
+    }
+
+    public void SetEnemyFindStrategy(IFindStrategy newStrategy)
+    {
+        EnemyFindStrategy = newStrategy;
+        Debug.Log(newStrategy);
     }
 }
