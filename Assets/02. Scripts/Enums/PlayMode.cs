@@ -1,4 +1,4 @@
-public enum FireMode
+public enum PlayMode
 {
     Auto,
     Manual,

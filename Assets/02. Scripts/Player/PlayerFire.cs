@@ -26,7 +26,7 @@ public class PlayerFire : MonoBehaviour
             return;
         }
 
-        if (Input.GetButtonDown("Fire1") || PlayMode.FireMode == FireMode.Auto)
+        if (Input.GetButtonDown("Fire1") || PlayerMode.PlayMode == PlayMode.Auto)
         {
             int counter = 0;
             // 총알을 인스턴스화해 씬에 올리고, 위치를 총구의 위치로 지정
@@ -49,11 +49,11 @@ public class PlayerFire : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
-            PlayMode.FireMode = FireMode.Auto;
+            PlayerMode.PlayMode = PlayMode.Auto;
         }
         if(Input.GetKeyDown(KeyCode.Alpha2))
         {
-            PlayMode.FireMode = FireMode.Manual;
+            PlayerMode.PlayMode = PlayMode.Manual;
         }    
     }
 }

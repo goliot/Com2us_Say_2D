@@ -24,7 +24,7 @@ public class PlayerMove : MonoBehaviour
     private void Update()
     {
         SpeedUp();
-        if (PlayMode.FireMode == FireMode.Auto)
+        if (PlayerMode.PlayMode == PlayMode.Auto)
         {
             FindClosestEnemy();
             SetAutoMoveDirection();
@@ -41,7 +41,6 @@ public class PlayerMove : MonoBehaviour
     {
         float minDistance = float.MaxValue;
         float currentDistance;
-        GameObject closestEnemy = null;
         GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy");
 
         foreach(GameObject enemy in enemys)
@@ -49,12 +48,10 @@ public class PlayerMove : MonoBehaviour
             currentDistance = Vector3.Distance(enemy.transform.position, transform.position);
             if (minDistance > currentDistance)
             {
-                closestEnemy = enemy;
+                _closestEnemy = enemy;
                 minDistance = currentDistance;
             }
         }
-
-        _closestEnemy = closestEnemy;
     }
 
     private void Move()
