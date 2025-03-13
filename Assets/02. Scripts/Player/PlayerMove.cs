@@ -5,7 +5,16 @@ public class PlayerMove : MonoBehaviour
     // MonoBehaviour : 여러 이벤트 함수를 자동으로 호출
     // Component : 게임 오브젝트에 추가할 수 있는 여러 기능
     [Header ("# Movement")]
-    public float Speed = 3f;
+    [SerializeField] private float _speed = 3f;
+    public float Speed
+    {
+        get => _speed;
+        set
+        {
+            _speed = Mathf.Min(MaxSpeed, value);
+            _speed = Mathf.Max(MinSpeed, value);
+        }
+    }
     public float MaxY = 0f;
     public float MinY = -4.5f;
     public float MaxSpeed = 10f;
@@ -36,7 +45,7 @@ public class PlayerMove : MonoBehaviour
     private void Update()
     {
         SpeedUp();
-        if (PlayerMode.PlayMode == PlayMode.Auto)
+        if (PlayerMode.PlayMode == EPlayMode.Auto)
         {
             FindEnemy();
             SetAutoMoveDirection();
@@ -71,7 +80,7 @@ public class PlayerMove : MonoBehaviour
         {
             _direction.y = 0;
         }
-        transform.Translate(_direction * Speed * Time.deltaTime);
+        transform.Translate(_direction * _speed * Time.deltaTime);
     }
 
     private void SetAutoMoveDirection()
@@ -115,11 +124,11 @@ public class PlayerMove : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            Speed = Mathf.Max(MinSpeed, Speed - 1);
+            _speed = Mathf.Max(MinSpeed, _speed - 1);
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            Speed = Mathf.Min(MaxSpeed, Speed + 1);
+            _speed = Mathf.Min(MaxSpeed, _speed + 1);
         }
     }
 

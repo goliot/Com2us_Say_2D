@@ -4,7 +4,7 @@ public class SubBullet : Bullet
 {
     private void OnEnable()
     {
-        BulletType = BulletType.SubBullet;
+        BulletType = EBulletType.SubBullet;
         Damage = 40f;
     }
 

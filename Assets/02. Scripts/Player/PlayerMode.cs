@@ -2,5 +2,5 @@ using UnityEngine;
 
 public static class PlayerMode
 {
-    public static PlayMode PlayMode = PlayMode.Manual;
+    public static EPlayMode PlayMode = EPlayMode.Manual;
 }

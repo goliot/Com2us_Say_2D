@@ -43,7 +43,7 @@ public class Spawner : MonoBehaviour
         if (_timer > _nextSpawnCooltime)
         {
             Enemy enemy = Spawn(Random.Range(0, SpawnPoints.Length)).GetComponent<Enemy>();
-            if (enemy.EnemyType == EnemyType.Basic || enemy.EnemyType == EnemyType.Split)
+            if (enemy.EnemyType == EEnemyType.Basic || enemy.EnemyType == EEnemyType.Split)
             {
                 if (enemy.transform.position.x < _leftBorder)
                 {

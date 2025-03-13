@@ -9,7 +9,15 @@ public class PlayerFire : MonoBehaviour
     public GameObject[] SubMuzzlePositions;
 
     [Header ("# Timer")]
-    public float FireCoolTime;
+    private float _fireCoolTime;
+    public float FireCoolTime
+    {
+        get => _fireCoolTime;
+        set
+        {
+            _fireCoolTime = Mathf.Max(0.2f, value);
+        }
+    }
     private float _timeCounter = 0f;
 
     private void Update()
@@ -21,12 +29,12 @@ public class PlayerFire : MonoBehaviour
 
     private void FireMain()
     {
-        if(_timeCounter < FireCoolTime)
+        if(_timeCounter < _fireCoolTime)
         {
             return;
         }
 
-        if (Input.GetButtonDown("Fire1") || PlayerMode.PlayMode == PlayMode.Auto)
+        if (Input.GetButtonDown("Fire1") || PlayerMode.PlayMode == EPlayMode.Auto)
         {
             int counter = 0;
             // 총알을 인스턴스화해 씬에 올리고, 위치를 총구의 위치로 지정
@@ -49,11 +57,11 @@ public class PlayerFire : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
-            PlayerMode.PlayMode = PlayMode.Auto;
+            PlayerMode.PlayMode = EPlayMode.Auto;
         }
         if(Input.GetKeyDown(KeyCode.Alpha2))
         {
-            PlayerMode.PlayMode = PlayMode.Manual;
+            PlayerMode.PlayMode = EPlayMode.Manual;
         }    
     }
 }

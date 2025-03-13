@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
     }
 
     [Header("# Info")]
-    public EnemyType EnemyType;
+    public EEnemyType EnemyType;
     public float Hp = 100f;
     public float Damage;
     private bool IsDead = false;
@@ -23,6 +23,10 @@ public class Enemy : MonoBehaviour
     [Header("# Skill")]
     public GameObject SubEnemy;
     protected Transform TargetPlayer;
+
+    [Header("# Items")]
+    public GameObject[] DropItems;
+    private float _dropPercentage = 0.3f;
 
     private void Awake()
     {
@@ -32,7 +36,6 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         Movement();
-        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -63,7 +66,7 @@ public class Enemy : MonoBehaviour
         for(int i=0; i<3; i++)
         {
             Enemy sub = Instantiate(SubEnemy, new Vector3(transform.position.x + (i - 1f) * 0.5f, transform.position.y, transform.position.z), Quaternion.identity).GetComponent<Enemy>();
-            sub.EnemyType = EnemyType.Bezier;
+            sub.EnemyType = EEnemyType.Bezier;
         }
     }
 
@@ -72,10 +75,22 @@ public class Enemy : MonoBehaviour
         if (IsDead) return;
         IsDead = true;
 
-        if (EnemyType == EnemyType.Split)
+        ItemDrop();
+
+        if (EnemyType == EEnemyType.Split)
         {
             Split();
         }
         Destroy(gameObject);
+    }
+
+    private void ItemDrop()
+    {
+        float percentage = Random.value;
+
+        if(percentage < _dropPercentage)
+        {
+            Instantiate(DropItems[Random.Range(0, DropItems.Length)]);
+        }
     }
 }
