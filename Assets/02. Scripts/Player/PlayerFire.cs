@@ -12,8 +12,6 @@ public class PlayerFire : MonoBehaviour
     public float FireCoolTime;
     private float _timeCounter = 0f;
 
-    public FireMode FireMode = FireMode.Manual;
-
     private void Update()
     {
         _timeCounter += Time.deltaTime;
@@ -28,7 +26,7 @@ public class PlayerFire : MonoBehaviour
             return;
         }
 
-        if (Input.GetButtonDown("Fire1") || FireMode == FireMode.Auto)
+        if (Input.GetButtonDown("Fire1") || PlayMode.FireMode == FireMode.Auto)
         {
             int counter = 0;
             // 총알을 인스턴스화해 씬에 올리고, 위치를 총구의 위치로 지정
@@ -51,11 +49,11 @@ public class PlayerFire : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
-            FireMode = FireMode.Auto;
+            PlayMode.FireMode = FireMode.Auto;
         }
         if(Input.GetKeyDown(KeyCode.Alpha2))
         {
-            FireMode = FireMode.Manual;
+            PlayMode.FireMode = FireMode.Manual;
         }    
     }
 }

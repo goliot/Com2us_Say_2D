@@ -12,6 +12,8 @@ public class PlayerMove : MonoBehaviour
 
     private Vector2 _direction = new Vector2();
     private SpriteRenderer _sr;
+    [SerializeField] private GameObject _closestEnemy = null;
+    [SerializeField] private Vector3 AutoDefaultPosition;
 
     private void Awake()
     {
@@ -22,9 +24,37 @@ public class PlayerMove : MonoBehaviour
     private void Update()
     {
         SpeedUp();
-        AxisInput();
+        if (PlayMode.FireMode == FireMode.Auto)
+        {
+            FindClosestEnemy();
+            SetAutoMoveDirection();
+        }
+        else
+        {
+            AxisInput();
+        }
         Move();
         CheckCameraBound();
+    }
+
+    private void FindClosestEnemy()
+    {
+        float minDistance = float.MaxValue;
+        float currentDistance;
+        GameObject closestEnemy = null;
+        GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach(GameObject enemy in enemys)
+        {
+            currentDistance = Vector3.Distance(enemy.transform.position, transform.position);
+            if (minDistance > currentDistance)
+            {
+                closestEnemy = enemy;
+                minDistance = currentDistance;
+            }
+        }
+
+        _closestEnemy = closestEnemy;
     }
 
     private void Move()
@@ -34,6 +64,35 @@ public class PlayerMove : MonoBehaviour
             _direction.y = 0;
         }
         transform.Translate(_direction * Speed * Time.deltaTime);
+    }
+
+    private void SetAutoMoveDirection()
+    {
+        if (_closestEnemy == null)
+        {
+            return;
+        }
+        // 적이 가까워지면
+        // X는 적방향으로, Y는 으로
+        if (Vector3.Distance(_closestEnemy.transform.position, transform.position) < 3f)
+        {
+            _direction.x = _closestEnemy.transform.position.x > transform.position.x ? 1 : -1;
+            _direction.y = _closestEnemy.transform.position.y > transform.position.y ? -1 : 1;
+            Vector3.Normalize(_direction);
+        }
+        // 가까운 적이 없으면
+        // 위 중앙으로
+        else
+        {
+            if (Vector3.Distance(AutoDefaultPosition, transform.position) < 0.1f)
+            {
+                _direction = Vector3.zero;
+            }
+            else
+            {
+                _direction = Vector3.Normalize(AutoDefaultPosition - transform.position);
+            }
+        }
     }
 
     private void AxisInput()

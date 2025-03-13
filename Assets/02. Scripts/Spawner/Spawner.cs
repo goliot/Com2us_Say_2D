@@ -8,7 +8,7 @@ public class Spawner : MonoBehaviour
     [Header ("# Spawning")]
     [SerializeField] private Transform[] SpawnPoints;
     [SerializeField] private float[] SpawnRates;
-    [SerializeField][Range(2, 4)] private float MaxSpawnCooltime;
+    [SerializeField][Range(1, 4)] private float MaxSpawnCooltime;
     [SerializeField][Range(0.1f, 1f)] private float MinSpawnCooltime;
    
     private float _timer = 0f;

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3113234887905835437}
   - component: {fileID: 6435688316115946497}
   - component: {fileID: 8941478082777444986}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BasicEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -103,12 +103,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 2
-  CurveIntensity: 2
   EnemyType: 0
   Hp: 100
   Damage: 40
   SubEnemy: {fileID: 7579682560884316346, guid: e9423a6f448320646a6023da97ae6912, type: 3}
-  TargetPlayer: {fileID: 0}
 --- !u!60 &6435688316115946497
 PolygonCollider2D:
   m_ObjectHideFlags: 0

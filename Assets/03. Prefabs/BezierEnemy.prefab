@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6435688316115946497}
   - component: {fileID: 8941478082777444986}
   - component: {fileID: -2792546273684439396}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BezierEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
