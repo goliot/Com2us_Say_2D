@@ -9,7 +9,7 @@ public class PlayerFire : MonoBehaviour
     public GameObject[] SubMuzzlePositions;
 
     [Header ("# Timer")]
-    private float _fireCoolTime;
+    private float _fireCoolTime = 0.6f;
     public float FireCoolTime
     {
         get => _fireCoolTime;

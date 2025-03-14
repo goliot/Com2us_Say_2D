@@ -34,24 +34,22 @@ public abstract class ItemRoot : MonoBehaviour
             Destroy(gameObject);
         }
 
-        _distance = Vector2.Distance(transform.position, PlayerObject.transform.position);
-        if(_distance < 3f)
+        /*if (Vector3.Distance(transform.position, PlayerObject.transform.position) < 3f)
         {
             _duration = _distance / Speed;
-        }
-
-        if (Vector3.Distance(transform.position, PlayerObject.transform.position) < 3f)
-        {
-            /*if(_isTweenComplete && _moveTweener != null)
-                transform.position = Vector3.Lerp(transform.position, PlayerObject.transform.position, Time.deltaTime * 3f);
-            else
-                TowardPlayer();*/
-            
-            if(_controlPoint == Vector2.zero)
+            if (_controlPoint == Vector2.zero)
                 _controlPoint = (Vector2)(transform.position + PlayerObject.transform.position) / 2 + Random.insideUnitCircle;
 
             _percent += Time.deltaTime / _duration;
             transform.position = Bezier(transform.position, _controlPoint, PlayerObject.transform.position, _percent);
+        }*/
+
+        if (Vector3.Distance(transform.position, PlayerObject.transform.position) < 3f)
+        {
+            if (_moveTweener == null)
+            {
+                TowardPlayer();
+            }
         }
     }
 
@@ -71,6 +69,20 @@ public abstract class ItemRoot : MonoBehaviour
         Vector2 final = Vector2.Lerp(p1, p2, t);
 
         return final;
+    }
+
+    protected void TowardPlayer()
+    {
+        Vector3 targetPos = PlayerObject.transform.position;
+
+        Vector3[] path = new Vector3[]
+        {
+            transform.position,
+            transform.position + (Vector3)Random.insideUnitCircle * 0.5f,
+            PlayerObject.transform.position
+        };
+        _moveTweener = transform.DOPath(path, 0.2f, PathType.CatmullRom)
+            .SetEase(Ease.InOutSine).OnComplete(()=>_isTweenComplete = true);
     }
 
     /*private void OnTriggerStay2D(Collider2D collision)
@@ -93,22 +105,4 @@ public abstract class ItemRoot : MonoBehaviour
             _triggerTimer = 0f;
         }
     }*/
-
-    protected void TowardPlayer()
-    {
-        Vector3 targetPos = PlayerObject.transform.position;
-
-        //_moveTweener?.Kill();
-
-        //_moveTweener = transform.DOMove(targetPos, 0.2f).SetEase(Ease.Linear).OnComplete(TowardPlayer);
-
-        Vector3[] path = new Vector3[]
-        {
-            transform.position,
-            transform.position + (Vector3)Random.insideUnitCircle * 0.5f,
-            PlayerObject.transform.position
-        };
-        _moveTweener = transform.DOPath(path, 0.2f, PathType.CatmullRom)
-            .SetEase(Ease.InOutSine).OnComplete(()=>_isTweenComplete = true);
-    }
 }

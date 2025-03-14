@@ -664,8 +664,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cc91419eaa49d548a83e74be7826246, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 3
-  MaxY: -0.5
+  _speed: 3
+  MaxY: 1.43
   MinY: -4.5
   MaxSpeed: 10
   MinSpeed: 1
@@ -691,7 +691,6 @@ MonoBehaviour:
   SubMuzzlePositions:
   - {fileID: 1846902817}
   - {fileID: 338895393}
-  FireCoolTime: 0.6
 --- !u!61 &1312142245
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -722,7 +721,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -750,8 +749,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 789d30348b252204a966f9c01c496300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHp: 10000
-  Hp: 10000
 --- !u!1 &1378518710
 GameObject:
   m_ObjectHideFlags: 0
