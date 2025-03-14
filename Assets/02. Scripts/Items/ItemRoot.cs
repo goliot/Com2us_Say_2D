@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-public abstract class Item : MonoBehaviour
+public abstract class ItemRoot : MonoBehaviour
 {
     protected EItemType itemType;
 
@@ -12,6 +12,12 @@ public abstract class Item : MonoBehaviour
     private float _deactiveTimer = 0f;
     private float _deactiveTime = 10f;
     private bool _isTweenComplete = false;
+
+    private float _percent = 0f;
+    private Vector2 _controlPoint = Vector2.zero;
+    private float _distance = 0;
+    private float _duration = 0;
+    public float Speed = 5f;
 
     public abstract void Effect();
 
@@ -27,16 +33,47 @@ public abstract class Item : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        if (Vector3.Distance(transform.position, PlayerObject.transform.position) < 2f)
+
+        _distance = Vector2.Distance(transform.position, PlayerObject.transform.position);
+        if(_distance < 3f)
         {
-            if(_isTweenComplete && _moveTweener != null)
+            _duration = _distance / Speed;
+        }
+
+        if (Vector3.Distance(transform.position, PlayerObject.transform.position) < 3f)
+        {
+            /*if(_isTweenComplete && _moveTweener != null)
                 transform.position = Vector3.Lerp(transform.position, PlayerObject.transform.position, Time.deltaTime * 3f);
             else
-                TowardPlayer(); 
+                TowardPlayer();*/
+            
+            if(_controlPoint == Vector2.zero)
+                _controlPoint = (Vector2)(transform.position + PlayerObject.transform.position) / 2 + Random.insideUnitCircle;
+
+            _percent += Time.deltaTime / _duration;
+            transform.position = Bezier(transform.position, _controlPoint, PlayerObject.transform.position, _percent);
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            Effect();
+            Destroy(gameObject);
+        }
+    }
+
+    private Vector2 Bezier(Vector2 start, Vector2 center, Vector2 end, float t)
+    {
+        Vector2 p1 = Vector2.Lerp(start, center, t);
+        Vector2 p2 = Vector2.Lerp(center, end, t);
+        Vector2 final = Vector2.Lerp(p1, p2, t);
+
+        return final;
+    }
+
+    /*private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
@@ -44,7 +81,6 @@ public abstract class Item : MonoBehaviour
             if (_triggerTimer > 1f)
             {
                 Effect();
-                Debug.Log("Effect");
                 Destroy(gameObject);
             }
         }
@@ -56,7 +92,7 @@ public abstract class Item : MonoBehaviour
         {
             _triggerTimer = 0f;
         }
-    }
+    }*/
 
     protected void TowardPlayer()
     {

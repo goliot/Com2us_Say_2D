@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Item_HpUp : Item
+public class Item_HpUp : ItemRoot
 {
     private void Start()
     {
@@ -9,9 +9,8 @@ public class Item_HpUp : Item
 
     public override void Effect()
     {
-        PlayerObject.GetComponent<PlayerStats>().MaxHp += 100;
-        PlayerObject.GetComponent<PlayerStats>().Hp += 100;
-
-        Debug.Log("Max HP Up!");
+        PlayerObject.GetComponent<Player>().MaxHp += 100;
+        PlayerObject.GetComponent<Player>().Hp += 100;
+        Debug.Log("Hp Up!");
     }
 }

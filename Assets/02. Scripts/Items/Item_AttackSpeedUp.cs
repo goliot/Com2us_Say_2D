@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Item_AttackSpeedUp : Item
+public class Item_AttackSpeedUp : ItemRoot
 {
     private void Start()
     {
@@ -9,7 +9,7 @@ public class Item_AttackSpeedUp : Item
 
     public override void Effect()
     {
-        PlayerObject.GetComponent<PlayerFire>().FireCoolTime = PlayerObject.GetComponent<PlayerFire>().FireCoolTime - 0.1f;
+        PlayerObject.GetComponent<PlayerFire>().FireCoolTime -= 0.1f;
         Debug.Log("Attack Speed Up!");
     }
 }

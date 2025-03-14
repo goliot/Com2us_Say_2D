@@ -42,7 +42,7 @@ public class Enemy : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
-            collision.GetComponent<PlayerStats>().TakeDamage(Damage);
+            collision.GetComponent<Player>().TakeDamage(Damage);
             Die();
         }
     }
@@ -90,7 +90,7 @@ public class Enemy : MonoBehaviour
 
         if(percentage < _dropPercentage)
         {
-            Instantiate(DropItems[Random.Range(0, DropItems.Length)]);
+            Instantiate(DropItems[Random.Range(0, DropItems.Length)], transform.position, Quaternion.identity); ;
         }
     }
 }

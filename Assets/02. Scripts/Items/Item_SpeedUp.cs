@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Item_SpeedUp : Item
+public class Item_SpeedUp : ItemRoot
 {
     private void Start()
     {

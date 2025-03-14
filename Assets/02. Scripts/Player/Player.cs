@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerStats : MonoBehaviour
+public class Player : MonoBehaviour
 {
     private float _maxHp = 100;
     public float MaxHp
@@ -8,7 +8,7 @@ public class PlayerStats : MonoBehaviour
         get => _maxHp;
         set
         {
-            MaxHp = value;
+            _maxHp = value;
         }
     }
 

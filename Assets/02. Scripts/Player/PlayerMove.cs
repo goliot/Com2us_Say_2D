@@ -11,10 +11,10 @@ public class PlayerMove : MonoBehaviour
         get => _speed;
         set
         {
-            _speed = Mathf.Min(MaxSpeed, value);
-            _speed = Mathf.Max(MinSpeed, value);
+            _speed = Mathf.Clamp(value, MinSpeed, MaxSpeed);
         }
     }
+
     public float MaxY = 0f;
     public float MinY = -4.5f;
     public float MaxSpeed = 10f;
@@ -45,7 +45,7 @@ public class PlayerMove : MonoBehaviour
     private void Update()
     {
         SpeedUp();
-        if (PlayerMode.PlayMode == EPlayMode.Auto)
+        if (PlayMode.CurrentPlayMode == EPlayMode.Auto)
         {
             FindEnemy();
             SetAutoMoveDirection();
