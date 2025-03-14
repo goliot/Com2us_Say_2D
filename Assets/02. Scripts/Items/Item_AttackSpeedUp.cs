@@ -9,7 +9,7 @@ public class Item_AttackSpeedUp : ItemRoot
 
     public override void Effect()
     {
-        PlayerObject.GetComponent<PlayerFire>().FireCoolTime -= 0.1f;
+        PlayerStats.FireCoolTime -= 0.1f;
         Debug.Log("Attack Speed Up!");
     }
 }

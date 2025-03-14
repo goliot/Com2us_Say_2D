@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class PlayerFire : MonoBehaviour
 {
+    [Header("# Init")]
+    [SerializeField] private float _intialAttackSpeed = 0.6f;
+
     [Header ("# Objects")]
     public GameObject BulletPrefab; // 총알 프리팹
     public GameObject SubBulletPrefab;
@@ -9,16 +12,12 @@ public class PlayerFire : MonoBehaviour
     public GameObject[] SubMuzzlePositions;
 
     [Header ("# Timer")]
-    private float _fireCoolTime = 0.6f;
-    public float FireCoolTime
-    {
-        get => _fireCoolTime;
-        set
-        {
-            _fireCoolTime = Mathf.Max(0.2f, value);
-        }
-    }
     private float _timeCounter = 0f;
+
+    private void Awake()
+    {
+        PlayerStats.FireCoolTime = _intialAttackSpeed;
+    }
 
     private void Update()
     {
@@ -29,7 +28,7 @@ public class PlayerFire : MonoBehaviour
 
     private void FireMain()
     {
-        if(_timeCounter < _fireCoolTime)
+        if(_timeCounter < PlayerStats.FireCoolTime)
         {
             return;
         }

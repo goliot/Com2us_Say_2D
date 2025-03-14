@@ -1,28 +1,22 @@
 using UnityEngine;
+using System;
 
 public class PlayerMove : MonoBehaviour
 {
     // MonoBehaviour : 여러 이벤트 함수를 자동으로 호출
     // Component : 게임 오브젝트에 추가할 수 있는 여러 기능
-    [Header ("# Movement")]
-    [SerializeField] private float _speed = 3f;
-    public float Speed
-    {
-        get => _speed;
-        set
-        {
-            _speed = Mathf.Clamp(value, MinSpeed, MaxSpeed);
-        }
-    }
+    [Header("# Init")]
+    [SerializeField] private float _initialSpeed = 3f;
 
+    [Header ("# Movement")]
     public float MaxY = 0f;
     public float MinY = -4.5f;
-    public float MaxSpeed = 10f;
-    public float MinSpeed = 1f;
+    
     private Vector2 _direction = new Vector2();
 
     [Header("# Components")]
     private SpriteRenderer _sr;
+    private Animator _animator;
 
     [Header("# AutoMove")]
     [SerializeField] private GameObject _closestEnemy = null;
@@ -39,6 +33,9 @@ public class PlayerMove : MonoBehaviour
     private void Awake()
     {
         _sr = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
+
+        PlayerStats.Speed = _initialSpeed;
         MinY = Camera.main.transform.position.y - Camera.main.orthographicSize;
     }
 
@@ -64,6 +61,8 @@ public class PlayerMove : MonoBehaviour
                 SetEnemyFindStrategy(_enemyStrategies[_currentStrategyIndex]);
             }
         }
+
+        SetMoveAnimation(_direction.x);
     }
 
     private void FindEnemy()
@@ -80,7 +79,7 @@ public class PlayerMove : MonoBehaviour
         {
             _direction.y = 0;
         }
-        transform.Translate(_direction * _speed * Time.deltaTime);
+        transform.Translate(_direction * PlayerStats.Speed * Time.deltaTime);
     }
 
     private void SetAutoMoveDirection()
@@ -124,11 +123,11 @@ public class PlayerMove : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            _speed = Mathf.Max(MinSpeed, _speed - 1);
+            PlayerStats.Speed = PlayerStats.Speed - 1;
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            _speed = Mathf.Min(MaxSpeed, _speed + 1);
+            PlayerStats.Speed = PlayerStats.Speed + 1;
         }
     }
 
@@ -144,6 +143,11 @@ public class PlayerMove : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x * -1, transform.position.y, transform.position.z);
         }
+    }
+
+    private void SetMoveAnimation(float x)
+    {
+        _animator.SetInteger("Horizontal", Math.Sign(x));
     }
 
     public void SetEnemyFindStrategy(IFindStrategy newStrategy)

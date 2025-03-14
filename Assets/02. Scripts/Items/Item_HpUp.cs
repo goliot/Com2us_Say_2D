@@ -9,8 +9,8 @@ public class Item_HpUp : ItemRoot
 
     public override void Effect()
     {
-        PlayerObject.GetComponent<Player>().MaxHp += 100;
-        PlayerObject.GetComponent<Player>().Hp += 100;
+        PlayerStats.MaxHp += 100;
+        PlayerStats.Hp += 100;
         Debug.Log("Hp Up!");
     }
 }

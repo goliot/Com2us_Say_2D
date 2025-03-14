@@ -9,7 +9,7 @@ public class Item_SpeedUp : ItemRoot
 
     public override void Effect()
     {
-        PlayerObject.GetComponent<PlayerMove>().Speed *= 1.2f;
+        PlayerStats.Speed *= 1.2f;
         Debug.Log("Speed Up!");
     }
 }
