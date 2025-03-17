@@ -8,12 +8,16 @@ public class BezierEnemy : Enemy
     [SerializeField] public float posA = 0.55f;
     [SerializeField] public float posB = 0.45f;
 
+    private Vector2 _prevPos;
+
     private void Start()
     {
         point[0] = transform.position; // P0
         point[1] = PointSetting(transform.position); // P1
         point[2] = PointSetting(TargetPlayer.position); // P2
         point[3] = TargetPlayer.position; // P3
+
+        _prevPos = transform.position;
     }
 
     private void Update()
@@ -45,10 +49,17 @@ public class BezierEnemy : Enemy
 
     void DrawTrajectory()
     {
-        transform.position = new Vector2(
+        Vector2 currentPos = new Vector2(
             FourPointBezier(point[0].x, point[1].x, point[2].x, point[3].x),
             FourPointBezier(point[0].y, point[1].y, point[2].y, point[3].y)
         );
+
+        Vector2 direction = (currentPos - _prevPos).normalized;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, angle + 90);
+        transform.position = currentPos;
+
+        _prevPos = currentPos;
     }
 
     private float FourPointBezier(float a, float b, float c, float d)

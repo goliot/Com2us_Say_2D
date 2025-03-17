@@ -1,0 +1,13 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: AC_ItemSpeedUp
+  m_Controller: {fileID: 9100000, guid: 8e16d4b75902ec34bb42b4aaa4afdca3, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 6305c756e75e9d84eaf5bf0a203f0552, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: eb5c6237fa364874699d93fd482c9efe, type: 2}

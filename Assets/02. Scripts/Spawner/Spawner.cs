@@ -42,26 +42,31 @@ public class Spawner : MonoBehaviour
 
         if (_timer > _nextSpawnCooltime)
         {
-            Enemy enemy = Spawn(Random.Range(0, SpawnPoints.Length)).GetComponent<Enemy>();
-            if (enemy.EnemyType == EEnemyType.Basic || enemy.EnemyType == EEnemyType.Split)
-            {
-                if (enemy.transform.position.x < _leftBorder)
-                {
-                    enemy.Direction = Vector3.right;
-                }
-                else if (enemy.transform.position.x > _rightBorder)
-                {
-                    enemy.Direction = Vector3.left;
-                }
-                else
-                {
-                    enemy.Direction = Vector3.down;
-                }
-            }
-
-            _nextSpawnCooltime = Random.Range(MinSpawnCooltime, MaxSpawnCooltime);
-            _timer = 0f;
+            SpawnRoutine();
         }
+    }
+
+    private void SpawnRoutine()
+    {
+        Enemy enemy = Spawn(Random.Range(0, SpawnPoints.Length)).GetComponent<Enemy>();
+        if (enemy.EnemyType == EEnemyType.Basic || enemy.EnemyType == EEnemyType.Split)
+        {
+            if (enemy.transform.position.x < _leftBorder)
+            {
+                enemy.Direction = Vector3.right;
+            }
+            else if (enemy.transform.position.x > _rightBorder)
+            {
+                enemy.Direction = Vector3.left;
+            }
+            else
+            {
+                enemy.Direction = Vector3.down;
+            }
+        }
+
+        _nextSpawnCooltime = Random.Range(MinSpawnCooltime, MaxSpawnCooltime);
+        _timer = 0f;
     }
 
     private GameObject Spawn(int spawnPointIndex)

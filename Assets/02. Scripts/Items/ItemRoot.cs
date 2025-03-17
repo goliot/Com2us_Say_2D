@@ -19,6 +19,9 @@ public abstract class ItemRoot : MonoBehaviour
     private float _duration = 0;
     public float Speed = 5f;
 
+    [Header("# VFX")]
+    public GameObject ItemGetVFX;
+
     public abstract void Effect();
 
     private void Awake()
@@ -58,6 +61,7 @@ public abstract class ItemRoot : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             Effect();
+            Instantiate(ItemGetVFX, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

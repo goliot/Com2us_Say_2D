@@ -28,8 +28,15 @@ public class Enemy : MonoBehaviour
     public GameObject[] DropItems;
     private float _dropPercentage = 0.3f;
 
+    [Header("# Effects")]
+    public GameObject ExplosionVFXPrefab;
+
+    [Header("# Componenets")]
+    private Animator _animator;
+
     private void Awake()
     {
+        _animator = GetComponent<Animator>();
         TargetPlayer = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
@@ -50,7 +57,8 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float damage)
     {
         Hp -= damage;
-        if(Hp <= 0)
+        _animator.SetTrigger("Hit");
+        if (Hp <= 0)
         {
             Die();
         }
@@ -74,6 +82,9 @@ public class Enemy : MonoBehaviour
     {
         if (IsDead) return;
         IsDead = true;
+
+        // 폭발 이펙트
+        Instantiate(ExplosionVFXPrefab, transform.position, Quaternion.identity);
 
         ItemDrop();
 
