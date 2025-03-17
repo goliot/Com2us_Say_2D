@@ -10,7 +10,7 @@ public abstract class ItemRoot : MonoBehaviour
     private Tweener _moveTweener = null;
     private float _triggerTimer = 0f;
     private float _deactiveTimer = 0f;
-    private float _deactiveTime = 10f;
+    private float _deactiveTime = 3f;
     private bool _isTweenComplete = false;
 
     private float _percent = 0f;
