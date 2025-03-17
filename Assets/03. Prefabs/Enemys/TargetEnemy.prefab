@@ -135,10 +135,7 @@ MonoBehaviour:
   Hp: 100
   Damage: 40
   SubEnemy: {fileID: 0}
-  DropItems:
-  - {fileID: 120389599058381263, guid: 5c669c1084b4dc24291353619b6309e8, type: 3}
-  - {fileID: 120389599058381263, guid: 978004e245b9ce24e8277dbafe03fca7, type: 3}
-  - {fileID: 120389599058381263, guid: faf6cc08f421769449a439ef381f96f8, type: 3}
+  DropList: {fileID: 11400000, guid: 33df80fee7da44349bb17c4ba244b207, type: 2}
   ExplosionVFXPrefab: {fileID: 4237966911660280652, guid: 65a7a57db3f85a4419efeb2602afebf2, type: 3}
   _rotateSpeed: 5
 --- !u!70 &-3141815281689039388

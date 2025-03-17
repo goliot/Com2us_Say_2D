@@ -21,11 +21,10 @@ public class Enemy : MonoBehaviour
     private bool IsDead = false;
 
     [Header("# Skill")]
-    public GameObject SubEnemy;
     protected Transform TargetPlayer;
 
     [Header("# Items")]
-    public GameObject[] DropItems;
+    public DropItemList DropList;
     private float _dropPercentage = 0.3f;
 
     [Header("# Effects")]
@@ -70,16 +69,7 @@ public class Enemy : MonoBehaviour
         transform.Translate(_direction * Speed * Time.deltaTime);
     }
 
-    private void Split()
-    {
-        for(int i=0; i<3; i++)
-        {
-            Enemy sub = Instantiate(SubEnemy, new Vector3(transform.position.x + (i - 1f) * 0.5f, transform.position.y, transform.position.z), Quaternion.identity).GetComponent<Enemy>();
-            sub.EnemyType = EEnemyType.Bezier;
-        }
-    }
-
-    private void Die()
+    protected virtual void Die()
     {
         if (IsDead) return;
         IsDead = true;
@@ -88,11 +78,6 @@ public class Enemy : MonoBehaviour
         Instantiate(ExplosionVFXPrefab, transform.position, Quaternion.identity);
 
         ItemDrop();
-
-        if (EnemyType == EEnemyType.Split)
-        {
-            Split();
-        }
         Destroy(gameObject);
     }
 
@@ -102,7 +87,7 @@ public class Enemy : MonoBehaviour
 
         if(percentage < _dropPercentage)
         {
-            Instantiate(DropItems[Random.Range(0, DropItems.Length)], transform.position, Quaternion.identity); ;
+            Instantiate(DropList[Random.Range(0, DropList.Count)], transform.position, Quaternion.identity); ;
         }
     }
 }

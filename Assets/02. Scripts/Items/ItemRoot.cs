@@ -3,21 +3,24 @@ using UnityEngine;
 
 public abstract class ItemRoot : MonoBehaviour
 {
+    public float Speed = 5f;
+
     protected EItemType itemType;
 
     protected GameObject PlayerObject;
 
     private Tweener _moveTweener = null;
-    private float _triggerTimer = 0f;
+    
     private float _deactiveTimer = 0f;
     private float _deactiveTime = 3f;
-    private bool _isTweenComplete = false;
 
+    /*private bool _isTweenComplete = false;
+    private float _triggerTimer = 0f;
     private float _percent = 0f;
     private Vector2 _controlPoint = Vector2.zero;
     private float _distance = 0;
-    private float _duration = 0;
-    public float Speed = 5f;
+    private float _duration = 0;*/
+    
 
     [Header("# VFX")]
     public GameObject ItemGetVFX;
@@ -86,7 +89,7 @@ public abstract class ItemRoot : MonoBehaviour
             PlayerObject.transform.position
         };
         _moveTweener = transform.DOPath(path, 0.2f, PathType.CatmullRom)
-            .SetEase(Ease.InOutSine).OnComplete(()=>_isTweenComplete = true);
+            .SetEase(Ease.InOutSine);
     }
 
     /*private void OnTriggerStay2D(Collider2D collision)

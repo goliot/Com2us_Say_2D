@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 9210545076644924269}
   - component: {fileID: 8356174096916164765}
-  - component: {fileID: 3113234887905835437}
   - component: {fileID: 8941478082777444986}
   - component: {fileID: 6045732513097826573}
   - component: {fileID: 8386141790071798251}
+  - component: {fileID: -2605914595012893807}
   m_Layer: 7
   m_Name: SplitEnemy
   m_TagString: Enemy
@@ -91,28 +91,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3113234887905835437
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7579682560884316346}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 086aff84b4d5ff94496a392bd301f22a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Speed: 2
-  EnemyType: 1
-  Hp: 100
-  Damage: 40
-  SubEnemy: {fileID: 7579682560884316346, guid: e9423a6f448320646a6023da97ae6912, type: 3}
-  DropItems:
-  - {fileID: 120389599058381263, guid: 978004e245b9ce24e8277dbafe03fca7, type: 3}
-  - {fileID: 120389599058381263, guid: faf6cc08f421769449a439ef381f96f8, type: 3}
-  - {fileID: 120389599058381263, guid: 5c669c1084b4dc24291353619b6309e8, type: 3}
-  ExplosionVFXPrefab: {fileID: 4237966911660280652, guid: 65a7a57db3f85a4419efeb2602afebf2, type: 3}
 --- !u!50 &8941478082777444986
 Rigidbody2D:
   serializedVersion: 5
@@ -199,3 +177,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-2605914595012893807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7579682560884316346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c44041b5788199b439e39eba86a41bab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 2
+  EnemyType: 1
+  Hp: 100
+  Damage: 40
+  DropList: {fileID: 11400000, guid: 33df80fee7da44349bb17c4ba244b207, type: 2}
+  ExplosionVFXPrefab: {fileID: 4237966911660280652, guid: 65a7a57db3f85a4419efeb2602afebf2, type: 3}
+  SubEnemy: {fileID: 7579682560884316346, guid: e9423a6f448320646a6023da97ae6912, type: 3}
