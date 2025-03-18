@@ -1,9 +1,13 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] private float _initialMaxHp;
-    
+    [SerializeField] private GameObject DieVFX;
+
+    public UnityEvent DieEvent;
+
     private void Awake()
     {
         PlayerStats.Hp = PlayerStats.MaxHp = _initialMaxHp;
@@ -23,6 +27,7 @@ public class Player : MonoBehaviour
 
     private void Die()
     {
+        Instantiate(DieVFX, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }

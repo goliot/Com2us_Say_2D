@@ -31,6 +31,12 @@ public abstract class ItemRoot : MonoBehaviour
         PlayerObject = GameObject.FindGameObjectWithTag("Player");
     }
 
+    private void OnEnable()
+    {
+        GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-1f, 1f), 5), ForceMode2D.Impulse);
+        GetComponent<Rigidbody2D>().AddTorque(Random.Range(-5, 5), ForceMode2D.Impulse);
+    }
+
     private void Update()
     {
         _deactiveTimer += Time.deltaTime;

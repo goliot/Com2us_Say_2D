@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerFire : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class PlayerFire : MonoBehaviour
 
     [Header ("# Timer")]
     private float _timeCounter = 0f;
+
+    public UnityEvent ShootEvent;
 
     private void Awake()
     {
@@ -35,6 +38,8 @@ public class PlayerFire : MonoBehaviour
 
         if (Input.GetButtonDown("Fire1") || PlayMode.CurrentPlayMode == EPlayMode.Auto)
         {
+            ShootEvent.Invoke();
+
             int counter = 0;
             // 총알을 인스턴스화해 씬에 올리고, 위치를 총구의 위치로 지정
             foreach(GameObject muzzle in MuzzlePositions)

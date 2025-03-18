@@ -4,6 +4,9 @@ using DG.Tweening;
 
 public class CameraShake : MonoBehaviour
 {
+    public float ShakeTime;
+    public float ShakeStrength;
+
     private Vector3 _originalPosition = new Vector3();
 
     private void Awake()
@@ -13,7 +16,13 @@ public class CameraShake : MonoBehaviour
 
     public void Shake()
     {
-        transform.DOShakePosition(0.1f, 0.2f)
+        transform.DOShakePosition(ShakeTime, ShakeStrength)
             .OnComplete(() => transform.position = _originalPosition);
+    }
+
+    public void DieShake()
+    {
+        ShakeTime = 5;
+        Shake();
     }
 }

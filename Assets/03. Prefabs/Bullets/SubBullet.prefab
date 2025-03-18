@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BulletType: 1
-  Speed: 4
+  Speed: 8
   Frequency: 10
   IsLeftBullet: 0
   _damage:

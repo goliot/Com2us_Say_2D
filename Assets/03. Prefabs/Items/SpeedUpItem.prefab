@@ -104,7 +104,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 5
+  PlayerObject: {fileID: 0}
   ItemGetVFX: {fileID: 1743054447673338168, guid: a54f66cc490d3fc43adb54ac21030732, type: 3}
+  MagneticFlag: 0
 --- !u!70 &4681447076555012534
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -139,9 +141,9 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
-  m_Direction: 0
+  m_Offset: {x: 0.0000005378316, y: 0.011658103}
+  m_Size: {x: 0.7142964, y: 0.3245877}
+  m_Direction: 1
 --- !u!50 &4378435773620459951
 Rigidbody2D:
   serializedVersion: 5
@@ -150,7 +152,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 120389599058381263}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

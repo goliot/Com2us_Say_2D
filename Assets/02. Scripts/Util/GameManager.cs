@@ -21,5 +21,12 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         MainCamera = Camera.main.gameObject;
+        Time.timeScale = 1;
+    }
+
+    public void PlayerDieSlowDown()
+    {
+        Time.timeScale = 0.5f;
+        MainCamera.GetComponent<CameraShake>().DieShake();
     }
 }
