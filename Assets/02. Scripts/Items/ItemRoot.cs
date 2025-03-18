@@ -6,11 +6,8 @@ public abstract class ItemRoot : MonoBehaviour
     public float Speed = 5f;
 
     protected EItemType itemType;
-
-    protected GameObject PlayerObject;
-
+    public GameObject PlayerObject;
     private Tweener _moveTweener = null;
-    
     private float _deactiveTimer = 0f;
     private float _deactiveTime = 3f;
 
@@ -25,6 +22,8 @@ public abstract class ItemRoot : MonoBehaviour
     [Header("# VFX")]
     public GameObject ItemGetVFX;
 
+    public bool MagneticFlag = false;
+
     public abstract void Effect();
 
     private void Awake()
@@ -37,7 +36,7 @@ public abstract class ItemRoot : MonoBehaviour
         _deactiveTimer += Time.deltaTime;
         if (_deactiveTimer > _deactiveTime)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
 
         /*if (Vector3.Distance(transform.position, PlayerObject.transform.position) < 3f)
@@ -50,7 +49,9 @@ public abstract class ItemRoot : MonoBehaviour
             transform.position = Bezier(transform.position, _controlPoint, PlayerObject.transform.position, _percent);
         }*/
 
-        if (Vector3.Distance(transform.position, PlayerObject.transform.position) < 3f)
+
+
+        if (Vector3.Distance(transform.position, PlayerObject.transform.position) < 2f || MagneticFlag)
         {
             if (_moveTweener == null)
             {
@@ -78,7 +79,7 @@ public abstract class ItemRoot : MonoBehaviour
         return final;
     }
 
-    protected void TowardPlayer()
+    public void TowardPlayer()
     {
         Vector3 targetPos = PlayerObject.transform.position;
 

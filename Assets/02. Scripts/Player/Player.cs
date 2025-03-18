@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     {
         PlayerStats.Hp -= damage.Value;
         Debug.Log($"Hp : {PlayerStats.Hp}");
+        GameManager.Instance.MainCamera.GetComponent<CameraShake>().Shake();
+
         if(PlayerStats.Hp <= 0)
         {
             Die();

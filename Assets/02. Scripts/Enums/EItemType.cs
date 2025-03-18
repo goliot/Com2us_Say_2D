@@ -4,4 +4,5 @@ public enum EItemType
     AttackSpeedUp,
     Heal,
     HpUp,
+    Magnetic,
 }
