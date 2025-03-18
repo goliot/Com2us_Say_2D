@@ -71,7 +71,8 @@ public abstract class ItemRoot : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             Effect();
-            Instantiate(ItemGetVFX, transform.position, Quaternion.identity);
+            GameObject itemGetVFX = Instantiate(ItemGetVFX, transform.position, Quaternion.identity);
+            itemGetVFX.GetComponent<AudioSource>().Play();
             Destroy(gameObject);
         }
     }

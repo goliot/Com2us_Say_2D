@@ -15,12 +15,19 @@ public class Boom : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        _damage.Value = float.MaxValue;
+        _damage.From = gameObject;
+    }
+
     private void Update()
     {
         _timer += Time.deltaTime;
         if (_timer > _showTime)
         {
             gameObject.SetActive(false);
+            _timer = 0;
         }
     }
 
