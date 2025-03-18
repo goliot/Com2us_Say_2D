@@ -20,7 +20,7 @@ public abstract class ItemRoot : MonoBehaviour
     private Vector2 _controlPoint = Vector2.zero;
     private float _distance = 0;
     private float _duration = 0;*/
-    
+
 
     [Header("# VFX")]
     public GameObject ItemGetVFX;
