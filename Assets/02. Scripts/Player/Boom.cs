@@ -2,14 +2,24 @@ using UnityEngine;
 
 public class Boom : MonoBehaviour
 {
+    [SerializeField] private float _showTime;
+
     private float _timer = 0f;
+    public float Timer
+    {
+        get => _timer;
+        set
+        {
+            _timer = Mathf.Max(0, value);
+        }
+    }
 
     private void Update()
     {
         _timer += Time.deltaTime;
-        if (_timer > 2f)
+        if (_timer > _showTime)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 

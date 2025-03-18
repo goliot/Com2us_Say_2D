@@ -60,7 +60,7 @@ public class Enemy : MonoBehaviour
         if (Hp <= 0)
         {
             Die();
-            TargetPlayer.gameObject.GetComponent<Player>().KillCount++;
+            PlayerStats.KillCount++;
         }
     }
 

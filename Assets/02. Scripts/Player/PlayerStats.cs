@@ -43,4 +43,14 @@ public static class PlayerStats
             _speed = Mathf.Clamp(value, MinSpeed, MaxSpeed);
         }
     }
+
+    private static int _killCount = 0;
+    public static int KillCount
+    {
+        get => _killCount;
+        set
+        {
+            _killCount = value;
+        }
+    }
 }
