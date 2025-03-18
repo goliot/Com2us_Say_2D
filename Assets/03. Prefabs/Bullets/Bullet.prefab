@@ -107,6 +107,10 @@ MonoBehaviour:
   Frequency: 10
   IsLeftBullet: 0
   Damage: 100
+  _damage:
+    Type: 0
+    Value: 100
+    From: {fileID: 0}
 --- !u!60 &2886919087550069573
 PolygonCollider2D:
   m_ObjectHideFlags: 0

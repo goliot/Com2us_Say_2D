@@ -9,9 +9,10 @@ public class Player : MonoBehaviour
         PlayerStats.Hp = PlayerStats.MaxHp = _initialMaxHp;
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(Damage damage)
     {
-        PlayerStats.Hp -= damage;
+        PlayerStats.Hp -= damage.Value;
+        Debug.Log($"Hp : {PlayerStats.Hp}");
         if(PlayerStats.Hp <= 0)
         {
             Die();

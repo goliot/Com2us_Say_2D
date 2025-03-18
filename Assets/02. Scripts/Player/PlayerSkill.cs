@@ -12,7 +12,6 @@ public class PlayerSkill : MonoBehaviour
     {
         BoomCount();
         MakeBoom();
-        Debug.Log(_boomCount);
     }
 
     private void BoomCount()

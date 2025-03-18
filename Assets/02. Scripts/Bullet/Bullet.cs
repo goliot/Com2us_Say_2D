@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour
     public bool IsLeftBullet = false;
 
     [Header("# Stats")]
-    public float Damage = 100;
+    [SerializeField] protected Damage _damage;
 
     private void Update()
     {
@@ -29,7 +29,7 @@ public class Bullet : MonoBehaviour
         if(collision.CompareTag("Enemy"))
         {
             // 묻지 말고 시켜라!
-            collision.GetComponent<Enemy>().TakeDamage(Damage);
+            collision.GetComponent<Enemy>().TakeDamage(_damage);
 
             Destroy(gameObject);
         }

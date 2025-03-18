@@ -5,11 +5,11 @@ public class SplitEnemy : Enemy
     [Header ("# Skill")]
     public GameObject SubEnemy;
 
-    protected override void Die()
+    protected override void Die(Damage damage)
     {
         Split();
 
-        base.Die();
+        base.Die(damage);
     }
 
     private void Split()

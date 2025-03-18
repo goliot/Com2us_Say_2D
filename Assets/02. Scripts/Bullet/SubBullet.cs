@@ -5,7 +5,7 @@ public class SubBullet : Bullet
     private void OnEnable()
     {
         BulletType = EBulletType.SubBullet;
-        Damage = 40f;
+        _damage.From = gameObject;
     }
 
     /*public override void Movement()

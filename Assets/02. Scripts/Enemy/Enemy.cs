@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
     [Header("# Info")]
     public EEnemyType EnemyType;
     public float Hp = 100f;
-    public float Damage;
+    [SerializeField] protected Damage _damage;
     private bool IsDead = false;
 
     [Header("# Skill")]
@@ -37,6 +37,7 @@ public class Enemy : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         TargetPlayer = GameObject.FindGameObjectWithTag("Player").transform;
+        _damage.From = gameObject;
     }
 
     private void Update()
@@ -48,19 +49,18 @@ public class Enemy : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
-            collision.GetComponent<Player>().TakeDamage(Damage);
-            Die();
+            collision.GetComponent<Player>().TakeDamage(_damage);
+            Die(_damage);
         }
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(Damage damage)
     {
-        Hp -= damage;
+        Hp -= damage.Value;
         _animator.SetTrigger("Hit");
         if (Hp <= 0)
         {
-            Die();
-            PlayerStats.KillCount++;
+            Die(damage);
         }
     }
 
@@ -69,11 +69,15 @@ public class Enemy : MonoBehaviour
         transform.Translate(_direction * Speed * Time.deltaTime);
     }
 
-    protected virtual void Die()
+    protected virtual void Die(Damage damage)
     {
         if (IsDead) return;
         IsDead = true;
 
+        if(damage.Type == DamageType.Bullet)
+        {
+            PlayerStats.KillCount++;
+        }
         // 폭발 이펙트
         Instantiate(ExplosionVFXPrefab, transform.position, Quaternion.identity);
 

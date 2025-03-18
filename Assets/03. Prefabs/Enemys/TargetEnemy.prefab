@@ -134,7 +134,10 @@ MonoBehaviour:
   EnemyType: 3
   Hp: 100
   Damage: 40
-  SubEnemy: {fileID: 0}
+  _damage:
+    Type: 0
+    Value: 40
+    From: {fileID: 0}
   DropList: {fileID: 11400000, guid: 33df80fee7da44349bb17c4ba244b207, type: 2}
   ExplosionVFXPrefab: {fileID: 4237966911660280652, guid: 65a7a57db3f85a4419efeb2602afebf2, type: 3}
   _rotateSpeed: 5

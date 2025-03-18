@@ -106,7 +106,10 @@ MonoBehaviour:
   Speed: 4
   Frequency: 10
   IsLeftBullet: 0
-  Damage: 40
+  _damage:
+    Type: 0
+    Value: 40
+    From: {fileID: 0}
 --- !u!60 &7406719943970238331
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -145,7 +148,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.33333334, y: 0.45833334}
+    oldSize: {x: 0.6666667, y: 0.9166667}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
