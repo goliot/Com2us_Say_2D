@@ -9,7 +9,7 @@ public class JsonManager : MonoBehaviour
     void Start()
     {
         string data = GetPlayerDataFromPrefs();
-        playerData = JsonToData(data);
+        playerData = LoadJsonData();
         PlayerStats.KillCount = playerData.KillCount;
         PlayerStats.Score = playerData.Score;
         PlayerStats.BoomCount = playerData.BoomCount;
@@ -53,6 +53,7 @@ public class JsonManager : MonoBehaviour
         FileStream fileStream = new FileStream(path, FileMode.Open);
 
         string data = DataToJson(playerData);
+        data = AesEncryption.Encrypt(data);
         byte[] bData = Encoding.UTF8.GetBytes(data);
         fileStream.Write(bData, 0, bData.Length);
         fileStream.Close();
@@ -68,6 +69,7 @@ public class JsonManager : MonoBehaviour
         fileStream.Read(bData, 0, bData.Length);
         fileStream.Close();
         string jsonData = Encoding.UTF8.GetString(bData);
+        jsonData = AesEncryption.Decrypt(jsonData);
         return JsonToData(jsonData);
     }
 
