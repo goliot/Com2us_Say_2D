@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        TargetPlayer = GameObject.FindGameObjectWithTag("Player").transform;
+        TargetPlayer = GameManager.Instance.player.gameObject.transform;
         _damage.From = gameObject;
     }
 

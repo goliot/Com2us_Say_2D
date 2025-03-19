@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        //PlayerStats.Load();
+
         MainCamera = Camera.main.gameObject;
         Time.timeScale = 1;
     }

@@ -5,6 +5,7 @@ public enum DamageType
 {
     Bullet,
     Boom,
+    Enemy,
 }
 
 // 데미지를 추상화

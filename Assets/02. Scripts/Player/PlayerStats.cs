@@ -1,4 +1,13 @@
 using UnityEngine;
+using System;
+
+[Serializable]
+public class PlayerData
+{
+    public int Score = 0;
+    public int KillCount = 0;
+    public int BoomCount = 0;
+}
 
 public static class PlayerStats
 {
@@ -74,6 +83,18 @@ public static class PlayerStats
         {
             _score = value;
             GameManager.Instance.UI.Refresh();
+            //Save();
         }
     }
+
+    /*public static void Save()
+    {
+        PlayerPrefs.SetInt("Score", _score);
+    }
+
+    public static void Load()
+    {
+        _score = PlayerPrefs.GetInt("Score", 0);
+        GameManager.Instance.UI.Refresh();
+    }*/
 }

@@ -34,9 +34,19 @@ public class UI_Game : MonoBehaviour
         }
         
         KillCountText.text = $"Kills : {PlayerStats.KillCount}";
-        KillCountText.transform.DOScale(1.2f, 0.2f).OnComplete(() => KillCountText.transform.localScale = Vector3.one);
-
-        ScoreText.text = $"Score : {PlayerStats.Score}";
-        ScoreText.transform.DOScale(1.2f, 0.2f).OnComplete(() => ScoreText.transform.localScale = Vector3.one);
+        if (_prevKillCount != PlayerStats.KillCount) 
+        {
+            _prevKillCount = PlayerStats.KillCount;
+            KillCountText.transform.DOScale(1.4f, 0.2f).SetEase(Ease.OutBounce)
+            .OnComplete(() => KillCountText.transform.DOScale(1f, 0.1f));
+        }
+        
+        if (_prevScore != PlayerStats.Score)
+        {
+            _prevScore = PlayerStats.Score;
+            ScoreText.text = $"Score : {PlayerStats.Score.ToString("N0")}";
+            ScoreText.transform.DOScale(1.4f, 0.2f).SetEase(Ease.OutBounce)
+                .OnComplete(() => ScoreText.transform.DOScale(1f, 0.1f));
+        }
     }
 }

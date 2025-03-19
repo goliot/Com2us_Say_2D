@@ -134,7 +134,7 @@ MonoBehaviour:
   EnemyType: 2
   Hp: 50
   _damage:
-    Type: 0
+    Type: 2
     Value: 20
     From: {fileID: 0}
   DropList: {fileID: 11400000, guid: 33df80fee7da44349bb17c4ba244b207, type: 2}
