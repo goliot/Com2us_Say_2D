@@ -18,7 +18,7 @@ public static class PlayerStats
         get => _hp;
         set
         {
-            _hp = value;
+            _hp = Mathf.Min(value, _maxHp);
         }
     }
 
