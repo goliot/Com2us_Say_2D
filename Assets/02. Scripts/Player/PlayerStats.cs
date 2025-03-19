@@ -51,6 +51,29 @@ public static class PlayerStats
         set
         {
             _killCount = value;
+            GameManager.Instance.UI.Refresh();
+        }
+    }
+
+    private static int _boomCount = 0;
+    public static int BoomCount
+    {
+        get => _boomCount;
+        set
+        {
+            _boomCount = Mathf.Clamp(value, 0, 3);
+            GameManager.Instance.UI.Refresh();
+        }
+    }
+
+    private static int _score = 0;
+    public static int Score
+    {
+        get => _score;
+        set
+        {
+            _score = value;
+            GameManager.Instance.UI.Refresh();
         }
     }
 }

@@ -133,12 +133,12 @@ MonoBehaviour:
   Speed: 0.5
   EnemyType: 2
   Hp: 50
-  Damage: 20
   _damage:
     Type: 0
     Value: 20
     From: {fileID: 0}
   DropList: {fileID: 11400000, guid: 33df80fee7da44349bb17c4ba244b207, type: 2}
+  Score: 40
   ExplosionVFXPrefab: {fileID: 4237966911660280652, guid: 65a7a57db3f85a4419efeb2602afebf2, type: 3}
   _t: 0
   posA: 0.55

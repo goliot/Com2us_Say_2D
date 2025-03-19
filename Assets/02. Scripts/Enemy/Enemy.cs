@@ -26,6 +26,7 @@ public class Enemy : MonoBehaviour
     [Header("# Items")]
     public DropItemList DropList;
     private float _dropPercentage = 0.3f;
+    public int Score = 0;
 
     [Header("# Effects")]
     public GameObject ExplosionVFXPrefab;
@@ -82,6 +83,8 @@ public class Enemy : MonoBehaviour
         Instantiate(ExplosionVFXPrefab, transform.position, Quaternion.identity);
 
         ItemDrop();
+        PlayerStats.Score += Score;
+
         Destroy(gameObject);
     }
 
@@ -91,7 +94,7 @@ public class Enemy : MonoBehaviour
 
         if(percentage < _dropPercentage)
         {
-            Instantiate(DropList[Random.Range(0, DropList.Count)], transform.position, Quaternion.identity); ;
+            Instantiate(DropList[Random.Range(0, DropList.Count)], transform.position, Quaternion.identity);
         }
     }
 }
