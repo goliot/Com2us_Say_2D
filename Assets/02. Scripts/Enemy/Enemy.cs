@@ -97,4 +97,10 @@ public class Enemy : MonoBehaviour
             Instantiate(DropList[Random.Range(0, DropList.Count)], transform.position, Quaternion.identity);
         }
     }
+
+    public void BossSpawnClear()
+    {
+        Instantiate(ExplosionVFXPrefab, transform.position, Quaternion.identity);
+        Destroy(gameObject);
+    }
 }

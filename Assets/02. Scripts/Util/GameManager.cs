@@ -18,6 +18,9 @@ public class GameManager : MonoBehaviour
 
     public GameObject MainCamera;
     public Player player;
+    public Spawner spawner;
+
+    public bool IsBossSpawned = false;
 
     private void Awake()
     {
@@ -25,6 +28,14 @@ public class GameManager : MonoBehaviour
 
         MainCamera = Camera.main.gameObject;
         Time.timeScale = 1;
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.B))
+        {
+            spawner.SpawnBoss();
+        }
     }
 
     public void PlayerDieSlowDown()

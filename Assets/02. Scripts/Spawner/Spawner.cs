@@ -4,9 +4,11 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] Enemys;
+    [SerializeField] private GameObject Boss;
 
     [Header ("# Spawning")]
     [SerializeField] private Transform[] SpawnPoints;
+    [SerializeField] private Transform BossSpawnPoint;
     [SerializeField] private float[] SpawnRates;
     [SerializeField][Range(1, 4)] private float MaxSpawnCooltime;
     [SerializeField][Range(0.1f, 1f)] private float MinSpawnCooltime;
@@ -40,9 +42,14 @@ public class Spawner : MonoBehaviour
     {
         _timer += Time.deltaTime;
 
-        if (_timer > _nextSpawnCooltime)
+        if (_timer > _nextSpawnCooltime && PlayerStats.KillCount < 100)
         {
             SpawnRoutine();
+        }
+
+        if(PlayerStats.KillCount >= 100 && !GameManager.Instance.IsBossSpawned)
+        {
+            SpawnBoss();
         }
     }
 
@@ -82,5 +89,18 @@ public class Spawner : MonoBehaviour
             }
         }
         return Instantiate(Enemys[SpawnRates.Length - 1], SpawnPoints[spawnPointIndex].position, Quaternion.identity);
+    }
+    
+    public void SpawnBoss()
+    {
+        GameManager.Instance.IsBossSpawned = true;
+
+        GameObject[] Enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach(GameObject enemy in Enemies)
+        {
+            enemy.GetComponent<Enemy>().BossSpawnClear();
+        }
+
+        Instantiate(Boss, BossSpawnPoint.position, Quaternion.identity);
     }
 }

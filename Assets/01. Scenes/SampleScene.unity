@@ -119,6 +119,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &13031817
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 13031818}
+  m_Layer: 0
+  m_Name: BossSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &13031818
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13031817}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.41, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1866859507}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &16771221
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,7 +164,7 @@ GameObject:
   - component: {fileID: 16771222}
   - component: {fileID: 16771226}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Canvas(UI_Game)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5914,6 +5945,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainCamera: {fileID: 519420028}
   player: {fileID: 1312142246}
+  spawner: {fileID: 0}
+  IsBossSpawned: 0
 --- !u!114 &613474339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7484,6 +7517,7 @@ Transform:
   - {fileID: 1486513540}
   - {fileID: 1004214962}
   - {fileID: 343304981}
+  - {fileID: 13031818}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1866859508
@@ -7504,6 +7538,7 @@ MonoBehaviour:
   - {fileID: 7579682560884316346, guid: 15e1503f853e3dc4cab5db8c7df1cfd0, type: 3}
   - {fileID: 7579682560884316346, guid: e9423a6f448320646a6023da97ae6912, type: 3}
   - {fileID: 7579682560884316346, guid: 1ac5635b3e3c79b4eb506837a5ee5854, type: 3}
+  Boss: {fileID: 3770033830141056741, guid: 252b37edab04c3a4c85cac95d2173d48, type: 3}
   SpawnPoints:
   - {fileID: 766847573}
   - {fileID: 1378518711}
@@ -7514,6 +7549,7 @@ MonoBehaviour:
   - {fileID: 1486513540}
   - {fileID: 1004214962}
   - {fileID: 343304981}
+  BossSpawnPoint: {fileID: 0}
   SpawnRates:
   - 10
   - 10
