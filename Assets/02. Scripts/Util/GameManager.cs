@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviour
 
     public GameObject MainCamera;
     public Player player;
-    public UI_Game UI;
 
     private void Awake()
     {

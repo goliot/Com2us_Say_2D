@@ -312,7 +312,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 17.300003, y: -98.56}
+  m_AnchoredPosition: {x: 17.299988, y: -98.56}
   m_SizeDelta: {x: 263.1, y: 100}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &265802271
@@ -5914,7 +5914,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainCamera: {fileID: 519420028}
   player: {fileID: 1312142246}
-  UI: {fileID: 16771226}
 --- !u!114 &613474339
 MonoBehaviour:
   m_ObjectHideFlags: 0

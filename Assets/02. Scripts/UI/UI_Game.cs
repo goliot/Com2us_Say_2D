@@ -5,6 +5,8 @@ using DG.Tweening;
 
 public class UI_Game : MonoBehaviour
 {
+    public static UI_Game Instance = null;
+
     public List<GameObject> Booms;
 
     public TextMeshProUGUI KillCountText;
@@ -15,11 +17,21 @@ public class UI_Game : MonoBehaviour
 
     private void Awake()
     {
+        if(Instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
         Refresh();
     }
 
     public void Refresh()
     {
+        Debug.Log(gameObject.name);
+
         for(int i=0; i<3; i++)
         {
             //Booms[i].SetActive(i < PlayerStats.BoomCount);

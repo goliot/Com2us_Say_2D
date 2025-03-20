@@ -10,9 +10,7 @@ public class JsonManager : MonoBehaviour
     {
         string data = GetPlayerDataFromPrefs();
         playerData = LoadJsonData();
-        PlayerStats.KillCount = playerData.KillCount;
-        PlayerStats.Score = playerData.Score;
-        PlayerStats.BoomCount = playerData.BoomCount;
+        DataToStat();
     }
 
     private void Update()
@@ -28,12 +26,37 @@ public class JsonManager : MonoBehaviour
         }
     }
 
-    public void CreateJsonData()
+    private void DataToStat()
     {
-        string path = Application.dataPath + "/Resources/Json/PlayerData.json";
+        if(playerData == null)
+        {
+            return;
+        }
+
+        PlayerStats.MaxHp = playerData.MaxHp;
+        PlayerStats.Hp = playerData.Hp;
+        PlayerStats.FireCoolTime = playerData.FireCoolTime;
+        PlayerStats.Speed = PlayerStats.Speed;
+        PlayerStats.KillCount = playerData.KillCount;
+        PlayerStats.BoomCount = playerData.BoomCount;
+        PlayerStats.Score = playerData.Score;
+    }
+
+    private void StatToData()
+    {
+        playerData.MaxHp = PlayerStats.MaxHp;
+        playerData.Hp = PlayerStats.Hp;
+        playerData.FireCoolTime = PlayerStats.FireCoolTime;
+        playerData.Speed = PlayerStats.Speed;
         playerData.Score = PlayerStats.Score;
         playerData.KillCount = PlayerStats.KillCount;
         playerData.BoomCount = PlayerStats.BoomCount;
+    }
+
+    public void CreateJsonData()
+    {
+        string path = Application.dataPath + "/Resources/Json/PlayerData.json";
+        StatToData();
 
         FileStream fileStream = new FileStream(path, FileMode.Create);
 
@@ -46,9 +69,7 @@ public class JsonManager : MonoBehaviour
     public void SaveJsonData()
     {
         string path = Application.dataPath + "/Resources/Json/PlayerData.json";
-        playerData.Score = PlayerStats.Score;
-        playerData.KillCount = PlayerStats.KillCount;
-        playerData.BoomCount = PlayerStats.BoomCount;
+        StatToData();
 
         FileStream fileStream = new FileStream(path, FileMode.Open);
 

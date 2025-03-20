@@ -1,13 +1,4 @@
 using UnityEngine;
-using System;
-
-[Serializable]
-public class PlayerData
-{
-    public int Score = 0;
-    public int KillCount = 0;
-    public int BoomCount = 0;
-}
 
 public static class PlayerStats
 {
@@ -60,7 +51,7 @@ public static class PlayerStats
         set
         {
             _killCount = value;
-            GameManager.Instance.UI.Refresh();
+            UI_Game.Instance.Refresh();
         }
     }
 
@@ -71,7 +62,7 @@ public static class PlayerStats
         set
         {
             _boomCount = Mathf.Clamp(value, 0, 3);
-            GameManager.Instance.UI.Refresh();
+            UI_Game.Instance.Refresh();
         }
     }
 
@@ -82,7 +73,7 @@ public static class PlayerStats
         set
         {
             _score = value;
-            GameManager.Instance.UI.Refresh();
+            UI_Game.Instance.Refresh();
             //Save();
         }
     }
