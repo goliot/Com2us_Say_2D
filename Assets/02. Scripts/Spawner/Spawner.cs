@@ -42,14 +42,15 @@ public class Spawner : MonoBehaviour
     {
         _timer += Time.deltaTime;
 
-        if (_timer > _nextSpawnCooltime && PlayerStats.KillCount < 100)
-        {
-            SpawnRoutine();
-        }
-
-        if(PlayerStats.KillCount >= 100 && !GameManager.Instance.IsBossSpawned)
+        if (PlayerStats.KillCount >= 100 && !GameManager.Instance.IsBossSpawned)
         {
             SpawnBoss();
+            return;
+        }
+
+        if (_timer > _nextSpawnCooltime && PlayerStats.KillCount < 100 && !GameManager.Instance.IsBossSpawned)
+        {
+            SpawnRoutine();
         }
     }
 
@@ -94,6 +95,7 @@ public class Spawner : MonoBehaviour
     public void SpawnBoss()
     {
         GameManager.Instance.IsBossSpawned = true;
+        UI_Game.Instance.ActiveWarning();
 
         GameObject[] Enemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach(GameObject enemy in Enemies)

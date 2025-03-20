@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
 using DG.Tweening;
+using System.Collections;
+using UnityEngine.UI;
 
 public class UI_Game : MonoBehaviour
 {
@@ -11,6 +13,8 @@ public class UI_Game : MonoBehaviour
 
     public TextMeshProUGUI KillCountText;
     public TextMeshProUGUI ScoreText;
+    public Slider BossHpSlider;
+    public GameObject WarnigPanel;
 
     private int _prevKillCount = 0;
     private int _prevScore = 0;
@@ -26,6 +30,13 @@ public class UI_Game : MonoBehaviour
             Instance = this;
         }
         Refresh();
+    }
+
+    public void ActiveWarning()
+    {
+        WarnigPanel.SetActive(true);
+        BossHpSlider.gameObject.SetActive(true);
+        //BossHpSlider.GetComponent<UI_BossHp>().boss = GameObject.FindGameObjectWithTag("Boss").GetComponent<Boss>();
     }
 
     public void Refresh()
@@ -60,5 +71,15 @@ public class UI_Game : MonoBehaviour
             ScoreText.transform.DOScale(1.4f, 0.2f).SetEase(Ease.OutBounce)
                 .OnComplete(() => ScoreText.transform.DOScale(1f, 0.1f));
         }
+    }
+
+    public void BossAlert()
+    {
+        StartCoroutine(CoBossAlert());
+    }
+
+    private IEnumerator CoBossAlert()
+    {
+        yield return null;
     }
 }

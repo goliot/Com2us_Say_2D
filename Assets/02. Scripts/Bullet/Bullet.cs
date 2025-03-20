@@ -33,6 +33,12 @@ public class Bullet : MonoBehaviour
 
             Destroy(gameObject);
         }
+        else if(collision.CompareTag("Boss"))
+        {
+            collision.GetComponent<Boss>().TakeDamage(_damage);
+
+            Destroy(gameObject);
+        }
     }
 
     private void StraightMovement()
