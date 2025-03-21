@@ -15,9 +15,15 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(Damage damage)
     {
+        GameManager.Instance.MainCamera.GetComponent<CameraShake>().Shake();
+
+        if (GameManager.Instance.IsFever)
+        {
+            return;
+        }
+
         PlayerStats.Hp -= damage.Value;
         Debug.Log($"Hp : {PlayerStats.Hp}");
-        GameManager.Instance.MainCamera.GetComponent<CameraShake>().Shake();
 
         if(PlayerStats.Hp <= 0)
         {

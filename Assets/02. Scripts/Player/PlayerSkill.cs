@@ -1,9 +1,10 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerSkill : MonoBehaviour
 {
     [SerializeField] private GameObject _boomObject;
-
+    [SerializeField] public GameObject[] FeverEffects;
     [SerializeField] private int _addBoomKillAmount = 20;
 
     private int _lastCount = 0;
@@ -12,6 +13,26 @@ public class PlayerSkill : MonoBehaviour
     {
         BoomCount();
         MakeBoom();
+        ActiveFever();
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            Debug.Log("UI 클릭 중! 키 입력 무시");
+            return; // UI 클릭 상태면 입력 무시
+        }
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            Debug.Log("Z 키 입력!");
+        }
+    }
+
+    private void ActiveFever()
+    {
+        if(Input.GetKeyDown(KeyCode.Z) && !GameManager.Instance.IsFever && !GameManager.Instance.IsBossSpawned)
+        {
+            Debug.Log("Z");
+            StartCoroutine(GameManager.Instance.CoFever());
+        }
     }
 
     private void BoomCount()

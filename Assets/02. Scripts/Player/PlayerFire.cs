@@ -31,7 +31,7 @@ public class PlayerFire : MonoBehaviour
 
     private void FireMain()
     {
-        if(_timeCounter < PlayerStats.FireCoolTime)
+        if(_timeCounter < PlayerStats.FireCoolTime || GameManager.Instance.IsFever)
         {
             return;
         }

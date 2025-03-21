@@ -224,7 +224,7 @@ public class Boss : MonoBehaviour
     private void Die()
     {
         GameManager.Instance.IsBossSpawned = false;
-
+        PlayerStats.Score += 10000;
         Instantiate(DieEffect, transform.position, Quaternion.identity);
 
         Destroy(gameObject);
