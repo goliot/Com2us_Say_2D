@@ -14,6 +14,7 @@ public class UI_Game : MonoBehaviour
     public TextMeshProUGUI KillCountText;
     public TextMeshProUGUI ScoreText;
     public Slider BossHpSlider;
+    public Slider BossSubSlider;
     public GameObject WarnigPanel;
 
     private int _prevKillCount = 0;
@@ -36,6 +37,7 @@ public class UI_Game : MonoBehaviour
     {
         WarnigPanel.SetActive(true);
         BossHpSlider.gameObject.SetActive(true);
+        BossSubSlider.gameObject.SetActive(true);
         //BossHpSlider.GetComponent<UI_BossHp>().boss = GameObject.FindGameObjectWithTag("Boss").GetComponent<Boss>();
     }
 

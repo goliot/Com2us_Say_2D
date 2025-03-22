@@ -217,6 +217,9 @@ public class Boss : MonoBehaviour
 
         CheckBossState();
 
+        UI_Game.Instance.BossHpSlider.GetComponent<UI_BossHp>().ShakeSlider();
+
+
         if (Hp <= 0)
             Die();
     }
@@ -224,6 +227,7 @@ public class Boss : MonoBehaviour
     private void Die()
     {
         GameManager.Instance.IsBossSpawned = false;
+        UI_Game.Instance.BossHpSlider.gameObject.SetActive(false);
         PlayerStats.Score += 10000;
         Instantiate(DieEffect, transform.position, Quaternion.identity);
 
