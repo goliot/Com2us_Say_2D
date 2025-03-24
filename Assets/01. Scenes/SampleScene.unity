@@ -8794,11 +8794,11 @@ MonoBehaviour:
   - {fileID: 343304981}
   BossSpawnPoint: {fileID: 13031818}
   SpawnRates:
-  - 0
-  - 0
   - 10
-  - 0
-  - 0
+  - 10
+  - 10
+  - 10
+  - 10
   MaxSpawnCooltime: 1
   MinSpawnCooltime: 0.1
 --- !u!1 &1898601749
