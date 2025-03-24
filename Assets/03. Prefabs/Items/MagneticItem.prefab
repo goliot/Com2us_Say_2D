@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 5
+  _objectType: 11
   PlayerObject: {fileID: 0}
   ItemGetVFX: {fileID: 8659334767085027916, guid: 9d5e43ecb94bead49b25b0b8e6f54ef8, type: 3}
   MagneticFlag: 0

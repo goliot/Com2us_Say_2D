@@ -15,7 +15,11 @@ public class Enemy : MonoBehaviour
     }
 
     [Header("# Info")]
-    public EEnemyType EnemyType;
+    [SerializeField] private EObjectType _objectType;
+    public EObjectType ObjectType
+    {
+        get => _objectType;
+    }
     public float MaxHp = 100f;
     public float Hp = 100f;
     [SerializeField] protected Damage _damage;
@@ -87,12 +91,13 @@ public class Enemy : MonoBehaviour
             PlayerStats.KillCount++;
         }
         // 폭발 이펙트
-        Instantiate(ExplosionVFXPrefab, transform.position, Quaternion.identity);
+        GameObject effect = PoolManager.Instance.GetObject(EObjectType.EnemyExpolsionEffect);
+        effect.transform.position = transform.position;
 
         ItemDrop();
         PlayerStats.Score += Score;
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     private void ItemDrop()
@@ -101,13 +106,15 @@ public class Enemy : MonoBehaviour
 
         if(percentage < _dropPercentage)
         {
-            Instantiate(DropList[Random.Range(0, DropList.Count)], transform.position, Quaternion.identity);
+            GameObject item = PoolManager.Instance.GetObject(DropList[Random.Range(0, DropList.Count)].GetComponent<ItemRoot>().ObjectType);
+            item.transform.position = transform.position;
         }
     }
 
     public void BossSpawnClear()
     {
-        Instantiate(ExplosionVFXPrefab, transform.position, Quaternion.identity);
-        Destroy(gameObject);
+        GameObject effect = PoolManager.Instance.GetObject(EObjectType.EnemyExpolsionEffect);
+        effect.transform.position = transform.position;
+        gameObject.SetActive(false);
     }
 }

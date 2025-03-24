@@ -190,7 +190,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 2
-  EnemyType: 1
+  _objectType: 7
+  MaxHp: 100
   Hp: 100
   _damage:
     Type: 2
@@ -199,4 +200,4 @@ MonoBehaviour:
   DropList: {fileID: 11400000, guid: 33df80fee7da44349bb17c4ba244b207, type: 2}
   Score: 10
   ExplosionVFXPrefab: {fileID: 4237966911660280652, guid: 65a7a57db3f85a4419efeb2602afebf2, type: 3}
-  SubEnemy: {fileID: 7579682560884316346, guid: e9423a6f448320646a6023da97ae6912, type: 3}
+  SubEnemy: {fileID: -2792546273684439396, guid: e9423a6f448320646a6023da97ae6912, type: 3}

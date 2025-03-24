@@ -5,7 +5,12 @@ public abstract class ItemRoot : MonoBehaviour
 {
     public float Speed = 5f;
 
-    protected EItemType itemType;
+    [SerializeField] private EObjectType _objectType;
+    public EObjectType ObjectType
+    {
+        get => _objectType;
+    }
+
     public GameObject PlayerObject;
     private Tweener _moveTweener = null;
     private float _deactiveTimer = 0f;
@@ -73,7 +78,7 @@ public abstract class ItemRoot : MonoBehaviour
             Effect();
             GameObject itemGetVFX = Instantiate(ItemGetVFX, transform.position, Quaternion.identity);
             itemGetVFX.GetComponent<AudioSource>().Play();
-            Destroy(gameObject);
+            gameObject.SetActive(false);    
         }
     }
 

@@ -41,14 +41,17 @@ public class PlayerFire : MonoBehaviour
         if (Input.GetButtonDown("Fire1") || PlayMode.CurrentPlayMode == EPlayMode.Auto)
         {
             ShootEvent.Invoke();
+            GameObject bullet = null;
 
             for (int i = 0; i < MuzzlePositions.Length; i++)
             {
-                PoolManager.Instance.Create(EBulletType.MainBullet, MuzzlePositions[i].transform.position);
+                bullet = PoolManager.Instance.GetObject(EObjectType.Bullet);
+                bullet.transform.position = MuzzlePositions[i].transform.position;
             }
             for(int i=0; i<SubMuzzlePositions.Length; i++)
             {
-                PoolManager.Instance.Create(EBulletType.SubBullet, SubMuzzlePositions[i].transform.position);
+                bullet = PoolManager.Instance.GetObject(EObjectType.SubBullet);
+                bullet.transform.position = SubMuzzlePositions[i].transform.position;
             }
 
             // 총알을 인스턴스화해 씬에 올리고, 위치를 총구의 위치로 지정

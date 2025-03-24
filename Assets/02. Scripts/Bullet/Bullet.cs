@@ -4,7 +4,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [Header ("# Bullet Type")]
-    public EBulletType BulletType = EBulletType.MainBullet;
+    public EObjectType ObjectType;
 
     [Header ("# Movement")]
     public float Speed;

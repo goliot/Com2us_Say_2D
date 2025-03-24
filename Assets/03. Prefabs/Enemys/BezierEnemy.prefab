@@ -131,7 +131,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 0.5
-  EnemyType: 2
+  _objectType: 5
+  MaxHp: 100
   Hp: 50
   _damage:
     Type: 2

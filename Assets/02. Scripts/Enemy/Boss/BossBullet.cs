@@ -4,6 +4,12 @@ public class BossBullet : MonoBehaviour
 {
     public Damage DamageInfo;
 
+    [SerializeField]  private EObjectType _objectType;
+    public EObjectType ObjectType
+    {
+        get => _objectType;
+    }
+
     public float Speed;
     public Vector3 Dir;
 
@@ -18,7 +24,7 @@ public class BossBullet : MonoBehaviour
         {
             collision.GetComponent<Player>().TakeDamage(DamageInfo);
 
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

@@ -2,11 +2,6 @@ using UnityEngine;
 
 public class Item_HpUp : ItemRoot
 {
-    private void Start()
-    {
-        itemType = EItemType.HpUp;
-    }
-
     public override void Effect()
     {
         PlayerStats.MaxHp += 100;

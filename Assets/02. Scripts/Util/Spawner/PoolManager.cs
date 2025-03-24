@@ -1,9 +1,9 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class PoolManager : MonoBehaviour
 {
-    public static PoolManager _instance;
+    private static PoolManager _instance;
     public static PoolManager Instance
     {
         get
@@ -16,47 +16,64 @@ public class PoolManager : MonoBehaviour
         }
     }
 
-    public int PoolSize;
-    public List<GameObject> BulletPrefabs;
-    private List<GameObject> _bullets = new List<GameObject>();
-    public List<GameObject> Bullets
-    {
-        get => _bullets;
-    }
+    [SerializeField] private List<PoolInfo> _poolInfoList;
 
     private void Awake()
     {
+        Initialize();
+    }
 
-        int bulletPrefabCount = BulletPrefabs.Count;
-
-        foreach(GameObject bulletPrefab in BulletPrefabs)
+    private void Initialize()
+    {
+        foreach(PoolInfo info in _poolInfoList)
         {
-            for(int i=0; i<PoolSize; i++)
+            for(int i=0; i<info.InitCount; i++)
             {
-                GameObject bullet = Instantiate(bulletPrefab, transform);
-                _bullets.Add(bullet);
-                bullet.SetActive(false);
+                info.PoolQueue.Enqueue(CreateNewObject(info));
             }
         }
     }
 
-    public GameObject Create(EBulletType bulletType, Vector3 position)
+    private GameObject CreateNewObject(PoolInfo info)
     {
-        foreach (GameObject bullet in _bullets)
+        GameObject newObject = Instantiate(info.Prefab, info.Container.transform);
+        newObject.SetActive(false);
+        return newObject;
+    }
+
+    private PoolInfo GetPoolByType(EObjectType type)
+    {
+        foreach(PoolInfo info in _poolInfoList)
         {
-            if (bullet.GetComponent<Bullet>().BulletType == bulletType && !bullet.activeSelf)
+            if(type == info.Type)
             {
-                bullet.transform.position = position;
-                bullet.gameObject.SetActive(true);
-                return bullet;
+                return info;
             }
         }
-
         return null;
     }
 
-    public void Release(GameObject target)
+    public GameObject GetObject(EObjectType type)
     {
-        target.SetActive(false);
+        PoolInfo info = Instance.GetPoolByType(type);
+        GameObject obj = null;
+        if(info.PoolQueue.Count > 0)
+        {
+            obj = info.PoolQueue.Dequeue();
+        }
+        else
+        {
+            obj = Instance.CreateNewObject(info);
+        }
+        obj.SetActive(true);
+
+        return obj;
+    }
+
+    public void ReturnObject(GameObject obj, EObjectType type)
+    {
+        PoolInfo info = Instance.GetPoolByType(type);
+        info.PoolQueue.Enqueue(obj);
+        obj.SetActive(false);
     }
 }

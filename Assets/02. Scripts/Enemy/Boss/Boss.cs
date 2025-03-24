@@ -100,7 +100,9 @@ public class Boss : MonoBehaviour
 
             Vector3 rotVec = new Vector3(0, 0, angle * Mathf.Rad2Deg + 90);
 
-            BossBullet bullet = Instantiate(BulletObject, transform.position, Quaternion.Euler(rotVec)).GetComponent<BossBullet>();
+            BossBullet bullet = PoolManager.Instance.GetObject(EObjectType.BossBullet).GetComponent<BossBullet>();
+            bullet.transform.rotation = Quaternion.Euler(rotVec);            
+            //BossBullet bullet = Instantiate(BulletObject, transform.position, Quaternion.Euler(rotVec)).GetComponent<BossBullet>();
             bullet.DamageInfo = DamageInfo;
             bullet.Dir = dir.normalized;
 
@@ -115,7 +117,8 @@ public class Boss : MonoBehaviour
 
             Vector3 rotVec = new Vector3(0, 0, angle * Mathf.Rad2Deg + 90);
 
-            BossBullet bullet = Instantiate(BulletObject, transform.position, Quaternion.Euler(rotVec)).GetComponent<BossBullet>();
+            BossBullet bullet = PoolManager.Instance.GetObject(EObjectType.BossBullet).GetComponent<BossBullet>();
+            bullet.transform.rotation = Quaternion.Euler(rotVec);
             bullet.DamageInfo = DamageInfo;
             bullet.Dir = dir.normalized;
 
@@ -161,7 +164,8 @@ public class Boss : MonoBehaviour
                 Vector2 dir = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
                 Vector3 rotVec = new Vector3(0, 0, angle * Mathf.Rad2Deg + 90);
 
-                BossBullet bullet = Instantiate(BulletObject, transform.position, Quaternion.Euler(rotVec)).GetComponent<BossBullet>();
+                BossBullet bullet = PoolManager.Instance.GetObject(EObjectType.BossBullet).GetComponent<BossBullet>();
+                bullet.transform.rotation = Quaternion.Euler(rotVec);
                 bullet.DamageInfo = DamageInfo;
                 bullet.Dir = dir.normalized;
             }
@@ -203,7 +207,8 @@ public class Boss : MonoBehaviour
                                       Mathf.Sin(Mathf.PI * 2 * idx / roundNum));
             Vector3 rotVec = Vector3.forward * 360 * idx / roundNum + Vector3.forward * 90;
 
-            BossBullet bullet = Instantiate(BulletObject, transform.position, Quaternion.Euler(rotVec)).GetComponent<BossBullet>();
+            BossBullet bullet = PoolManager.Instance.GetObject(EObjectType.BossBullet).GetComponent<BossBullet>();
+            bullet.transform.rotation = Quaternion.Euler(rotVec);
             bullet.DamageInfo = DamageInfo;
             bullet.Dir = dir.normalized;
         }

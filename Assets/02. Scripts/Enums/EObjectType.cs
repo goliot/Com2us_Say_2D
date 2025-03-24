@@ -1,0 +1,21 @@
+public enum EObjectType
+{
+    Bullet,
+    SubBullet,
+    PetBullet,
+    BossBullet,
+    BasicEnemy,
+    BezierEnemy,
+    FollowEnemy,
+    SplitEnemy,
+    TargetEnemy,
+    AttackSpeedUpItem,
+    HpUpItem,
+    MagneticItem,
+    SpeedUpItem,
+    AttackSpeedUpEffect,
+    HpUpEffect,
+    MagneticEffect,
+    SpeedUpEffect,
+    EnemyExpolsionEffect,
+}

@@ -24,7 +24,8 @@ public class Pet : MonoBehaviour
 
     public void Shoot()
     {
-        Instantiate(Bullet, Muzzle.position, Quaternion.identity);
+        GameObject bullet = PoolManager.Instance.GetObject(EObjectType.PetBullet);
+        bullet.transform.position = Muzzle.position;
     }
 
     private void Follow()

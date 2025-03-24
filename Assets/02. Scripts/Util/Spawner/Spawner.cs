@@ -12,7 +12,9 @@ public class Spawner : MonoBehaviour
     [SerializeField] private float[] SpawnRates;
     [SerializeField][Range(1, 4)] private float MaxSpawnCooltime;
     [SerializeField][Range(0.1f, 1f)] private float MinSpawnCooltime;
-   
+
+    public EObjectType[] EnemyTypes;
+
     private float _timer = 0f;
     private float _nextSpawnCooltime;
 
@@ -57,7 +59,7 @@ public class Spawner : MonoBehaviour
     private void SpawnRoutine()
     {
         Enemy enemy = Spawn(Random.Range(0, SpawnPoints.Length)).GetComponent<Enemy>();
-        if (enemy.EnemyType == EEnemyType.Basic || enemy.EnemyType == EEnemyType.Split)
+        if (enemy.ObjectType == EObjectType.BasicEnemy || enemy.ObjectType == EObjectType.SplitEnemy)
         {
             if (enemy.transform.position.x < _leftBorder)
             {
@@ -80,16 +82,19 @@ public class Spawner : MonoBehaviour
     private GameObject Spawn(int spawnPointIndex)
     {
         float randNum = Random.value;
+        GameObject enemyToSpawn = null;
 
         for(int i=0; i<SpawnRates.Length; i++)
         {
             if(randNum < SpawnRates[i])
             {
-                return Instantiate(Enemys[i], SpawnPoints[spawnPointIndex].position, Quaternion.identity);
-                
+                enemyToSpawn = PoolManager.Instance.GetObject(EnemyTypes[i]);
+                enemyToSpawn.transform.position = SpawnPoints[spawnPointIndex].position;
+                //return Instantiate(Enemys[i], SpawnPoints[spawnPointIndex].position, Quaternion.identity);
+                return enemyToSpawn;
             }
         }
-        return Instantiate(Enemys[SpawnRates.Length - 1], SpawnPoints[spawnPointIndex].position, Quaternion.identity);
+        return enemyToSpawn;
     }
     
     public void SpawnBoss()

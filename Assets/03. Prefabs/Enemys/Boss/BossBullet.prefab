@@ -170,4 +170,6 @@ MonoBehaviour:
     Type: 0
     Value: 0
     From: {fileID: 0}
+  _objectType: 3
   Speed: 3
+  Dir: {x: 0, y: 0, z: 0}
