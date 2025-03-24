@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public enum DamageType
+public enum EDamageType
 {
     Bullet,
     Boom,
@@ -10,9 +10,9 @@ public enum DamageType
 
 // 데미지를 추상화
 [Serializable]
-public struct Damage
+public struct DamageInfo
 {
-    public DamageType Type;
+    public EDamageType Type;
     public float Value;
     public GameObject From;
 }

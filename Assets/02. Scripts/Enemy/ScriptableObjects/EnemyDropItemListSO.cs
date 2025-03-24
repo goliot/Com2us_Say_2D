@@ -1,8 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu]
-public class DropItemList : ScriptableObject
+[CreateAssetMenu(fileName = "DropItemList", menuName = "Scriptable Objects/DropItemListSO")]
+public class EnemyDropItemListSO : ScriptableObject
 {
     public List<GameObject> itemList;
 

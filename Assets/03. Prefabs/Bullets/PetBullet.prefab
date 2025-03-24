@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ObjectType: 2
+  Data: {fileID: 11400000, guid: 1d71466cd6fb68d4f8cfe9fa3d702ae6, type: 2}
   Speed: 8
   Frequency: 10
   IsLeftBullet: 0

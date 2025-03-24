@@ -3,11 +3,10 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [Header ("# Bullet Type")]
-    public EObjectType ObjectType;
+    [Header ("# Data")]
+    public BulletDataSO Data;
 
     [Header ("# Movement")]
-    public float Speed;
     protected Vector3 _direction = new Vector3();
 
     [Header ("# Snake Movement")]
@@ -15,8 +14,14 @@ public class Bullet : MonoBehaviour
     public float Frequency = 10f;
     public bool IsLeftBullet = false;
 
-    [Header("# Stats")]
-    [SerializeField] protected Damage _damage;
+    protected DamageInfo _damage;
+
+    private void Awake()
+    {
+        _damage.Value = Data.Damage;
+        _damage.Type = EDamageType.Bullet;
+        _damage.From = gameObject;
+    }
 
     public void Initialize()
     {
@@ -36,19 +41,19 @@ public class Bullet : MonoBehaviour
             // 묻지 말고 시켜라!
             collision.GetComponent<Enemy>().TakeDamage(_damage);
 
-            gameObject.SetActive(false);
+            PoolManager.Instance.ReturnObject(gameObject, Data.ObjectType);
         }
         else if(collision.CompareTag("Boss"))
         {
             collision.GetComponent<Boss>().TakeDamage(_damage);
 
-            gameObject.SetActive(false);
+            PoolManager.Instance.ReturnObject(gameObject, Data.ObjectType);
         }
     }
 
     private void StraightMovement()
     {
-        transform.Translate(Vector3.up * Speed * Time.deltaTime);
+        transform.Translate(Vector3.up * Data.Speed * Time.deltaTime);
     }
 
     public virtual void Movement()
@@ -62,6 +67,6 @@ public class Bullet : MonoBehaviour
         //float h = IsLeftBullet ? Mathf.Cos(Frequency * _lerpTime) : -Mathf.Cos(Frequency * _lerpTime);
         float h = Mathf.Cos(Frequency * _lerpTime);
         _direction = new Vector3(h, 1, 0).normalized;
-        transform.Translate(_direction * Speed * Time.deltaTime);
+        transform.Translate(_direction * Data.Speed * Time.deltaTime);
     }
 }

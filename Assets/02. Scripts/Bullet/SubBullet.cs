@@ -4,7 +4,7 @@ public class SubBullet : Bullet
 {
     private void OnEnable()
     {
-        ObjectType = EObjectType.SubBullet;
+        Data.ObjectType = EObjectType.SubBullet;
         _damage.From = gameObject;
     }
 

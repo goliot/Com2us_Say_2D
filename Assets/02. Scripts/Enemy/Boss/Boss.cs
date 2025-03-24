@@ -1,15 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using DG.Tweening;
-using UnityEngine.UIElements;
-using System;
-
-public enum BossState
-{
-    Normal,
-    Finch,
-    Rage,
-}
 
 public class Boss : MonoBehaviour
 {
@@ -20,7 +11,7 @@ public class Boss : MonoBehaviour
     [Header("# Stats")]
     public float MaxHp;
     public float Hp;
-    public Damage DamageInfo;
+    public DamageInfo DamageInfo;
     private float CurrentCoolTime;
     public float NormalCoolTime;
     public float FinchCoolTime;
@@ -100,11 +91,7 @@ public class Boss : MonoBehaviour
 
             Vector3 rotVec = new Vector3(0, 0, angle * Mathf.Rad2Deg + 90);
 
-            BossBullet bullet = PoolManager.Instance.GetObject(EObjectType.BossBullet).GetComponent<BossBullet>();
-            bullet.transform.rotation = Quaternion.Euler(rotVec);            
-            //BossBullet bullet = Instantiate(BulletObject, transform.position, Quaternion.Euler(rotVec)).GetComponent<BossBullet>();
-            bullet.DamageInfo = DamageInfo;
-            bullet.Dir = dir.normalized;
+            MakeBullet(dir, rotVec);
 
             yield return new WaitForSeconds(0.1f);
         }
@@ -117,10 +104,7 @@ public class Boss : MonoBehaviour
 
             Vector3 rotVec = new Vector3(0, 0, angle * Mathf.Rad2Deg + 90);
 
-            BossBullet bullet = PoolManager.Instance.GetObject(EObjectType.BossBullet).GetComponent<BossBullet>();
-            bullet.transform.rotation = Quaternion.Euler(rotVec);
-            bullet.DamageInfo = DamageInfo;
-            bullet.Dir = dir.normalized;
+            MakeBullet(dir, rotVec);
 
             yield return new WaitForSeconds(0.1f);
         }
@@ -164,10 +148,7 @@ public class Boss : MonoBehaviour
                 Vector2 dir = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
                 Vector3 rotVec = new Vector3(0, 0, angle * Mathf.Rad2Deg + 90);
 
-                BossBullet bullet = PoolManager.Instance.GetObject(EObjectType.BossBullet).GetComponent<BossBullet>();
-                bullet.transform.rotation = Quaternion.Euler(rotVec);
-                bullet.DamageInfo = DamageInfo;
-                bullet.Dir = dir.normalized;
+                MakeBullet(dir, rotVec);
             }
             yield return new WaitForSeconds(0.1f);
         }
@@ -207,14 +188,20 @@ public class Boss : MonoBehaviour
                                       Mathf.Sin(Mathf.PI * 2 * idx / roundNum));
             Vector3 rotVec = Vector3.forward * 360 * idx / roundNum + Vector3.forward * 90;
 
-            BossBullet bullet = PoolManager.Instance.GetObject(EObjectType.BossBullet).GetComponent<BossBullet>();
-            bullet.transform.rotation = Quaternion.Euler(rotVec);
-            bullet.DamageInfo = DamageInfo;
-            bullet.Dir = dir.normalized;
+            MakeBullet(dir, rotVec);
         }
     }
 
-    public void TakeDamage(Damage damage)
+    private void MakeBullet(Vector2 dir, Vector3 rotVec)
+    {
+        BossBullet bullet = PoolManager.Instance.GetObject(EObjectType.BossBullet).GetComponent<BossBullet>();
+        bullet.transform.rotation = Quaternion.Euler(rotVec);
+        bullet.transform.position = transform.position;
+        bullet.DamageInfo = DamageInfo;
+        bullet.Dir = dir.normalized;
+    }
+
+    public void TakeDamage(DamageInfo damage)
     {
         Hp -= damage.Value;
 

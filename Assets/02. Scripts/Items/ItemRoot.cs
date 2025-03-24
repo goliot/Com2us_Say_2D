@@ -28,6 +28,7 @@ public abstract class ItemRoot : MonoBehaviour
     public GameObject ItemGetVFX;
 
     public bool MagneticFlag = false;
+    private bool _towardFlag = false;
 
     public abstract void Effect();
 
@@ -62,7 +63,7 @@ public abstract class ItemRoot : MonoBehaviour
 
 
 
-        if (Vector3.Distance(transform.position, PlayerObject.transform.position) < 2f || MagneticFlag)
+        if (Vector3.Distance(transform.position, PlayerObject.transform.position) < 2f || MagneticFlag || _towardFlag)
         {
             if (_moveTweener == null)
             {
@@ -78,7 +79,7 @@ public abstract class ItemRoot : MonoBehaviour
             Effect();
             GameObject itemGetVFX = Instantiate(ItemGetVFX, transform.position, Quaternion.identity);
             itemGetVFX.GetComponent<AudioSource>().Play();
-            gameObject.SetActive(false);    
+            PoolManager.Instance.ReturnObject(gameObject, ObjectType);
         }
     }
 
@@ -93,6 +94,7 @@ public abstract class ItemRoot : MonoBehaviour
 
     public void TowardPlayer()
     {
+        _towardFlag = true;
         Vector3 targetPos = PlayerObject.transform.position;
 
         Vector3[] path = new Vector3[]
@@ -102,7 +104,7 @@ public abstract class ItemRoot : MonoBehaviour
             PlayerObject.transform.position
         };
         _moveTweener = transform.DOPath(path, 0.2f, PathType.CatmullRom)
-            .SetEase(Ease.InOutSine);
+            .SetEase(Ease.InOutSine).OnComplete(() => TowardPlayer());
     }
 
     /*private void OnTriggerStay2D(Collider2D collision)

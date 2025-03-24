@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -7044785340647934035}
   - component: {fileID: -9179428682293934261}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: MainBullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -103,7 +103,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44e5cebeec4c05f45b4a39a562ed27e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletType: 0
+  ObjectType: 0
+  Data: {fileID: 11400000, guid: 94181045d6133c44d84a36d3b073b8be, type: 2}
   Speed: 12
   Frequency: 10
   IsLeftBullet: 0

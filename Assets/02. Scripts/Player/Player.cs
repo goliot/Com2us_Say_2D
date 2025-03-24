@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
         PlayerStats.Hp = PlayerStats.MaxHp = _initialMaxHp;
     }
 
-    public void TakeDamage(Damage damage)
+    public void TakeDamage(DamageInfo damage)
     {
         GameManager.Instance.MainCamera.GetComponent<CameraShake>().Shake();
 

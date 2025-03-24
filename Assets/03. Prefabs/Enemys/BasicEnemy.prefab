@@ -104,13 +104,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 2
-  _objectType: 4
-  MaxHp: 100
+  Data: {fileID: 11400000, guid: f2102137a889ba143b648cb8bb80dd69, type: 2}
   Hp: 100
-  _damage:
-    Type: 2
-    Value: 40
-    From: {fileID: 0}
   DropList: {fileID: 11400000, guid: 33df80fee7da44349bb17c4ba244b207, type: 2}
   Score: 10
   ExplosionVFXPrefab: {fileID: 4237966911660280652, guid: 65a7a57db3f85a4419efeb2602afebf2, type: 3}

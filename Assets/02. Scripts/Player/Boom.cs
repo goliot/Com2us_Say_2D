@@ -3,7 +3,7 @@ using UnityEngine;
 public class Boom : MonoBehaviour
 {
     [SerializeField] private float _showTime;
-    [SerializeField] private Damage _damage;
+    [SerializeField] private DamageInfo _damage;
 
     private float _timer = 0f;
     public float Timer

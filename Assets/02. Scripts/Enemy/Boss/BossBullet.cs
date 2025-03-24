@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BossBullet : MonoBehaviour
 {
-    public Damage DamageInfo;
+    public DamageInfo DamageInfo;
 
     [SerializeField]  private EObjectType _objectType;
     public EObjectType ObjectType
@@ -24,7 +24,7 @@ public class BossBullet : MonoBehaviour
         {
             collision.GetComponent<Player>().TakeDamage(DamageInfo);
 
-            gameObject.SetActive(false);
+            PoolManager.Instance.ReturnObject(gameObject, ObjectType);
         }
     }
 }

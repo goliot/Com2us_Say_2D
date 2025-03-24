@@ -15,26 +15,20 @@ public class Enemy : MonoBehaviour
     }
 
     [Header("# Info")]
-    [SerializeField] private EObjectType _objectType;
-    public EObjectType ObjectType
-    {
-        get => _objectType;
-    }
-    public float MaxHp = 100f;
+    public EnemyDataSO Data;
     public float Hp = 100f;
-    [SerializeField] protected Damage _damage;
+    protected DamageInfo _damage;
     private bool _isDead = false;
 
-    [Header("# Skill")]
-    protected Transform TargetPlayer;
-
     [Header("# Items")]
-    public DropItemList DropList;
+    public EnemyDropItemListSO DropList;
     private float _dropPercentage = 0.3f;
-    public int Score = 0;
 
     [Header("# Effects")]
     public GameObject ExplosionVFXPrefab;
+
+    [Header("# Skill")]
+    protected Transform TargetPlayer;
 
     [Header("# Componenets")]
     private Animator _animator;
@@ -43,12 +37,14 @@ public class Enemy : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         TargetPlayer = GameManager.Instance.player.gameObject.transform;
+        _damage.Type = EDamageType.Enemy;
+        _damage.Value = Data.Damage;
         _damage.From = gameObject;
     }
 
     private void OnEnable()
     {
-        Hp = MaxHp;
+        Hp = Data.MaxHp;
         _isDead = false;
     }
 
@@ -66,7 +62,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void TakeDamage(Damage damage)
+    public void TakeDamage(DamageInfo damage)
     {
         Hp -= damage.Value;
         _animator.SetTrigger("Hit");
@@ -81,12 +77,12 @@ public class Enemy : MonoBehaviour
         transform.Translate(_direction * Speed * Time.deltaTime);
     }
 
-    protected virtual void Die(Damage damage)
+    protected virtual void Die(DamageInfo damage)
     {
         if (_isDead) return;
         _isDead = true;
 
-        if(damage.Type == DamageType.Bullet)
+        if(damage.Type == EDamageType.Bullet)
         {
             PlayerStats.KillCount++;
         }
@@ -95,9 +91,9 @@ public class Enemy : MonoBehaviour
         effect.transform.position = transform.position;
 
         ItemDrop();
-        PlayerStats.Score += Score;
+        PlayerStats.Score += Data.Score;
 
-        gameObject.SetActive(false);
+        PoolManager.Instance.ReturnObject(gameObject, Data.ObjectType);
     }
 
     private void ItemDrop()
@@ -115,6 +111,6 @@ public class Enemy : MonoBehaviour
     {
         GameObject effect = PoolManager.Instance.GetObject(EObjectType.EnemyExpolsionEffect);
         effect.transform.position = transform.position;
-        gameObject.SetActive(false);
+        PoolManager.Instance.ReturnObject(gameObject, Data.ObjectType);
     }
 }

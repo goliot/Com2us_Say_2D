@@ -774,7 +774,7 @@ GameObject:
   m_Component:
   - component: {fileID: 283445854}
   m_Layer: 0
-  m_Name: Item
+  m_Name: ItemContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -839,7 +839,7 @@ GameObject:
   m_Component:
   - component: {fileID: 329254802}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: BulletContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1025,7 +1025,7 @@ GameObject:
   m_Component:
   - component: {fileID: 377660382}
   m_Layer: 0
-  m_Name: Effect
+  m_Name: EffectContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7239,7 +7239,7 @@ GameObject:
   m_Component:
   - component: {fileID: 904092531}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: EnemyContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7376,52 +7376,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1073648124}
   m_CullTransparentMesh: 1
---- !u!1 &1083780940
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1083780942}
-  - component: {fileID: 1083780943}
-  m_Layer: 0
-  m_Name: BulletPool
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1083780942
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1083780940}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1083780943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1083780940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e8963f70a29a5b48b2b99fd6b7286de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PoolSize: 0
-  BulletPrefabs: []
 --- !u!1 &1191616562
 GameObject:
   m_ObjectHideFlags: 0
@@ -8776,7 +8730,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 321e132ac5a47bf4fb5ad9dd0c160e3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enemys: []
+  EnemyTypes: 0400000005000000060000000700000008000000
   Boss: {fileID: 3770033830141056741, guid: 252b37edab04c3a4c85cac95d2173d48, type: 3}
   SpawnPoints:
   - {fileID: 766847573}
@@ -8797,7 +8751,6 @@ MonoBehaviour:
   - 10
   MaxSpawnCooltime: 1
   MinSpawnCooltime: 0.1
-  EnemyTypes: 0400000005000000060000000700000008000000
 --- !u!1 &1898601749
 GameObject:
   m_ObjectHideFlags: 0
@@ -38493,6 +38446,7 @@ SceneRoots:
   - {fileID: 613474337}
   - {fileID: 519420032}
   - {fileID: 619394802}
+  - {fileID: 611410535}
   - {fileID: 1866859507}
   - {fileID: 301566204}
   - {fileID: 6510370793224703799}
@@ -38502,5 +38456,3 @@ SceneRoots:
   - {fileID: 1990922158}
   - {fileID: 16771225}
   - {fileID: 1898601752}
-  - {fileID: 1083780942}
-  - {fileID: 611410535}

@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca2bd70df3c11e34b85d0701dbbd3cd5, type: 3}
+  m_Script: {fileID: 11500000, guid: 50e1b2386a11dac418332cbaea49e987, type: 3}
   m_Name: EnemyDropItemList
   m_EditorClassIdentifier: 
   itemList:
   - {fileID: 120389599058381263, guid: 978004e245b9ce24e8277dbafe03fca7, type: 3}
   - {fileID: 120389599058381263, guid: faf6cc08f421769449a439ef381f96f8, type: 3}
-  - {fileID: 120389599058381263, guid: 5c669c1084b4dc24291353619b6309e8, type: 3}
   - {fileID: 4216934579658839287, guid: 00c5b4eff9cedfa46a16ee43452ebdce, type: 3}
+  - {fileID: 120389599058381263, guid: 5c669c1084b4dc24291353619b6309e8, type: 3}

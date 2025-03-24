@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private GameObject[] Enemys;
+    public EObjectType[] EnemyTypes;
     [SerializeField] private GameObject Boss;
 
     [Header ("# Spawning")]
@@ -12,8 +12,6 @@ public class Spawner : MonoBehaviour
     [SerializeField] private float[] SpawnRates;
     [SerializeField][Range(1, 4)] private float MaxSpawnCooltime;
     [SerializeField][Range(0.1f, 1f)] private float MinSpawnCooltime;
-
-    public EObjectType[] EnemyTypes;
 
     private float _timer = 0f;
     private float _nextSpawnCooltime;
@@ -59,7 +57,7 @@ public class Spawner : MonoBehaviour
     private void SpawnRoutine()
     {
         Enemy enemy = Spawn(Random.Range(0, SpawnPoints.Length)).GetComponent<Enemy>();
-        if (enemy.ObjectType == EObjectType.BasicEnemy || enemy.ObjectType == EObjectType.SplitEnemy)
+        if (enemy.Data.ObjectType == EObjectType.BasicEnemy || enemy.Data.ObjectType == EObjectType.SplitEnemy)
         {
             if (enemy.transform.position.x < _leftBorder)
             {
