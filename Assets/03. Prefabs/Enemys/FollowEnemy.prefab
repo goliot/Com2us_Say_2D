@@ -132,9 +132,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 3
   Data: {fileID: 11400000, guid: 93f2053a8d16acc4c8f09f088008766f, type: 2}
-  Hp: 100
+  MaxHp: 100
+  Damage: 40
   DropList: {fileID: 11400000, guid: 33df80fee7da44349bb17c4ba244b207, type: 2}
-  Score: 40
   ExplosionVFXPrefab: {fileID: 4237966911660280652, guid: 65a7a57db3f85a4419efeb2602afebf2, type: 3}
 --- !u!70 &-9113570277663792109
 CapsuleCollider2D:

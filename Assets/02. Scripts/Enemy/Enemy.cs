@@ -16,13 +16,17 @@ public class Enemy : MonoBehaviour
 
     [Header("# Info")]
     public EnemyDataSO Data;
-    public float Hp = 100f;
+    private float Hp = 100f;
     protected DamageInfo _damage;
     private bool _isDead = false;
 
+    [Header("# Stats")]
+    public float MaxHp;
+    public float Damage;
+
     [Header("# Items")]
     public EnemyDropItemListSO DropList;
-    private float _dropPercentage = 0.3f;
+    [SerializeField] private float _dropPercentage = 0.3f;
 
     [Header("# Effects")]
     public GameObject ExplosionVFXPrefab;
@@ -38,14 +42,25 @@ public class Enemy : MonoBehaviour
         _animator = GetComponent<Animator>();
         TargetPlayer = GameManager.Instance.player.gameObject.transform;
         _damage.Type = EDamageType.Enemy;
-        _damage.Value = Data.Damage;
-        _damage.From = gameObject;
+        Initialize();
     }
 
-    private void OnEnable()
+    private void Initialize()
     {
-        Hp = Data.MaxHp;
+        _damage.Value = Damage;
         _isDead = false;
+    }
+
+    protected void OnEnable()
+    {
+        _isDead = false;
+
+        LevelDataSO levelData = LevelManager.Instance.GetLevelData();
+        Damage *= levelData.DamageFactor;
+        MaxHp *= levelData.HealthFactor;
+        Speed *= levelData.SpeedFactor;
+
+        Hp = MaxHp;
     }
 
     private void Update()
@@ -59,6 +74,10 @@ public class Enemy : MonoBehaviour
         {
             collision.GetComponent<Player>().TakeDamage(_damage);
             Die(_damage);
+        }
+        if(collision.CompareTag("DestroyZone"))
+        {
+            PoolManager.Instance.ReturnObject(gameObject, Data.ObjectType);
         }
     }
 

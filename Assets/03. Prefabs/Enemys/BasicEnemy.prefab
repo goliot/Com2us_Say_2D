@@ -105,9 +105,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 2
   Data: {fileID: 11400000, guid: f2102137a889ba143b648cb8bb80dd69, type: 2}
-  Hp: 100
+  MaxHp: 1
+  Damage: 40
   DropList: {fileID: 11400000, guid: 33df80fee7da44349bb17c4ba244b207, type: 2}
-  Score: 10
+  _dropPercentage: 0.3
   ExplosionVFXPrefab: {fileID: 4237966911660280652, guid: 65a7a57db3f85a4419efeb2602afebf2, type: 3}
 --- !u!50 &8941478082777444986
 Rigidbody2D:

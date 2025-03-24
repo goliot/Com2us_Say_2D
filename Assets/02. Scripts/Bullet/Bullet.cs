@@ -10,9 +10,8 @@ public class Bullet : MonoBehaviour
     protected Vector3 _direction = new Vector3();
 
     [Header ("# Snake Movement")]
-    protected float _lerpTime = 0f;
-    public float Frequency = 10f;
-    public bool IsLeftBullet = false;
+    //protected float _lerpTime = 0f;
+    //public float Frequency = 10f;
 
     protected DamageInfo _damage;
 
@@ -21,11 +20,6 @@ public class Bullet : MonoBehaviour
         _damage.Value = Data.Damage;
         _damage.Type = EDamageType.Bullet;
         _damage.From = gameObject;
-    }
-
-    public void Initialize()
-    {
-
     }
 
     private void Update()
@@ -49,6 +43,11 @@ public class Bullet : MonoBehaviour
 
             PoolManager.Instance.ReturnObject(gameObject, Data.ObjectType);
         }
+
+        if (collision.CompareTag("DestroyZone"))
+        {
+            PoolManager.Instance.ReturnObject(gameObject, Data.ObjectType);
+        }
     }
 
     private void StraightMovement()
@@ -56,7 +55,7 @@ public class Bullet : MonoBehaviour
         transform.Translate(Vector3.up * Data.Speed * Time.deltaTime);
     }
 
-    public virtual void Movement()
+    /*public virtual void Movement()
     {
         _lerpTime += Time.deltaTime;
         if(_lerpTime > 2 * Mathf.PI)
@@ -68,5 +67,5 @@ public class Bullet : MonoBehaviour
         float h = Mathf.Cos(Frequency * _lerpTime);
         _direction = new Vector3(h, 1, 0).normalized;
         transform.Translate(_direction * Data.Speed * Time.deltaTime);
-    }
+    }*/
 }

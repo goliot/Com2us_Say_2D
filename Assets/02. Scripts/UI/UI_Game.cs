@@ -43,8 +43,6 @@ public class UI_Game : MonoBehaviour
 
     public void Refresh()
     {
-        Debug.Log(gameObject.name);
-
         for(int i=0; i<3; i++)
         {
             //Booms[i].SetActive(i < PlayerStats.BoomCount);

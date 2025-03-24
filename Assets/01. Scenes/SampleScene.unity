@@ -6913,6 +6913,56 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 246318617}
+--- !u!1 &691457011
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 691457013}
+  - component: {fileID: 691457012}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &691457012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691457011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a492ce195c6c8244a922477c039d513, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levelDatas:
+  - {fileID: 11400000, guid: 1ed7377ed1d2e914d829c3912ff712e0, type: 2}
+  - {fileID: 11400000, guid: caaaf8bce7e365e418f94198486ae734, type: 2}
+  - {fileID: 11400000, guid: c54babe3fcfb6cf4c8117bd39198f8b6, type: 2}
+  - {fileID: 11400000, guid: f673454337ab08c4d88063451f5e3cd4, type: 2}
+  - {fileID: 11400000, guid: a63975d3fbd04c84bb8eba92a8e6f60f, type: 2}
+--- !u!4 &691457013
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691457011}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &766847572
 GameObject:
   m_ObjectHideFlags: 0
@@ -8744,11 +8794,11 @@ MonoBehaviour:
   - {fileID: 343304981}
   BossSpawnPoint: {fileID: 13031818}
   SpawnRates:
+  - 0
+  - 0
   - 10
-  - 10
-  - 10
-  - 10
-  - 10
+  - 0
+  - 0
   MaxSpawnCooltime: 1
   MinSpawnCooltime: 0.1
 --- !u!1 &1898601749
@@ -33136,6 +33186,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1632470144654789008, guid: 631d552a1f4e71e41919996e3e394ebc, type: 3}
+      propertyPath: m_TagString
+      value: DestroyZone
+      objectReference: {fileID: 0}
     - target: {fileID: 2333203219833312763, guid: 631d552a1f4e71e41919996e3e394ebc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -33176,11 +33230,27 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2717970007023707028, guid: 631d552a1f4e71e41919996e3e394ebc, type: 3}
+      propertyPath: m_TagString
+      value: DestroyZone
+      objectReference: {fileID: 0}
+    - target: {fileID: 3816876789957779352, guid: 631d552a1f4e71e41919996e3e394ebc, type: 3}
+      propertyPath: m_TagString
+      value: DestroyZone
+      objectReference: {fileID: 0}
+    - target: {fileID: 6372675435402820756, guid: 631d552a1f4e71e41919996e3e394ebc, type: 3}
+      propertyPath: m_TagString
+      value: DestroyZone
+      objectReference: {fileID: 0}
     - target: {fileID: 7498920587913607916, guid: 631d552a1f4e71e41919996e3e394ebc, type: 3}
       propertyPath: m_Name
       value: DestroyZones
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8460713740174702786, guid: 631d552a1f4e71e41919996e3e394ebc, type: 3}
+    - {fileID: 1701645646868763292, guid: 631d552a1f4e71e41919996e3e394ebc, type: 3}
+    - {fileID: 7100893075375618116, guid: 631d552a1f4e71e41919996e3e394ebc, type: 3}
+    - {fileID: 6208662542209141159, guid: 631d552a1f4e71e41919996e3e394ebc, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -38443,9 +38513,10 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 613474337}
   - {fileID: 519420032}
   - {fileID: 619394802}
+  - {fileID: 613474337}
+  - {fileID: 691457013}
   - {fileID: 611410535}
   - {fileID: 1866859507}
   - {fileID: 301566204}

@@ -39,6 +39,7 @@ public abstract class ItemRoot : MonoBehaviour
 
     private void OnEnable()
     {
+        MagneticFlag = false;
         GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-1f, 1f), 5), ForceMode2D.Impulse);
         GetComponent<Rigidbody2D>().AddTorque(Random.Range(-5, 5), ForceMode2D.Impulse);
     }
@@ -63,7 +64,7 @@ public abstract class ItemRoot : MonoBehaviour
 
 
 
-        if (Vector3.Distance(transform.position, PlayerObject.transform.position) < 2f || MagneticFlag || _towardFlag)
+        if (Vector3.Distance(transform.position, PlayerObject.transform.position) < 2f || MagneticFlag)
         {
             if (_moveTweener == null)
             {
@@ -80,6 +81,11 @@ public abstract class ItemRoot : MonoBehaviour
             GameObject itemGetVFX = Instantiate(ItemGetVFX, transform.position, Quaternion.identity);
             itemGetVFX.GetComponent<AudioSource>().Play();
             PoolManager.Instance.ReturnObject(gameObject, ObjectType);
+        }
+
+        if (collision.CompareTag("DestroyZone"))
+        {
+            PoolManager.Instance.ReturnObject(gameObject, _objectType);
         }
     }
 
@@ -104,7 +110,7 @@ public abstract class ItemRoot : MonoBehaviour
             PlayerObject.transform.position
         };
         _moveTweener = transform.DOPath(path, 0.2f, PathType.CatmullRom)
-            .SetEase(Ease.InOutSine).OnComplete(() => TowardPlayer());
+            .SetEase(Ease.InOutSine).OnComplete(()=>transform.DOMove(PlayerObject.transform.position, 0.1f));
     }
 
     /*private void OnTriggerStay2D(Collider2D collision)

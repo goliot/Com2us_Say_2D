@@ -10,18 +10,33 @@ public class BezierEnemy : Enemy
 
     private Vector2 _prevPos;
 
-    private void Start()
+    private bool _isPathSet = false;
+
+    private void SetPath()
     {
+        _isPathSet = true;
+
         point[0] = transform.position; // P0
         point[1] = PointSetting(transform.position); // P1
         point[2] = PointSetting(TargetPlayer.position); // P2
         point[3] = TargetPlayer.position; // P3
 
         _prevPos = transform.position;
+    }
+
+    private void OnDisable()
+    {
+        _t = 0;
+        _isPathSet = false;
     }
 
     private void Update()
     {
+        if(!_isPathSet)
+        {
+            SetPath();
+        }
+
         if (_t > 1)
         {
             _t = 0;  // 새로운 베지어 경로를 생성할 준비
