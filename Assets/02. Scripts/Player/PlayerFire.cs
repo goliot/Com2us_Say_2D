@@ -1,5 +1,7 @@
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.Events;
+using System.Collections.Generic;
 
 public class PlayerFire : MonoBehaviour
 {
@@ -40,19 +42,47 @@ public class PlayerFire : MonoBehaviour
         {
             ShootEvent.Invoke();
 
-            int counter = 0;
-            // 총알을 인스턴스화해 씬에 올리고, 위치를 총구의 위치로 지정
-            foreach(GameObject muzzle in MuzzlePositions)
+            for (int i = 0; i < MuzzlePositions.Length; i++)
             {
-                GameObject bullet = Instantiate(BulletPrefab, muzzle.transform.position, Quaternion.identity);
-                bullet.GetComponent<Bullet>().IsLeftBullet = counter % 2 == 0;
-                counter++;
+                PoolManager.Instance.Create(EBulletType.MainBullet, MuzzlePositions[i].transform.position);
+            }
+            for(int i=0; i<SubMuzzlePositions.Length; i++)
+            {
+                PoolManager.Instance.Create(EBulletType.SubBullet, SubMuzzlePositions[i].transform.position);
+            }
+
+            // 총알을 인스턴스화해 씬에 올리고, 위치를 총구의 위치로 지정
+            /*foreach(GameObject muzzle in MuzzlePositions)
+            {
+                List<GameObject> pool = PoolManager.Instance.Bullets;
+                foreach(GameObject bullet in pool)
+                {
+                    if(bullet.GetComponent<Bullet>().BulletType == EBulletType.MainBullet && !bullet.activeSelf)
+                    {
+                        bullet.transform.position = muzzle.transform.position;
+                        bullet.gameObject.SetActive(true);
+                        break;
+                    }
+                }
+
+                //GameObject bullet = Instantiate(BulletPrefab, muzzle.transform.position, Quaternion.identity);
+                //bullet.GetComponent<Bullet>().IsLeftBullet = counter % 2 == 0;
             }
 
             foreach(GameObject muzzle in SubMuzzlePositions)
             {
-                GameObject bullet = Instantiate(SubBulletPrefab, muzzle.transform.position, Quaternion.identity);
-            }
+                List<GameObject> pool = PoolManager.Instance.Bullets;
+                foreach (GameObject bullet in pool)
+                {
+                    if (bullet.GetComponent<Bullet>().BulletType == EBulletType.SubBullet && !bullet.activeSelf)
+                    {
+                        bullet.transform.position = muzzle.transform.position;
+                        bullet.gameObject.SetActive(true);
+                        break;
+                    }
+                }
+                //GameObject bullet = Instantiate(SubBulletPrefab, muzzle.transform.position, Quaternion.identity);
+            }*/
             _timeCounter = 0f;
         }
     }

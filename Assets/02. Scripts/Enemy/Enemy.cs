@@ -16,9 +16,10 @@ public class Enemy : MonoBehaviour
 
     [Header("# Info")]
     public EEnemyType EnemyType;
+    public float MaxHp = 100f;
     public float Hp = 100f;
     [SerializeField] protected Damage _damage;
-    private bool IsDead = false;
+    private bool _isDead = false;
 
     [Header("# Skill")]
     protected Transform TargetPlayer;
@@ -39,6 +40,12 @@ public class Enemy : MonoBehaviour
         _animator = GetComponent<Animator>();
         TargetPlayer = GameManager.Instance.player.gameObject.transform;
         _damage.From = gameObject;
+    }
+
+    private void OnEnable()
+    {
+        Hp = MaxHp;
+        _isDead = false;
     }
 
     private void Update()
@@ -72,8 +79,8 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Die(Damage damage)
     {
-        if (IsDead) return;
-        IsDead = true;
+        if (_isDead) return;
+        _isDead = true;
 
         if(damage.Type == DamageType.Bullet)
         {

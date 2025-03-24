@@ -18,6 +18,11 @@ public class Bullet : MonoBehaviour
     [Header("# Stats")]
     [SerializeField] protected Damage _damage;
 
+    public void Initialize()
+    {
+
+    }
+
     private void Update()
     {
         //Movement();
@@ -31,13 +36,13 @@ public class Bullet : MonoBehaviour
             // 묻지 말고 시켜라!
             collision.GetComponent<Enemy>().TakeDamage(_damage);
 
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
         else if(collision.CompareTag("Boss"))
         {
             collision.GetComponent<Boss>().TakeDamage(_damage);
 
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 
