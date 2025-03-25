@@ -14,16 +14,6 @@ public class PlayerSkill : MonoBehaviour
         BoomCount();
         MakeBoom();
         ActiveFever();
-        if (EventSystem.current.IsPointerOverGameObject())
-        {
-            Debug.Log("UI 클릭 중! 키 입력 무시");
-            return; // UI 클릭 상태면 입력 무시
-        }
-
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            Debug.Log("Z 키 입력!");
-        }
     }
 
     private void ActiveFever()

@@ -22,6 +22,16 @@ public static class PlayerStats
         }
     }
 
+    private static float _damage = 10;
+    public static float Damage
+    {
+        get => _damage;
+        set
+        {
+            _damage = Mathf.Max(value, 0);
+        }
+    }
+
     private static float _fireCoolTime = 0.6f;
     public static float FireCoolTime
     {

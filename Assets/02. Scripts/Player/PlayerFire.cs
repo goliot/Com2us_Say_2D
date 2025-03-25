@@ -9,8 +9,6 @@ public class PlayerFire : MonoBehaviour
     [SerializeField] private float _intialAttackSpeed = 0.6f;
 
     [Header ("# Objects")]
-    public GameObject BulletPrefab; // 총알 프리팹
-    public GameObject SubBulletPrefab;
     public GameObject[] MuzzlePositions; // 총구
     public GameObject[] SubMuzzlePositions;
 

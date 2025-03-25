@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class Stat
 {
-    private EStatType StatType;
-    private int Level;
+    public EStatType StatType;
+    public int Level;
 
-    private StatDataSO _data;
+    public StatDataSO _data;
 
-    private float Value;
-    private int Cost;
+    public float Value;
+    public int Cost;
 
     public Stat(StatDataSO data, EStatType statType, int level)
     {

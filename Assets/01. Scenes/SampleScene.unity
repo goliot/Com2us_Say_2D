@@ -364,8 +364,9 @@ GameObject:
   - component: {fileID: 67667267}
   - component: {fileID: 67667266}
   - component: {fileID: 67667265}
+  - component: {fileID: 67667268}
   m_Layer: 5
-  m_Name: UI_AtkSpeedUpgradeButton
+  m_Name: UI_DamageStatButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -436,7 +437,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 67667266}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 67667268}
+        m_TargetAssemblyTypeName: UI_StatButton, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &67667266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -475,6 +488,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 67667263}
   m_CullTransparentMesh: 1
+--- !u!114 &67667268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67667263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed127b986097677448ab829965f9492f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NameTextUI: {fileID: 1488140437}
+  ValueTextUI: {fileID: 490886480}
+  CostTextUI: {fileID: 448476257}
 --- !u!1 &135801659
 GameObject:
   m_ObjectHideFlags: 0
@@ -7490,6 +7518,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 76e9b0fac828ed746b176afefd4d6724, type: 2}
   - {fileID: 11400000, guid: 7c59db8dea4ac1741b196d45787c71b6, type: 2}
   - {fileID: 11400000, guid: e61fe9b386ad2e047bd631896f36ba83, type: 2}
+  Buttons:
+  - {fileID: 1231165184}
+  - {fileID: 67667268}
+  - {fileID: 1017911680}
 --- !u!114 &613474342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8218,8 +8250,9 @@ GameObject:
   - component: {fileID: 1017911679}
   - component: {fileID: 1017911678}
   - component: {fileID: 1017911677}
+  - component: {fileID: 1017911680}
   m_Layer: 5
-  m_Name: UI_SpeedUpgradeButton
+  m_Name: UI_SpeedStatButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8244,7 +8277,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 395.00003, y: -873.1417}
+  m_AnchoredPosition: {x: 395.00006, y: -873.1417}
   m_SizeDelta: {x: 277.65002, y: 258.8}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1017911677
@@ -8290,7 +8323,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1017911678}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1017911680}
+        m_TargetAssemblyTypeName: UI_StatButton, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1017911678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8329,6 +8374,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1017911675}
   m_CullTransparentMesh: 1
+--- !u!114 &1017911680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017911675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed127b986097677448ab829965f9492f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NameTextUI: {fileID: 1277244097}
+  ValueTextUI: {fileID: 1092148428}
+  CostTextUI: {fileID: 1089264572}
 --- !u!1 &1073648124
 GameObject:
   m_ObjectHideFlags: 0
@@ -9096,8 +9156,9 @@ GameObject:
   - component: {fileID: 1231165183}
   - component: {fileID: 1231165182}
   - component: {fileID: 1231165181}
+  - component: {fileID: 1231165184}
   m_Layer: 5
-  m_Name: UI_HpUpgradeButton
+  m_Name: UI_HpStatButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9168,7 +9229,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1231165182}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1231165184}
+        m_TargetAssemblyTypeName: UI_StatButton, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1231165182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9207,6 +9280,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1231165179}
   m_CullTransparentMesh: 1
+--- !u!114 &1231165184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1231165179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed127b986097677448ab829965f9492f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NameTextUI: {fileID: 151215003}
+  ValueTextUI: {fileID: 1211471278}
+  CostTextUI: {fileID: 1196576815}
 --- !u!1 &1277244095
 GameObject:
   m_ObjectHideFlags: 0
@@ -10012,7 +10100,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: AtkSpeed
+  m_text: Damage
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 862c0af5c73b2b44fbb2381e3ca2dee9, type: 2}
   m_sharedMaterial: {fileID: -1258341029416385468, guid: 862c0af5c73b2b44fbb2381e3ca2dee9, type: 2}

@@ -18,9 +18,6 @@ public class Boss : MonoBehaviour
     public float RageCoolTime;
     private float _timer = 0f;
 
-    [Header("# Bullet")]
-    [SerializeField] private GameObject BulletObject;
-
     public bool IsEntryEnded = false;
     public BossState BossState = BossState.Finch;
 
@@ -197,13 +194,12 @@ public class Boss : MonoBehaviour
         BossBullet bullet = PoolManager.Instance.GetObject(EObjectType.BossBullet).GetComponent<BossBullet>();
         bullet.transform.rotation = Quaternion.Euler(rotVec);
         bullet.transform.position = transform.position;
-        bullet.DamageInfo = DamageInfo;
         bullet.Dir = dir.normalized;
     }
 
-    public void TakeDamage(DamageInfo damage)
+    public void TakeDamage(float damage)
     {
-        Hp -= damage.Value;
+        Hp -= damage;
 
         transform.DOShakeScale(0.1f, 0.05f).OnComplete(() => transform.localScale = Vector3.one);
 

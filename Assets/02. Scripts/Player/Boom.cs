@@ -3,7 +3,7 @@ using UnityEngine;
 public class Boom : MonoBehaviour
 {
     [SerializeField] private float _showTime;
-    [SerializeField] private DamageInfo _damage;
+    public float Damage;
 
     private float _timer = 0f;
     public float Timer
@@ -17,8 +17,7 @@ public class Boom : MonoBehaviour
 
     private void Awake()
     {
-        _damage.Value = float.MaxValue;
-        _damage.From = gameObject;
+        Damage = float.MaxValue;
     }
 
     private void Update()
@@ -35,7 +34,7 @@ public class Boom : MonoBehaviour
     {
         if(collision.CompareTag("Enemy"))
         {
-            collision.GetComponent<Enemy>().TakeDamage(_damage);
+            collision.GetComponent<Enemy>().TakeDamage(Damage);
         }
     }
 }

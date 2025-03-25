@@ -41,7 +41,6 @@ public class Enemy : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         TargetPlayer = GameManager.Instance.player.gameObject.transform;
-        _damage.Type = EDamageType.Enemy;
         Initialize();
     }
 
@@ -72,8 +71,8 @@ public class Enemy : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
-            collision.GetComponent<Player>().TakeDamage(_damage);
-            Die(_damage);
+            collision.GetComponent<Player>().TakeDamage(Damage);
+            Die();
         }
         if(collision.CompareTag("DestroyZone"))
         {
@@ -81,13 +80,13 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void TakeDamage(DamageInfo damage)
+    public void TakeDamage(float damage)
     {
-        Hp -= damage.Value;
+        Hp -= damage;
         _animator.SetTrigger("Hit");
         if (Hp <= 0)
         {
-            Die(damage);
+            Die();
         }
     }
 
@@ -96,15 +95,13 @@ public class Enemy : MonoBehaviour
         transform.Translate(_direction * Speed * Time.deltaTime);
     }
 
-    protected virtual void Die(DamageInfo damage)
+    protected virtual void Die()
     {
         if (_isDead) return;
         _isDead = true;
 
-        if(damage.Type == EDamageType.Bullet)
-        {
-            PlayerStats.KillCount++;
-        }
+        PlayerStats.KillCount++;
+
         // 폭발 이펙트
         GameObject effect = PoolManager.Instance.GetObject(EObjectType.EnemyExpolsionEffect);
         effect.transform.position = transform.position;

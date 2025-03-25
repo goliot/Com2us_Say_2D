@@ -10,17 +10,10 @@ public class Bullet : MonoBehaviour
     protected Vector3 _direction = new Vector3();
 
     [Header ("# Snake Movement")]
-    //protected float _lerpTime = 0f;
-    //public float Frequency = 10f;
+    protected float _lerpTime = 0f;
+    public float Frequency = 10f;
 
-    protected DamageInfo _damage;
-
-    private void Awake()
-    {
-        _damage.Value = Data.Damage;
-        _damage.Type = EDamageType.Bullet;
-        _damage.From = gameObject;
-    }
+    //protected DamageInfo _damage;
 
     private void Update()
     {
@@ -33,13 +26,13 @@ public class Bullet : MonoBehaviour
         if(collision.CompareTag("Enemy"))
         {
             // 묻지 말고 시켜라!
-            collision.GetComponent<Enemy>().TakeDamage(_damage);
+            collision.GetComponent<Enemy>().TakeDamage(Data.Damage);
 
             PoolManager.Instance.ReturnObject(gameObject, Data.ObjectType);
         }
         else if(collision.CompareTag("Boss"))
         {
-            collision.GetComponent<Boss>().TakeDamage(_damage);
+            collision.GetComponent<Boss>().TakeDamage(Data.Damage);
 
             PoolManager.Instance.ReturnObject(gameObject, Data.ObjectType);
         }

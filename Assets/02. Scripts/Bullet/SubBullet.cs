@@ -5,7 +5,6 @@ public class SubBullet : Bullet
     private void OnEnable()
     {
         Data.ObjectType = EObjectType.SubBullet;
-        _damage.From = gameObject;
     }
 
     /*public override void Movement()

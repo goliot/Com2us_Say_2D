@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
         PlayerStats.Hp = PlayerStats.MaxHp = _initialMaxHp;
     }
 
-    public void TakeDamage(DamageInfo damage)
+    public void TakeDamage(float damage)
     {
         GameManager.Instance.MainCamera.GetComponent<CameraShake>().Shake();
 
@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
             return;
         }
 
-        PlayerStats.Hp -= damage.Value;
+        PlayerStats.Hp -= damage;
         Debug.Log($"Hp : {PlayerStats.Hp}");
 
         if(PlayerStats.Hp <= 0)
