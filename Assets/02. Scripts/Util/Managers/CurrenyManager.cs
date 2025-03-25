@@ -71,7 +71,7 @@ public class CurrenyManager : MonoBehaviour
 
     private void Save()
     {
-        UI_Game.Instance.RefreshGold();
+        UI_Game.Instance.Refresh();
         string jsonData = JsonUtility.ToJson(_saveData);
         PlayerPrefs.SetString(SAVE_KEY, jsonData);
     }

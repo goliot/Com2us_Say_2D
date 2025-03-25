@@ -37,8 +37,6 @@ public class UI_Game : MonoBehaviour
     private void Start()
     {
         Refresh();
-        RefreshScore();
-        RefreshGold();
     }
 
     public void ActiveWarning()
@@ -51,47 +49,33 @@ public class UI_Game : MonoBehaviour
 
     public void Refresh()
     {
-        for(int i=0; i<3; i++)
+        for (int i = 0; i < 3; i++)
         {
-            //Booms[i].SetActive(i < PlayerStats.BoomCount);
-            if(i < PlayerStats.BoomCount)
-            {
-                Booms[i].transform.DOScale(1f, 0.2f);
-            }
-            else
-            {
-                Booms[i].transform.DOScale(0f, 0.2f);
-            }
+            Booms[i].transform.DOScale(i < PlayerStats.BoomCount ? 1f : 0f, 0.2f);
         }
 
-        KillCountText.text = $"Kills : {PlayerStats.KillCount}";
-        if (_prevKillCount < PlayerStats.KillCount) 
-        {
-            _prevKillCount = PlayerStats.KillCount;
-            KillCountText.transform.DOScale(1.4f, 0.2f).SetEase(Ease.OutBounce)
-            .OnComplete(() => KillCountText.transform.DOScale(1f, 0.1f));
-        }
+        UpdateText(KillCountText, ref _prevKillCount, PlayerStats.KillCount, "Kills : ");
+        UpdateText(ScoreText, ref _prevScore, PlayerStats.Score, "Score : ");
+        UpdateText(GoldText, ref _prevGold, CurrenyManager.Instance.Gold, "");
     }
 
-    public void RefreshScore()
+    /// <summary>
+    /// UI 텍스트 갱신 및 애니메이션 처리
+    /// </summary>
+    /// <param name="textElement">변경할 UI 텍스트</param>
+    /// <param name="prevValue">이전 값 저장할 ref 변수</param>
+    /// <param name="newValue">새로운 값</param>
+    /// <param name="prefix">텍스트 앞에 붙일 문자열</param>
+    private void UpdateText(TextMeshProUGUI textElement, ref int prevValue, int newValue, string prefix)
     {
-        ScoreText.text = $"Score : {PlayerStats.Score.ToString("N0")}";
-        if (_prevScore < PlayerStats.Score)
-        {
-            _prevScore = PlayerStats.Score;
-            ScoreText.transform.DOScale(1.4f, 0.2f).SetEase(Ease.OutBounce)
-                .OnComplete(() => ScoreText.transform.DOScale(1f, 0.1f));
-        }
-    }
+        textElement.text = $"{prefix}{newValue:N0}";
 
-    public void RefreshGold()
-    {
-        GoldText.text = $"{CurrenyManager.Instance.Gold.ToString("N0")}";
-        if (_prevGold<CurrenyManager.Instance.Gold)
+        if (prevValue < newValue)
         {
-            _prevGold = CurrenyManager.Instance.Gold;
-            GoldText.transform.DOScale(1.4f, 0.2f).SetEase(Ease.OutBounce)
-                .OnComplete(() => GoldText.transform.DOScale(1f, 0.1f));
+            prevValue = newValue;
+            textElement.transform.DOScale(1.4f, 0.2f)
+                .SetEase(Ease.OutBounce)
+                .OnComplete(() => textElement.transform.DOScale(1f, 0.1f));
         }
     }
 

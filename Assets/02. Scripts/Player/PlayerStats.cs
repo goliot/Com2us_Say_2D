@@ -73,7 +73,7 @@ public static class PlayerStats
         set
         {
             _score = value;
-            UI_Game.Instance.RefreshScore();
+            UI_Game.Instance.Refresh();
             //Save();
         }
     }
