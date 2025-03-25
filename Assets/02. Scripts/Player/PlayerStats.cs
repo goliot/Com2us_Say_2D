@@ -73,19 +73,8 @@ public static class PlayerStats
         set
         {
             _score = value;
-            UI_Game.Instance.Refresh();
+            UI_Game.Instance.RefreshScore();
             //Save();
-        }
-    }
-
-    private static int _gold = 0;
-    public static int Gold
-    {
-        get => _gold;
-        set
-        {
-            _gold = value;
-            UI_Game.Instance.Refresh();
         }
     }
 

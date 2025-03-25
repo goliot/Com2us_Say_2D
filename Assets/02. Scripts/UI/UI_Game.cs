@@ -32,7 +32,13 @@ public class UI_Game : MonoBehaviour
         {
             Instance = this;
         }
+    }
+
+    private void Start()
+    {
         Refresh();
+        RefreshScore();
+        RefreshGold();
     }
 
     public void ActiveWarning()
@@ -65,7 +71,10 @@ public class UI_Game : MonoBehaviour
             KillCountText.transform.DOScale(1.4f, 0.2f).SetEase(Ease.OutBounce)
             .OnComplete(() => KillCountText.transform.DOScale(1f, 0.1f));
         }
+    }
 
+    public void RefreshScore()
+    {
         ScoreText.text = $"Score : {PlayerStats.Score.ToString("N0")}";
         if (_prevScore < PlayerStats.Score)
         {
@@ -73,11 +82,14 @@ public class UI_Game : MonoBehaviour
             ScoreText.transform.DOScale(1.4f, 0.2f).SetEase(Ease.OutBounce)
                 .OnComplete(() => ScoreText.transform.DOScale(1f, 0.1f));
         }
+    }
 
-        GoldText.text = $"Gold : {PlayerStats.Gold.ToString("N0")}";
-        if (_prevGold < PlayerStats.Gold)
+    public void RefreshGold()
+    {
+        GoldText.text = $"{CurrenyManager.Instance.Gold.ToString("N0")}";
+        if (_prevGold<CurrenyManager.Instance.Gold)
         {
-            _prevGold = PlayerStats.Gold;
+            _prevGold = CurrenyManager.Instance.Gold;
             GoldText.transform.DOScale(1.4f, 0.2f).SetEase(Ease.OutBounce)
                 .OnComplete(() => GoldText.transform.DOScale(1f, 0.1f));
         }
