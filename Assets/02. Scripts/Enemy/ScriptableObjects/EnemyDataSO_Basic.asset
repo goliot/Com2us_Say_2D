@@ -13,7 +13,5 @@ MonoBehaviour:
   m_Name: EnemyDataSO_Basic
   m_EditorClassIdentifier: 
   ObjectType: 4
-  MaxHp: 100
-  Damage: 40
   Score: 40
-  Speed: 5
+  Gold: 100

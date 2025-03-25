@@ -5,4 +5,5 @@ public class EnemyDataSO : ScriptableObject
 {
     public EObjectType ObjectType;
     public int Score;
+    public int Gold;
 }

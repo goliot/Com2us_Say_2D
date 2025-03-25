@@ -111,6 +111,7 @@ public class Enemy : MonoBehaviour
 
         ItemDrop();
         PlayerStats.Score += Data.Score;
+        PlayerStats.Gold += Data.Gold;
 
         PoolManager.Instance.ReturnObject(gameObject, Data.ObjectType);
     }

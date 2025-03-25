@@ -13,12 +13,14 @@ public class UI_Game : MonoBehaviour
 
     public TextMeshProUGUI KillCountText;
     public TextMeshProUGUI ScoreText;
+    public TextMeshProUGUI GoldText;
     public Slider BossHpSlider;
     public Slider BossSubSlider;
     public GameObject WarnigPanel;
 
     private int _prevKillCount = 0;
     private int _prevScore = 0;
+    private int _prevGold = 0;
 
     private void Awake()
     {
@@ -55,21 +57,29 @@ public class UI_Game : MonoBehaviour
                 Booms[i].transform.DOScale(0f, 0.2f);
             }
         }
-        
+
         KillCountText.text = $"Kills : {PlayerStats.KillCount}";
-        if (_prevKillCount != PlayerStats.KillCount) 
+        if (_prevKillCount < PlayerStats.KillCount) 
         {
             _prevKillCount = PlayerStats.KillCount;
             KillCountText.transform.DOScale(1.4f, 0.2f).SetEase(Ease.OutBounce)
             .OnComplete(() => KillCountText.transform.DOScale(1f, 0.1f));
         }
-        
-        if (_prevScore != PlayerStats.Score)
+
+        ScoreText.text = $"Score : {PlayerStats.Score.ToString("N0")}";
+        if (_prevScore < PlayerStats.Score)
         {
             _prevScore = PlayerStats.Score;
-            ScoreText.text = $"Score : {PlayerStats.Score.ToString("N0")}";
             ScoreText.transform.DOScale(1.4f, 0.2f).SetEase(Ease.OutBounce)
                 .OnComplete(() => ScoreText.transform.DOScale(1f, 0.1f));
+        }
+
+        GoldText.text = $"Gold : {PlayerStats.Gold.ToString("N0")}";
+        if (_prevGold < PlayerStats.Gold)
+        {
+            _prevGold = PlayerStats.Gold;
+            GoldText.transform.DOScale(1.4f, 0.2f).SetEase(Ease.OutBounce)
+                .OnComplete(() => GoldText.transform.DOScale(1f, 0.1f));
         }
     }
 

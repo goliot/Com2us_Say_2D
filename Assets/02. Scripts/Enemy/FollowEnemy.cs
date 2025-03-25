@@ -12,7 +12,7 @@ public class FollowEnemy : Enemy
 
     private void TargetMovement()
     {
-        transform.Translate(_direction * Speed * Time.deltaTime);
+        transform.Translate(_direction * Speed * Time.deltaTime, Space.World);
     }
 
     private void RotateTowardTarget()

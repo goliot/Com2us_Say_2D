@@ -78,6 +78,17 @@ public static class PlayerStats
         }
     }
 
+    private static int _gold = 0;
+    public static int Gold
+    {
+        get => _gold;
+        set
+        {
+            _gold = value;
+            UI_Game.Instance.Refresh();
+        }
+    }
+
     /*public static void Save()
     {
         PlayerPrefs.SetInt("Score", _score);
