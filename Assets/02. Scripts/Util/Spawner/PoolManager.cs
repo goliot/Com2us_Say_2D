@@ -1,21 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoolManager : MonoBehaviour
+public class PoolManager : Singleton<PoolManager>
 {
-    private static PoolManager _instance;
-    public static PoolManager Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = FindAnyObjectByType<PoolManager>();
-            }
-            return _instance;
-        }
-    }
-
     [SerializeField] private List<PoolInfo> _poolInfoList;
 
     private void Awake()

@@ -1,21 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    private static GameManager _instance = null;
-    public static GameManager Instance
-    {
-        get
-        {
-            if(_instance == null)
-            {
-                _instance = FindAnyObjectByType<GameManager>();
-            }
-            return _instance;
-        }
-    }
-
     public GameObject MainCamera;
     public Player player;
     public Spawner spawner;

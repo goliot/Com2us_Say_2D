@@ -2,58 +2,38 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum CurrenyType
-{
-    Gold,
-    Diamond,
-    Count,
-}
-
 [Serializable]
 public class CurrencySaveData
 {
-    public List<int> Values = new List<int>(new int[(int)CurrenyType.Count]);
+    public List<int> Values = new List<int>(new int[(int)ECurrenyType.Count]);
 }
 
-public class CurrenyManager : MonoBehaviour
+public class CurrenyManager : Singleton<CurrenyManager>
 {
-    private static CurrenyManager _instance;
-    public static CurrenyManager Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = FindAnyObjectByType<CurrenyManager>();
-            }
-            return _instance;
-        }
-    }
-
     private const string SAVE_KEY = "Currency";
 
     private CurrencySaveData _saveData = new CurrencySaveData();
 
-    public int Gold => _saveData.Values[(int)CurrenyType.Gold];
-    public int Diamond => _saveData.Values[(int)CurrenyType.Diamond];
+    public int Gold => _saveData.Values[(int)ECurrenyType.Gold];
+    public int Diamond => _saveData.Values[(int)ECurrenyType.Diamond];
 
     private void Awake()
     {
         Load();
     }
 
-    public int Get(CurrenyType type)
+    public int Get(ECurrenyType type)
     {
         return _saveData.Values[(int)type];
     }
 
-    public void Add(CurrenyType type, int value)
+    public void Add(ECurrenyType type, int value)
     {
         _saveData.Values[(int)type] += value;
         Save();
     }
 
-    public bool TryConsume(CurrenyType type, int value)
+    public bool TryConsume(ECurrenyType type, int value)
     {
         if (!HaveEnough(type, value))
         {
@@ -64,7 +44,7 @@ public class CurrenyManager : MonoBehaviour
         return true;
     }
 
-    public bool HaveEnough(CurrenyType type, int value)
+    public bool HaveEnough(ECurrenyType type, int value)
     {
         return _saveData.Values[(int)type] >= value;
     }

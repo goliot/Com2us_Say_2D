@@ -5,15 +5,16 @@ using DG.Tweening;
 using System.Collections;
 using UnityEngine.UI;
 
-public class UI_Game : MonoBehaviour
+public class UI_Game : Singleton<UI_Game>
 {
-    public static UI_Game Instance = null;
-
     public List<GameObject> Booms;
 
+    [Header ("# Texts")]
     public TextMeshProUGUI KillCountText;
     public TextMeshProUGUI ScoreText;
     public TextMeshProUGUI GoldText;
+
+    [Header ("# BossUI")]
     public Slider BossHpSlider;
     public Slider BossSubSlider;
     public GameObject WarnigPanel;
@@ -21,18 +22,6 @@ public class UI_Game : MonoBehaviour
     private int _prevKillCount = 0;
     private int _prevScore = 0;
     private int _prevGold = 0;
-
-    private void Awake()
-    {
-        if(Instance != null)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            Instance = this;
-        }
-    }
 
     private void Start()
     {
