@@ -11,7 +11,6 @@ public class UI_StatButton : MonoBehaviour
 
     private void Start()
     {
-        
         Refresh();
     }
 
