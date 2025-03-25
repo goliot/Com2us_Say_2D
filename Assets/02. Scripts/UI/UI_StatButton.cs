@@ -9,11 +9,6 @@ public class UI_StatButton : MonoBehaviour
     public TextMeshProUGUI ValueTextUI;
     public TextMeshProUGUI CostTextUI;
 
-    private void Start()
-    {
-        Refresh();
-    }
-
     public void Refresh()
     {
         NameTextUI.text = _stat.StatType.ToString();
@@ -36,13 +31,17 @@ public class UI_StatButton : MonoBehaviour
             case EStatType.Damage:
                 if (StatManager.Instance.TryLevelUp(_stat.StatType))
                 {
+                    Debug.Log("Before" + PlayerStats.Damage);
                     PlayerStats.Damage += _stat.Value;
+                    Debug.Log("After" + PlayerStats.Damage);
                 }
                 break;
             case EStatType.Speed:
                 if (StatManager.Instance.TryLevelUp(_stat.StatType))
                 {
+                    Debug.Log("Before" + PlayerStats.Speed);
                     PlayerStats.Speed += _stat.Value;
+                    Debug.Log("After" + PlayerStats.Speed);
                 }
                 break;
         }

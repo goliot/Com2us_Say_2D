@@ -15,13 +15,17 @@ public class StatManager : Singleton<StatManager>
     {
         for (int i = 0; i < (int)EStatType.Count; i++)
         {
-            _stats.Add(new Stat(StatDataList[i], (EStatType)i, 1));
+            _stats.Add(new Stat(StatDataList[i], (EStatType)i, 0));
         }
     }
 
     public bool TryLevelUp(EStatType type)
     {
-        OnDataChangedCallback?.Invoke();
-        return _stats[(int)type].TryUpgrade();
+        if(_stats[(int)type].TryUpgrade())
+        {
+            OnDataChangedCallback?.Invoke();
+            return true;
+        }
+        return false;
     }
 }

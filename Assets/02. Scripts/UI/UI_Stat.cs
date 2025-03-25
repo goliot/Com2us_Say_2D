@@ -10,6 +10,7 @@ public class UI_Stat : Singleton<UI_Stat>
         for (int i = 0; i < (int)EStatType.Count; i++)
         {
             UI_StatButtons[i]._stat = StatManager.Instance.Stats[i];
+            UI_StatButtons[i].Refresh();
         }
 
         StatManager.Instance.OnDataChangedCallback = Refresh;
