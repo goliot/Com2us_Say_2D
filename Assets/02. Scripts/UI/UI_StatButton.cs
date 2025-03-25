@@ -11,6 +11,7 @@ public class UI_StatButton : MonoBehaviour
 
     private void Start()
     {
+        
         Refresh();
     }
 
@@ -26,19 +27,21 @@ public class UI_StatButton : MonoBehaviour
         switch(_stat.StatType)
         {
             case EStatType.Health:
-                if (_stat.TryUpgrade())
+                if (StatManager.Instance.TryLevelUp(_stat.StatType))
                 {
+                    Debug.Log("Before" + PlayerStats.MaxHp);
                     PlayerStats.MaxHp += _stat.Value;
+                    Debug.Log("After" + PlayerStats.MaxHp);
                 }
                 break;
             case EStatType.Damage:
-                if (_stat.TryUpgrade())
+                if (StatManager.Instance.TryLevelUp(_stat.StatType))
                 {
                     PlayerStats.Damage += _stat.Value;
                 }
                 break;
             case EStatType.Speed:
-                if (_stat.TryUpgrade())
+                if (StatManager.Instance.TryLevelUp(_stat.StatType))
                 {
                     PlayerStats.Speed += _stat.Value;
                 }

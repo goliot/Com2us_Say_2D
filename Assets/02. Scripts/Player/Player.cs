@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
         }
 
         PlayerStats.Hp -= damage;
-        Debug.Log($"Hp : {PlayerStats.Hp}");
+        //Debug.Log($"Hp : {PlayerStats.Hp}");
 
         if(PlayerStats.Hp <= 0)
         {

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class StatManager : Singleton<StatManager>
 {
@@ -8,7 +9,7 @@ public class StatManager : Singleton<StatManager>
     private List<Stat> _stats = new List<Stat>();
     public List<Stat> Stats => _stats;
 
-    public List<UI_StatButton> Buttons;
+    public Action OnDataChangedCallback = null;
 
     private void Awake()
     {
@@ -20,10 +21,7 @@ public class StatManager : Singleton<StatManager>
 
     public bool TryLevelUp(EStatType type)
     {
-        for (int i = 0; i < (int)EStatType.Count; i++)
-        {
-            Buttons[i].Refresh();
-        }
+        OnDataChangedCallback?.Invoke();
         return _stats[(int)type].TryUpgrade();
     }
 }

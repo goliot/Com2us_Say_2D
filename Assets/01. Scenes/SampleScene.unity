@@ -1766,8 +1766,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 476374211}
+  - component: {fileID: 476374212}
   m_Layer: 5
-  m_Name: UpgradeButtons
+  m_Name: StatButtons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1795,6 +1796,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &476374212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476374210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dce10a78f7477b409d659a3261d3433, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UI_StatButtons:
+  - {fileID: 1231165184}
+  - {fileID: 67667268}
+  - {fileID: 1017911680}
 --- !u!1 &490863143
 GameObject:
   m_ObjectHideFlags: 0
@@ -7518,10 +7535,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 76e9b0fac828ed746b176afefd4d6724, type: 2}
   - {fileID: 11400000, guid: 7c59db8dea4ac1741b196d45787c71b6, type: 2}
   - {fileID: 11400000, guid: e61fe9b386ad2e047bd631896f36ba83, type: 2}
-  Buttons:
-  - {fileID: 1231165184}
-  - {fileID: 67667268}
-  - {fileID: 1017911680}
 --- !u!114 &613474342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9561,8 +9574,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _intialAttackSpeed: 0.6
-  BulletPrefab: {fileID: 3252118948963211823, guid: 9be370b403c8b8a448e145834e626108, type: 3}
-  SubBulletPrefab: {fileID: 3576854120191465324, guid: 513acb6035a22c54fbd9aa0e345ab96b, type: 3}
   MuzzlePositions:
   - {fileID: 490863143}
   - {fileID: 332935178}
