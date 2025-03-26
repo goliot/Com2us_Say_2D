@@ -5,6 +5,8 @@ public class PlayerMove : MonoBehaviour
 {
     // MonoBehaviour : 여러 이벤트 함수를 자동으로 호출
     // Component : 게임 오브젝트에 추가할 수 있는 여러 기능
+    public DynamicJoystick Joystick;
+
     [Header("# Init")]
     [SerializeField] private float _initialSpeed = 3f;
 
@@ -37,6 +39,9 @@ public class PlayerMove : MonoBehaviour
 
         PlayerStats.Speed = _initialSpeed;
         MinY = Camera.main.transform.position.y - Camera.main.orthographicSize;
+#if !UNITY_ANDROID
+        Destroy(Joystick);
+#endif
     }
 
     private void Update()
@@ -113,8 +118,14 @@ public class PlayerMove : MonoBehaviour
 
     private void AxisInput()
     {
+#if UNITY_STANDALONE_WIN
         float h = Input.GetAxisRaw("Horizontal"); // 수평(좌우)
         float v = Input.GetAxisRaw("Vertical"); // 수직(좌우)
+#endif
+#if UNITY_ANDROID
+        float h = Joystick.Horizontal;
+        float v = Joystick.Vertical;
+#endif
 
         _direction = new Vector2(h, v).normalized;
     }

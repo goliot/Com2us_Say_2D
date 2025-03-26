@@ -35,8 +35,22 @@ public class PlayerFire : MonoBehaviour
         {
             return;
         }
+        ShootEvent.Invoke();
+        GameObject bullet = null;
 
-        if (Input.GetButtonDown("Fire1") || PlayMode.CurrentPlayMode == EPlayMode.Auto)
+        for (int i = 0; i < MuzzlePositions.Length; i++)
+        {
+            bullet = PoolManager.Instance.GetObject(EObjectType.Bullet);
+            bullet.transform.position = MuzzlePositions[i].transform.position;
+        }
+        for (int i = 0; i < SubMuzzlePositions.Length; i++)
+        {
+            bullet = PoolManager.Instance.GetObject(EObjectType.SubBullet);
+            bullet.transform.position = SubMuzzlePositions[i].transform.position;
+        }
+        _timeCounter = 0f;
+
+        /*if (Input.GetButtonDown("Fire1") || PlayMode.CurrentPlayMode == EPlayMode.Auto)
         {
             ShootEvent.Invoke();
             GameObject bullet = null;
@@ -83,9 +97,9 @@ public class PlayerFire : MonoBehaviour
                     }
                 }
                 //GameObject bullet = Instantiate(SubBulletPrefab, muzzle.transform.position, Quaternion.identity);
-            }*/
+            }
             _timeCounter = 0f;
-        }
+        }*/
     }
 
     private void FireModeToggle()
