@@ -1,4 +1,5 @@
 using Coffee.UIEffects;
+using Coffee.UIExtensions;
 using DG.Tweening;
 using System.Collections;
 using TMPro;
@@ -13,15 +14,15 @@ public class UI_StatButton : MonoBehaviour
     public TextMeshProUGUI CostTextUI;
 
     [Header("Click Effect")]
-    public ParticleSystem ClickParticle;
+    public GameObject ClickParticle;
     private bool _isClickHold = false;
     private Coroutine _coClickHold;
-    public UIEffect _uiEffect;
+    public UIEffect UiEffect;
 
     private void Awake()
     {
         //ClickParticle.Stop();
-        _uiEffect = GetComponent<UIEffect>();
+        UiEffect = GetComponent<UIEffect>();
     }
 
     public void Refresh()
@@ -72,9 +73,12 @@ public class UI_StatButton : MonoBehaviour
 
     public void OnClickUp()
     {
-        //ClickParticle.Stop();
-        //ClickParticle.Clear();
-        //ClickParticle.Play();
+        GameObject go = Instantiate(ClickParticle, transform);
+        go.transform.position = transform.position;
+        var uiParticle = go.AddComponent<UIParticle>();
+        uiParticle.scale = 100;
+
+        uiParticle.Play();
 
         _isClickHold = false;
     }

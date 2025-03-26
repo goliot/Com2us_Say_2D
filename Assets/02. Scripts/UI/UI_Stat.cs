@@ -26,11 +26,11 @@ public class UI_Stat : Singleton<UI_Stat>
             UI_StatButtons[i].Refresh();
             if (CurrenyManager.Instance.HaveEnough(ECurrenyType.Gold, StatManager.Instance.Stats[(int)UI_StatButtons[i]._stat.StatType].Cost))
             {
-                UI_StatButtons[i]._uiEffect.edgeMode = EdgeMode.Shiny;
+                UI_StatButtons[i].UiEffect.edgeMode = EdgeMode.Shiny;
             }
             else
             {
-                UI_StatButtons[i]._uiEffect.edgeMode = EdgeMode.None;
+                UI_StatButtons[i].UiEffect.edgeMode = EdgeMode.None;
             }
         }
     }
