@@ -17,6 +17,8 @@ public class CurrenyManager : Singleton<CurrenyManager>
     public int Gold => _saveData.Values[(int)ECurrenyType.Gold];
     public int Diamond => _saveData.Values[(int)ECurrenyType.Diamond];
 
+    public Action OnCurrencySave;
+
     private void Awake()
     {
         Load();
@@ -52,6 +54,7 @@ public class CurrenyManager : Singleton<CurrenyManager>
     private void Save()
     {
         UI_Game.Instance.Refresh();
+        OnCurrencySave?.Invoke();
         string jsonData = JsonUtility.ToJson(_saveData);
         PlayerPrefs.SetString(SAVE_KEY, jsonData);
     }

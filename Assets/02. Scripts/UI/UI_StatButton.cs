@@ -1,3 +1,4 @@
+using Coffee.UIEffects;
 using DG.Tweening;
 using System.Collections;
 using TMPro;
@@ -15,10 +16,12 @@ public class UI_StatButton : MonoBehaviour
     public ParticleSystem ClickParticle;
     private bool _isClickHold = false;
     private Coroutine _coClickHold;
+    public UIEffect _uiEffect;
 
     private void Awake()
     {
         //ClickParticle.Stop();
+        _uiEffect = GetComponent<UIEffect>();
     }
 
     public void Refresh()
@@ -86,7 +89,7 @@ public class UI_StatButton : MonoBehaviour
             yield return null;
         }
 
-        transform.DOScale(1, 0.2f).SetEase(Ease.Linear);
+        transform.DOScale(1, 0.2f).SetEase(Ease.InOutSine);
         _coClickHold = null;
     }
 }

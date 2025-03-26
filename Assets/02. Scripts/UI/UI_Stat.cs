@@ -1,3 +1,4 @@
+using Coffee.UIEffects;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ public class UI_Stat : Singleton<UI_Stat>
         }
 
         StatManager.Instance.OnDataChangedCallback = Refresh;
-
+        CurrenyManager.Instance.OnCurrencySave += Refresh;
         Refresh();
     }
 
@@ -23,6 +24,14 @@ public class UI_Stat : Singleton<UI_Stat>
         for (int i = 0; i < (int)EStatType.Count; i++)
         {
             UI_StatButtons[i].Refresh();
+            if (CurrenyManager.Instance.HaveEnough(ECurrenyType.Gold, StatManager.Instance.Stats[(int)UI_StatButtons[i]._stat.StatType].Cost))
+            {
+                UI_StatButtons[i]._uiEffect.edgeMode = EdgeMode.Shiny;
+            }
+            else
+            {
+                UI_StatButtons[i]._uiEffect.edgeMode = EdgeMode.None;
+            }
         }
     }
 }
