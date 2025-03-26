@@ -43,8 +43,8 @@ public class UI_Game : Singleton<UI_Game>
             Booms[i].transform.DOScale(i < PlayerStats.BoomCount ? 1f : 0f, 0.2f);
         }
 
-        UpdateText(KillCountText, ref _prevKillCount, PlayerStats.KillCount, "Kills : ");
-        UpdateText(ScoreText, ref _prevScore, PlayerStats.Score, "Score : ");
+        UpdateText(KillCountText, ref _prevKillCount, PlayerStats.KillCount, "");
+        UpdateText(ScoreText, ref _prevScore, PlayerStats.Score, "");
         UpdateText(GoldText, ref _prevGold, CurrenyManager.Instance.Gold, "");
     }
 
