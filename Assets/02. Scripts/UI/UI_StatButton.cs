@@ -4,20 +4,15 @@ using DG.Tweening;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class UI_StatButton : MonoBehaviour
+public class UI_StatButton : UI_TouchBounce
 {
     public Stat _stat;
 
     public TextMeshProUGUI NameTextUI;
     public TextMeshProUGUI ValueTextUI;
     public TextMeshProUGUI CostTextUI;
-
-    [Header("Click Effect")]
-    public GameObject ClickParticle;
-    private bool _isClickHold = false;
-    private Coroutine _coClickHold;
-    public UIEffect UiEffect;
 
     private void Awake()
     {
@@ -32,8 +27,10 @@ public class UI_StatButton : MonoBehaviour
         CostTextUI.text = _stat.Cost.ToString();
     }
 
-    public void OnClick()
+    public override void OnPointerUp(PointerEventData eventData)
     {
+        base.OnPointerUp(eventData);
+
         switch(_stat.StatType)
         {
             case EStatType.Health:
@@ -61,39 +58,5 @@ public class UI_StatButton : MonoBehaviour
                 }
                 break;
         }
-    }
-
-    public void OnClickHold()
-    {
-        if(_coClickHold == null)
-        {
-            _coClickHold = StartCoroutine(CoClickHold());
-        }
-    }
-
-    public void OnClickUp()
-    {
-        GameObject go = Instantiate(ClickParticle, transform);
-        go.transform.position = transform.position;
-        var uiParticle = go.AddComponent<UIParticle>();
-        uiParticle.scale = 100;
-
-        uiParticle.Play();
-
-        _isClickHold = false;
-    }
-
-    IEnumerator CoClickHold()
-    {
-        _isClickHold = true;
-        transform.DOScale(0.9f, 0.2f).SetEase(Ease.Linear).OnComplete(()=>transform.localScale = new Vector3(0.9f, 0.9f, 0.9f));
-
-        while(_isClickHold)
-        {
-            yield return null;
-        }
-
-        transform.DOScale(1, 0.2f).SetEase(Ease.InOutSine);
-        _coClickHold = null;
     }
 }

@@ -65,6 +65,7 @@ public class CurrenyManager : Singleton<CurrenyManager>
         if(PlayerPrefs.HasKey(SAVE_KEY))
         {
             string jsonData = PlayerPrefs.GetString(SAVE_KEY, "null");
+            Debug.Log(jsonData);
             _saveData = JsonUtility.FromJson<CurrencySaveData>(jsonData);
         }
         else

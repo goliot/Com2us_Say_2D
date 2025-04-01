@@ -5,19 +5,14 @@ using TMPro;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class UI_AttendanceButton : MonoBehaviour
+public class UI_AttendanceButton : UI_TouchBounce
 {
     public Attendance _attendance;
 
     public TextMeshProUGUI DayTextUI;
     public TextMeshProUGUI AmountTextUI;
-
-    [Header("Click Effect")]
-    public GameObject ClickParticle;
-    private bool _isClickHold = false;
-    private Coroutine _coClickHold;
-    public UIEffect UiEffect;
 
     private Image _image;
     private Button _button;
@@ -38,49 +33,42 @@ public class UI_AttendanceButton : MonoBehaviour
         AmountTextUI.text = _attendance.Data.RewardAmount.ToString();
     }
 
-    public void OnClick()
-    {
-        
-    }
+    //public void OnClick()
+    //{
 
-    public void OnClickHold()
-    {
-        if (_coClickHold == null)
-        {
-            _coClickHold = StartCoroutine(CoClickHold());
-        }
-    }
+    //}
 
-    public void OnClickUp()
+    //public void OnClickHold()
+    //{
+    //    if (_coClickHold == null)
+    //    {
+    //        _coClickHold = StartCoroutine(CoClickHold());
+    //    }
+    //}
+
+    public override void OnPointerUp(PointerEventData eventData)
     {
         Debug.Log("클릭!");
 
-        if(AttendanceManager.Instance.TryGetReward(_attendance))
+        if (AttendanceManager.Instance.TryGetReward(_attendance))
         {
-            GameObject go = Instantiate(ClickParticle, transform);
-            go.transform.position = transform.position;
-            var uiParticle = go.AddComponent<UIParticle>();
-            uiParticle.scale = 100;
-
-            uiParticle.Play();
+            base.OnPointerUp(eventData);
 
             Refresh();
         }
-        
-        _isClickHold = false;
     }
 
-    IEnumerator CoClickHold()
-    {
-        _isClickHold = true;
-        transform.DOScale(0.9f, 0.2f).SetEase(Ease.Linear).OnComplete(() => transform.localScale = new Vector3(0.9f, 0.9f, 0.9f));
+    //IEnumerator CoClickHold()
+    //{
+    //    _isClickHold = true;
+    //    transform.DOScale(0.9f, 0.2f).SetEase(Ease.Linear).OnComplete(() => transform.localScale = new Vector3(0.9f, 0.9f, 0.9f));
 
-        while (_isClickHold)
-        {
-            yield return null;
-        }
+    //    while (_isClickHold)
+    //    {
+    //        yield return null;
+    //    }
 
-        transform.DOScale(1, 0.2f).SetEase(Ease.InOutSine);
-        _coClickHold = null;
-    }
+    //    transform.DOScale(1, 0.2f).SetEase(Ease.InOutSine);
+    //    _coClickHold = null;
+    //}
 }

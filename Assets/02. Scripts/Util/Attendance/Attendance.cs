@@ -16,9 +16,9 @@ public class Attendance
 
 
     //데이터와 보상 유무
-    public Attendance(AttendanceDataSO data)
+    public Attendance(AttendanceDataSO data, bool isRewarded)
     {
         Data = data;
-        _isRewarded = data.IsRewarded;
+        _isRewarded = isRewarded;
     }
 }

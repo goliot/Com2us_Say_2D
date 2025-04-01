@@ -7,6 +7,9 @@ public class AttendanceManager : Singleton<AttendanceManager>
 {
     private const string LOGINDATE_KEY = "LastLoginDate";
     private const string ATTENDANCE_COUNT_KEY = "AttendanceCount";
+    private const string ATTENDANCE_DATA = "AttendanceData";
+
+    private AttendanceDataToSave _attendanceDataToSave = new AttendanceDataToSave();
 
     // 관리자 : 추가, 삭제, 조회, 정렬
     [SerializeField]
@@ -30,10 +33,17 @@ public class AttendanceManager : Singleton<AttendanceManager>
         _attendances = new List<Attendance>(_soDatas.Count); //최적화
         foreach (AttendanceDataSO data in _soDatas)
         {
-            Attendance attendance = new Attendance(data);
+            Attendance attendance = new Attendance(data, false);
             _attendances.Add(attendance);
         }
         //PlayerPrefs.DeleteKey(LOGINDATE_KEY);
+        //_attendanceDataToSave.LastLoginDate = DateTime.Today.ToString("yyyy-MM-dd");
+        //_attendanceDataToSave.AttendanceCount = 0;
+        //for (int i = 0; i < 7; i++)
+        //{
+        //    _attendanceDataToSave.IsRewardedList.Add(false);
+        //}
+        //Save();
         Load();
         AttendanceCheck();
         StartCoroutine(SaveDate());
@@ -41,18 +51,40 @@ public class AttendanceManager : Singleton<AttendanceManager>
 
     private void Load()
     {
-        string dateString = PlayerPrefs.GetString(LOGINDATE_KEY, DateTime.Today.ToString("yyyy-MM-dd"));
-        _lastLoginDateTime = DateTime.ParseExact(dateString, "yyyy-MM-dd", null);
+        //string dateString = PlayerPrefs.GetString(LOGINDATE_KEY, DateTime.Today.ToString("yyyy-MM-dd"));
+        //_lastLoginDateTime = DateTime.ParseExact(dateString, "yyyy-MM-dd", null);
 
-        _attendanceCount = PlayerPrefs.GetInt(ATTENDANCE_COUNT_KEY, 0);
+        //_attendanceCount = PlayerPrefs.GetInt(ATTENDANCE_COUNT_KEY, 0);
 
-        Debug.Log(_lastLoginDateTime + " " + _attendanceCount);
+        string dataString = PlayerPrefs.GetString(ATTENDANCE_DATA, "");
+        if (!string.IsNullOrEmpty(dataString))
+        {
+            _attendanceDataToSave = JsonUtility.FromJson<AttendanceDataToSave>(dataString);
+            for(int i=0; i<_attendances.Count; i++)
+            {
+                _attendances[i].IsRewarded = _attendanceDataToSave.IsRewardedList[i];
+            }
+            _attendanceCount = _attendanceDataToSave.AttendanceCount;
+            _lastLoginDateTime = DateTime.Parse(_attendanceDataToSave.LastLoginDate);
+        }
+        else
+        {
+            _attendanceDataToSave = new AttendanceDataToSave();
+        }
+
+        Debug.Log(dataString);
     }
 
     private void Save()
     {
-        PlayerPrefs.SetString(LOGINDATE_KEY, DateTime.Today.ToString("yyyy-MM-dd"));
-        PlayerPrefs.SetInt(ATTENDANCE_COUNT_KEY, _attendanceCount);
+        //PlayerPrefs.SetString(LOGINDATE_KEY, DateTime.Today.ToString("yyyy-MM-dd"));
+        //PlayerPrefs.SetInt(ATTENDANCE_COUNT_KEY, _attendanceCount);
+        for(int i=0; i<_attendances.Count; i++)
+        {
+            _attendanceDataToSave.IsRewardedList[i] = _attendances[i].IsRewarded;
+        }
+        string data = JsonUtility.ToJson(_attendanceDataToSave);
+        PlayerPrefs.SetString(ATTENDANCE_DATA, data);
     }
 
     private IEnumerator SaveDate()
@@ -67,10 +99,11 @@ public class AttendanceManager : Singleton<AttendanceManager>
     private void AttendanceCheck()
     {
         DateTime today = DateTime.Today;
-        if(today > _lastLoginDateTime)
+        DateTime LastLoginDate = DateTime.Parse(_attendanceDataToSave.LastLoginDate);
+        if (today > LastLoginDate)
         {
-            _lastLoginDateTime = today;
-            _attendanceCount++;
+            LastLoginDate = today;
+            _attendanceDataToSave.AttendanceCount++;
         }
     }
 
@@ -84,16 +117,18 @@ public class AttendanceManager : Singleton<AttendanceManager>
         }
         
         //조건 2 : 실제 그만큼 출석 했는가
-        if(_attendanceCount < attendance.Data.Day)
+        if(_attendanceDataToSave.AttendanceCount < attendance.Data.Day)
         {
             return false;
         }
 
-        attendance.Data.IsRewarded = true;
+        //attendance.Data.IsRewarded = true;
         attendance.IsRewarded = true;
+
+        //_attendanceDataToSave.IsRewardedList[attendance.Data.Day] = true;
         CurrenyManager.Instance.Add(attendance.Data.RewardCurrencyType, attendance.Data.RewardAmount);
         OnDataChanged?.Invoke();
-
+        Save(); 
         return true;
     }
 }
