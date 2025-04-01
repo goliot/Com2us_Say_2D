@@ -6,4 +6,5 @@ public class AttendanceDataSO : ScriptableObject
     public int Day = 0;
     public ECurrenyType RewardCurrencyType;
     public int RewardAmount;
+    public bool IsRewarded = false;
 }

@@ -30,9 +30,10 @@ public class AttendanceManager : Singleton<AttendanceManager>
         _attendances = new List<Attendance>(_soDatas.Count); //최적화
         foreach (AttendanceDataSO data in _soDatas)
         {
-            Attendance attendance = new Attendance(data, false);
+            Attendance attendance = new Attendance(data);
             _attendances.Add(attendance);
         }
+        //PlayerPrefs.DeleteKey(LOGINDATE_KEY);
         Load();
         AttendanceCheck();
         StartCoroutine(SaveDate());
@@ -44,11 +45,13 @@ public class AttendanceManager : Singleton<AttendanceManager>
         _lastLoginDateTime = DateTime.ParseExact(dateString, "yyyy-MM-dd", null);
 
         _attendanceCount = PlayerPrefs.GetInt(ATTENDANCE_COUNT_KEY, 0);
+
+        Debug.Log(_lastLoginDateTime + " " + _attendanceCount);
     }
 
     private void Save()
     {
-        PlayerPrefs.SetString(LOGINDATE_KEY, DateTime.Today.ToString());
+        PlayerPrefs.SetString(LOGINDATE_KEY, DateTime.Today.ToString("yyyy-MM-dd"));
         PlayerPrefs.SetInt(ATTENDANCE_COUNT_KEY, _attendanceCount);
     }
 
@@ -79,16 +82,16 @@ public class AttendanceManager : Singleton<AttendanceManager>
         {
             return false;
         }
-
+        
         //조건 2 : 실제 그만큼 출석 했는가
         if(_attendanceCount < attendance.Data.Day)
         {
             return false;
         }
 
+        attendance.Data.IsRewarded = true;
         attendance.IsRewarded = true;
         CurrenyManager.Instance.Add(attendance.Data.RewardCurrencyType, attendance.Data.RewardAmount);
-
         OnDataChanged?.Invoke();
 
         return true;

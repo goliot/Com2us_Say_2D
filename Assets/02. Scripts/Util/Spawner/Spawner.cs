@@ -30,7 +30,7 @@ public class Spawner : MonoBehaviour
                 SpawnRates[i] += SpawnRates[i - 1];
             }
         }
-
+        
         _nextSpawnCooltime = Random.Range(MinSpawnCooltime, MaxSpawnCooltime);
 
         _leftBorder = Camera.main.transform.position.x - Camera.main.orthographicSize * Camera.main.aspect;
@@ -40,6 +40,11 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(GameManager.Instance.IsGamePaused)
+        {
+            return;
+        }
+
         _timer += Time.deltaTime;
 
         if (PlayerStats.KillCount >= 100 && !GameManager.Instance.IsBossSpawned)

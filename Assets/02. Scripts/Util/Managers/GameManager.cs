@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
@@ -9,6 +11,9 @@ public class GameManager : Singleton<GameManager>
 
     public bool IsBossSpawned = false;
     public bool IsFever = false;
+    public bool IsGamePaused = false;
+
+    public Action GamePaused;
 
     private void Awake()
     {
@@ -16,6 +21,13 @@ public class GameManager : Singleton<GameManager>
 
         MainCamera = Camera.main.gameObject;
         Time.timeScale = 1;
+    }
+
+    private void Start()
+    {
+        //UI_Game.Instance.OpenAttendancePanel();
+        //IsGamePaused = true;
+        //Time.timeScale = 0;
     }
 
     private void Update()

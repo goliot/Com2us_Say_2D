@@ -19,6 +19,9 @@ public class UI_Game : Singleton<UI_Game>
     public Slider BossSubSlider;
     public GameObject WarnigPanel;
 
+    [Header("# Attendance")]
+    public GameObject AttendancePanel;
+
     private int _prevKillCount = 0;
     private int _prevScore = 0;
     private int _prevGold = 0;
@@ -76,5 +79,17 @@ public class UI_Game : Singleton<UI_Game>
     private IEnumerator CoBossAlert()
     {
         yield return null;
+    }
+
+    public void OpenAttendancePanel()
+    {
+        AttendancePanel.SetActive(true);
+        AttendancePanel.transform.DOScale(1, 0.3f).SetEase(Ease.InOutSine);
+    }
+
+    public void OnClickCloseAttendancePanel()
+    {
+        GameManager.Instance.IsGamePaused = false;
+        AttendancePanel.transform.DOScale(0, 0.3f).SetEase(Ease.InOutSine).OnComplete(() => AttendancePanel.SetActive(false));
     }
 }
