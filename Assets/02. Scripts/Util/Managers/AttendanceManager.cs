@@ -57,8 +57,10 @@ public class AttendanceManager : Singleton<AttendanceManager>
         //_attendanceCount = PlayerPrefs.GetInt(ATTENDANCE_COUNT_KEY, 0);
 
         string dataString = PlayerPrefs.GetString(ATTENDANCE_DATA, "");
+        Debug.Log(dataString);
         if (!string.IsNullOrEmpty(dataString))
         {
+            dataString = AesEncryption.Decrypt(dataString);
             _attendanceDataToSave = JsonUtility.FromJson<AttendanceDataToSave>(dataString);
             for(int i=0; i<_attendances.Count; i++)
             {
@@ -72,7 +74,7 @@ public class AttendanceManager : Singleton<AttendanceManager>
             _attendanceDataToSave = new AttendanceDataToSave();
         }
 
-        Debug.Log(dataString);
+        //Debug.Log(dataString);
     }
 
     private void Save()
@@ -84,6 +86,7 @@ public class AttendanceManager : Singleton<AttendanceManager>
             _attendanceDataToSave.IsRewardedList[i] = _attendances[i].IsRewarded;
         }
         string data = JsonUtility.ToJson(_attendanceDataToSave);
+        data = AesEncryption.Encrypt(data);
         PlayerPrefs.SetString(ATTENDANCE_DATA, data);
     }
 
